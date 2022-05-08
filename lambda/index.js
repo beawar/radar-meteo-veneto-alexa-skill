@@ -31,10 +31,10 @@ const ShowRadarIntent = {
             console.log("Progressive response directive error : " + error);
         }
         // we'll now fetch radar images from an external API
-        // const response = await logic.fetchRadar();
-        const response = await new Promise((resolve) => {
-            setTimeout(resolve(['data']), 2000);
-        })
+        const response = await logic.fetchRadar();
+        // const response = await new Promise((resolve) => {
+            // setTimeout(resolve(['data']), 2000);
+        // })
         console.log(JSON.stringify(response));
         // // below we convert the API response to text that Alexa can read
         // const speechResponse = logic.convertBirthdaysResponse(handlerInput, response, true, timezone);
