@@ -13,6 +13,7 @@
     "ask-sdk-model": "^1.19.0",
     "aws-sdk": "^2.326.0",
     "i18next": "^21.8.0",
+    "ask-sdk-s3-persistence-adapter": "^2.12.1",
     "ask-sdk-dynamodb-persistence-adapter": "^2.12.1",
     "moment-timezone": "^0.5.34"
   }
