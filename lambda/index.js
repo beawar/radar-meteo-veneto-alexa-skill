@@ -2,39 +2,17 @@ const Alexa = require('ask-sdk-core');
 const util = require('./util'); // utility functions
 const interceptors = require('./interceptors');
 const logic = require('./logic'); // this file encapsulates all "business" logic
-const constants = require('./constants'); // constants such as specific service permissions go here
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        let speechText = handlerInput.t('WELCOME_MSG', {name: name});
 
-        const day = sessionAttributes['day'];
-        const monthName = sessionAttributes['monthName'];
-        const year = sessionAttributes['year'];
-        const name = sessionAttributes['name'] || '';
-        const sessionCounter = sessionAttributes['sessionCounter'];
-
-        const dateAvailable = day && monthName && year;
-        if (dateAvailable){
-            // we can't use intent chaining because the target intent is not dialog based
-            return SayBirthdayIntentHandler.handle(handlerInput);
-        }
-
-        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG', {name: name}) : handlerInput.t('WELCOME_BACK_MSG', {name: name});
-        speechText += handlerInput.t('MISSING_MSG');
-
-        // we use intent chaining to trigger the birthday registration multi-turn
         return handlerInput.responseBuilder
             .speak(speechText)
-            // we use intent chaining to trigger the birthday registration multi-turn
-            .addDelegateDirective({
-                name: 'RegisterBirthdayIntent',
-                confirmationStatus: 'NONE',
-                slots: {}
-            })
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
