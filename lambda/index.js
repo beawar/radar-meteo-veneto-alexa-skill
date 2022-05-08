@@ -4,6 +4,32 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
+const i18n = require('i18next');
+
+const languageStrings = {
+    en: {
+        translation: {
+            WELCOME_MSG: 'Welcome, you can say Hello or Help. Which would you like to try?',
+            HELLO_MSG: 'Hello World!',
+            HELP_MSG: 'You can say hello to me! How can I help?',
+            GOODBYE_MSG: 'Goodbye!',
+            REFLECTOR_MSG: 'You just triggered {{intent}}',
+            FALLBACK_MSG: 'Sorry, I don\'t know about that. Please try again.',
+            ERROR_MSG: 'Sorry, I had trouble doing what you asked. Please try again.'
+        }
+    },
+    it: {
+        translation: {
+            WELCOME_MSG: 'Benvenuto, puoi dire Ciao or Aiuto. Cosa preferisci fare?',
+            HELLO_MSG: 'Ciao mondo!',
+            HELP_MSG: 'Dimmi ciao e io ti risponderò! Come posso aiutarti?',
+            GOODBYE_MSG: 'A presto!',
+            REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
+            FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
+            ERROR_MSG: 'Scusa, si è verificato un errore. Riprova.'
+        }
+    }
+}
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -136,6 +162,18 @@ const ErrorHandler = {
     }
 };
 
+
+const LocalisationRequestInterceptor = {
+    process(handlerInput) {
+        i18n.init({
+            lng: Alexa.getLocale(handlerInput.requestEnvelope),
+            resources: languageStrings
+        }).then((t) => {
+            handlerInput.t = (...args) => t(...args);
+        });
+    }
+}
+
 /**
  * This handler acts as the entry point for your skill, routing all request and response
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -152,5 +190,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         IntentReflectorHandler)
     .addErrorHandlers(
         ErrorHandler)
+    .addRequestInterceptors(
+        LocalisationRequestInterceptor)
     .withCustomUserAgent('sample/hello-world/v1.2')
     .lambda();
