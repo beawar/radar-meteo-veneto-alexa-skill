@@ -17,7 +17,7 @@ module.exports = {
         return Promise.all(requests).then((result) => {
             return result;
         }).catch((error) => {
-            console.error('error on fetching radar images');
+            console.error('error on fetching radar images', error);
             return null;
         });
     }
