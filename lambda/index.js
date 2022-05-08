@@ -8,7 +8,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        let speechText = handlerInput.t('WELCOME_MSG', {name: name});
+        let speechText = handlerInput.t('WELCOME_MSG');
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -25,7 +25,7 @@ const ShowRadarIntent = {
     async handle(handlerInput) {
         try {
             // call the progressive response service
-            util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG', {name: name}));
+            util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
         } catch (error) {
             // if it fails we can continue, but the user will wait without progressive response
             console.log("Progressive response directive error : " + error);
