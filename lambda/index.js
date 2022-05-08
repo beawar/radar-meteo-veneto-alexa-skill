@@ -1,32 +1,65 @@
-/* *
- * This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK (v2).
- * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
- * session persistence, api calls, and more.
- * */
 const Alexa = require('ask-sdk-core');
+// i18n library dependency, we use it below in a localisation interceptor
 const i18n = require('i18next');
 
+/* *
+ * We create a language strings object containing all of our strings.
+ * The keys for each string will then be referenced in our code, e.g. handlerInput.t('WELCOME_MSG')
+ * Later we'll move these string to a separate file to avoid polluting index.js 
+ * */
 const languageStrings = {
     en: {
         translation: {
-            WELCOME_MSG: 'Welcome, you can say Hello or Help. Which would you like to try?',
-            HELLO_MSG: 'Hello World!',
-            HELP_MSG: 'You can say hello to me! How can I help?',
+            WELCOME_MSG: `Welcome to Happy Birthday. Let's have some fun with your birthday! `,
+            REGISTER_MSG: 'Your birthday is {{month}} {{day}} {{year}}.',
+            REJECTED_MSG: 'No problem. Please say the date again so I can get it right.',
+            HELP_MSG: `You can tell me your date of birth and I'll take note. You can also just say, register my birthday and I will guide you. Which one would you like to try?`,
             GOODBYE_MSG: 'Goodbye!',
             REFLECTOR_MSG: 'You just triggered {{intent}}',
             FALLBACK_MSG: 'Sorry, I don\'t know about that. Please try again.',
-            ERROR_MSG: 'Sorry, I had trouble doing what you asked. Please try again.'
+            ERROR_MSG: 'Sorry, there was an error. Please try again.'
         }
     },
     it: {
         translation: {
-            WELCOME_MSG: 'Benvenuto, puoi dire Ciao or Aiuto. Cosa preferisci fare?',
-            HELLO_MSG: 'Ciao mondo!',
-            HELP_MSG: 'Dimmi ciao e io ti risponderò! Come posso aiutarti?',
+            WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
+            REGISTER_MSG: 'Il tuo compleanno è il {{day}} di {{month}}, {{year}}.',
+            REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito.',
+            HELP_MSG: `Dimmi la tua data di nascita e me la segnerò. Altrimenti puoi chiedermi di ricordarti il tuo compleanno e ti guido io passo per passo. Come preferisci procedere?`,
             GOODBYE_MSG: 'A presto!',
             REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
             FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
-            ERROR_MSG: 'Scusa, si è verificato un errore. Riprova.'
+            ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.'
+        }
+    },    
+    es: {
+        translation: {
+            WELCOME_MSG: 'Te doy la bienvenida a Feliz Cumpleaños. Vamos a divertirnos un poco con tu cumpleaños! ',
+            REGISTER_MSG: 'Tu fecha de cumpleaños es el {{day}} de {{month}} de {{year}}.',
+            REJECTED_MSG: 'No pasa nada. Por favor dime la fecha otra vez y lo corregimos.',
+            HELP_MSG: 'Puedes decirme el día, mes y año de tu nacimiento y tomaré nota de ello. También puedes decirme, registra mi cumpleaños y te guiaré. Qué quieres hacer?',
+            GOODBYE_MSG: 'Hasta luego!',
+            REFLECTOR_MSG: 'Acabas de activar {{intent}}',
+            FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
+            ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
+        }
+    },
+    fr:{
+        translation: {
+            WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires! ',
+            REGISTER_MSG: 'Votre date de naissance est le {{day}} {{month}} {{year}}.',
+            REJECTED_MSG: 'D\'accord, je ne vais pas prendre en compte cette date. Dites-moi une autre date pour que je puisse l\'enregistrer.',
+            HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'"enregistre mon anniversaire"\' et je vous guiderai. Quel est votre choix ?',
+            GOODBYE_MSG: 'Au revoir!',
+            REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
+            FALLBACK_MSG: 'Désolé, je ne sais pas répondre à votre demande. Pouvez-vous reformuler?.',
+            ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
+        }
+    },
+    "fr-CA": {
+        translation: {
+            WELCOME_MSG: 'Bienvenue sur la Skill des fêtes! ',
+            HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'sauve ma fête\' et je vous guiderai. Quel est votre choix ?',
         }
     }
 }
@@ -36,26 +69,44 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = handlerInput.t('WELCOME_MSG');
+        const speechText = handlerInput.t('WELCOME_MSG');
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            // we use intent chaining to trigger the birthday registration multi-turn
+            .addDelegateDirective({
+                name: 'RegisterBirthdayIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            })
             .getResponse();
     }
 };
 
-const HelloWorldIntentHandler = {
+const RegisterBirthdayIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
-        const speakOutput = handlerInput.t('HELLO_MSG');
+        const {requestEnvelope, responseBuilder} = handlerInput;
+        const {intent} = requestEnvelope.request;
 
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+        let speechText = handlerInput.t('REJECTED_MSG');
+
+        if (intent.confirmationStatus === 'CONFIRMED') {
+            const day = Alexa.getSlotValue(requestEnvelope, 'day');
+            const year = Alexa.getSlotValue(requestEnvelope, 'year');
+            const month = Alexa.getSlotValue(requestEnvelope, 'month');
+
+            speechText = handlerInput.t('REGISTER_MSG', {day: day, month: month, year: year}); // we'll save these values in the next module
+        } else {
+            const repromptText = handlerInput.t('HELP_MSG');
+            responseBuilder.reprompt(repromptText);
+        }
+        
+        return responseBuilder
+            .speak(speechText)
             .getResponse();
     }
 };
@@ -66,11 +117,11 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = handlerInput.t('HELP_MSG');
+        const speechText = handlerInput.t('HELP_MSG');
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(speechText)
             .getResponse();
     }
 };
@@ -82,10 +133,10 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = handlerInput.t('GOODBYE_MSG');
+        const speechText = handlerInput.t('GOODBYE_MSG');
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(speechText)
             .getResponse();
     }
 };
@@ -100,11 +151,11 @@ const FallbackIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const speakOutput = handlerInput.t('FALLBACK_MSG');
+        const speechText = handlerInput.t('FALLBACK_MSG');
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
@@ -134,10 +185,10 @@ const IntentReflectorHandler = {
     },
     handle(handlerInput) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = handlerInput.t('REFLECTOR_MSG');
+        const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(speechText)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
@@ -152,17 +203,31 @@ const ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const speakOutput = handlerInput.t('ERROR_MSG');
+        const speechText = handlerInput.t('ERROR_MSG');
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speechText)
+            .reprompt(handlerInput.t('HELP_MSG'))
             .getResponse();
     }
 };
 
+// This request interceptor will log all incoming requests to this lambda
+const LoggingRequestInterceptor = {
+    process(handlerInput) {
+        console.log(`Incoming request: ${JSON.stringify(handlerInput.requestEnvelope)}`);
+    }
+};
 
+// This response interceptor will log all outgoing responses of this lambda
+const LoggingResponseInterceptor = {
+    process(handlerInput, response) {
+        console.log(`Outgoing response: ${JSON.stringify(response)}`);
+    }
+};
+
+// This request interceptor will bind a translation function 't' to the handlerInput
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
         i18n.init({
@@ -172,9 +237,8 @@ const LocalisationRequestInterceptor = {
             handlerInput.t = (...args) => t(...args);
         });
     }
-}
-
-/**
+};
+/* *
  * This handler acts as the entry point for your skill, routing all request and response
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
  * defined are included below. The order matters - they're processed top to bottom 
@@ -182,7 +246,7 @@ const LocalisationRequestInterceptor = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        HelloWorldIntentHandler,
+        RegisterBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
@@ -191,6 +255,9 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler)
     .addRequestInterceptors(
-        LocalisationRequestInterceptor)
-    .withCustomUserAgent('sample/hello-world/v1.2')
+        LocalisationRequestInterceptor,
+        LoggingRequestInterceptor)
+    .addResponseInterceptors(
+        LoggingResponseInterceptor)
+    .withCustomUserAgent('sample/happy-birthday/mod3')
     .lambda();
