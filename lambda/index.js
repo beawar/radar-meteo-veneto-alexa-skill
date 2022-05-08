@@ -78,7 +78,7 @@ const SayBirthdayIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SayBirthdayIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
         const day = sessionAttributes['day'];
@@ -87,7 +87,7 @@ const SayBirthdayIntentHandler = {
         const name = sessionAttributes['name'] || '';
         let timezone = sessionAttributes['timezone'];
 
-        let speechText = '';
+        let speechText = '', isBirthday = false;
         const dateAvailable = day && month && year;
         if (dateAvailable){
             if (!timezone){
@@ -101,10 +101,17 @@ const SayBirthdayIntentHandler = {
             sessionAttributes['daysLeft'] = birthdayData.daysUntilBirthday;
             speechText = handlerInput.t('DAYS_LEFT_MSG', {name: name, count: birthdayData.daysUntilBirthday});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: birthdayData.age + 1});
-            const isBirthday = birthdayData.daysUntilBirthday === 0;
+            isBirthday = birthdayData.daysUntilBirthday === 0;
             if (isBirthday) { // it's the user's birthday!
                 speechText = handlerInput.t('GREET_MSG', {name: name});
                 speechText += handlerInput.t('NOW_TURN_MSG', {count: birthdayData.age});
+                const adjustedDate = logic.getAdjustedDate(timezone);
+                // we'll now fetch celebrity birthdays from an external API
+                const response = await logic.fetchBirthdays(adjustedDate.day, adjustedDate.month, constants.MAX_BIRTHDAYS);
+                console.log(JSON.stringify(response));
+                // below we convert the API response to text that Alexa can read
+                const speechResponse = logic.convertBirthdaysResponse(handlerInput, response, false);
+                speechText += speechResponse;
             }
             speechText += handlerInput.t('POST_SAY_HELP_MSG');
         } else {
@@ -231,6 +238,48 @@ const RemindBirthdayIntentHandler = {
     }
 };
 
+const CelebrityBirthdaysIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CelebrityBirthdaysIntent';
+    },
+    async handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes()
+        const name = sessionAttributes['name'] || '';
+        let timezone = sessionAttributes['timezone'];
+
+        if (!timezone){
+           //timezone = 'Europe/Rome';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+            return handlerInput.responseBuilder
+                .speak(handlerInput.t('NO_TIMEZONE_MSG'))
+                .getResponse();
+        }
+        try {
+            // call the progressive response service
+            await util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG', {name: name}));
+        } catch (error) {
+            // if it fails we can continue, but the user will wait without progressive response
+            console.log("Progressive response directive error : " + error);
+        }
+        const adjustedDate = logic.getAdjustedDate(timezone);
+        // we'll now fetch celebrity birthdays from an external API
+        const response = await logic.fetchBirthdays(adjustedDate.day, adjustedDate.month, constants.MAX_BIRTHDAYS);
+        console.log(JSON.stringify(response));
+        // below we convert the API response to text that Alexa can read
+        const speechResponse = logic.convertBirthdaysResponse(handlerInput, response, true, timezone);
+        let speechText = handlerInput.t('API_ERROR_MSG');
+        if (speechResponse) {
+            speechText = speechResponse;
+        }
+        speechText += handlerInput.t('POST_CELEBRITIES_HELP_MSG');
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .getResponse();
+    }
+};
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -345,6 +394,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         RegisterBirthdayIntentHandler,
         SayBirthdayIntentHandler,
         RemindBirthdayIntentHandler,
+        CelebrityBirthdaysIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
@@ -363,5 +413,5 @@ exports.handler = Alexa.SkillBuilders.custom()
         interceptors.SaveAttributesResponseInterceptor)
     .withPersistenceAdapter(util.getPersistenceAdapter())
     .withApiClient(new Alexa.DefaultApiClient())
-    .withCustomUserAgent('sample/happy-birthday/mod6')
+    .withCustomUserAgent('sample/happy-birthday/mod7')
     .lambda();
