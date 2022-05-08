@@ -1,66 +1,31 @@
 const Alexa = require('ask-sdk-core');
+// Get an instance of the persistence adapter
+var persistenceAdapter = getPersistenceAdapter();
+// Moments library will help us do all the birthday math
+const moment = require('moment-timezone');
 // i18n library dependency, we use it below in a localisation interceptor
 const i18n = require('i18next');
+// We import a language strings object containing all of our strings.
+// The keys for each string will then be referenced in our code, e.g. handlerInput.t('WELCOME_MSG')
+const languageStrings = require('./localisation');
 
-/* *
- * We create a language strings object containing all of our strings.
- * The keys for each string will then be referenced in our code, e.g. handlerInput.t('WELCOME_MSG')
- * Later we'll move these string to a separate file to avoid polluting index.js 
- * */
-const languageStrings = {
-    en: {
-        translation: {
-            WELCOME_MSG: `Welcome to Happy Birthday. Let's have some fun with your birthday! `,
-            REGISTER_MSG: 'Your birthday is {{month}} {{day}} {{year}}.',
-            REJECTED_MSG: 'No problem. Please say the date again so I can get it right.',
-            HELP_MSG: `You can tell me your date of birth and I'll take note. You can also just say, register my birthday and I will guide you. Which one would you like to try?`,
-            GOODBYE_MSG: 'Goodbye!',
-            REFLECTOR_MSG: 'You just triggered {{intent}}',
-            FALLBACK_MSG: 'Sorry, I don\'t know about that. Please try again.',
-            ERROR_MSG: 'Sorry, there was an error. Please try again.'
-        }
-    },
-    it: {
-        translation: {
-            WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
-            REGISTER_MSG: 'Il tuo compleanno è il {{day}} di {{month}}, {{year}}.',
-            REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito.',
-            HELP_MSG: `Dimmi la tua data di nascita e me la segnerò. Altrimenti puoi chiedermi di ricordarti il tuo compleanno e ti guido io passo per passo. Come preferisci procedere?`,
-            GOODBYE_MSG: 'A presto!',
-            REFLECTOR_MSG: 'Hai invocato l\'intento {{intent}}',
-            FALLBACK_MSG: 'Perdonami, penso di non aver capito bene. Riprova.',
-            ERROR_MSG: 'Scusa, c\'è stato un errore. Riprova.'
-        }
-    },    
-    es: {
-        translation: {
-            WELCOME_MSG: 'Te doy la bienvenida a Feliz Cumpleaños. Vamos a divertirnos un poco con tu cumpleaños! ',
-            REGISTER_MSG: 'Tu fecha de cumpleaños es el {{day}} de {{month}} de {{year}}.',
-            REJECTED_MSG: 'No pasa nada. Por favor dime la fecha otra vez y lo corregimos.',
-            HELP_MSG: 'Puedes decirme el día, mes y año de tu nacimiento y tomaré nota de ello. También puedes decirme, registra mi cumpleaños y te guiaré. Qué quieres hacer?',
-            GOODBYE_MSG: 'Hasta luego!',
-            REFLECTOR_MSG: 'Acabas de activar {{intent}}',
-            FALLBACK_MSG: 'Lo siento, no se nada sobre eso. Por favor inténtalo otra vez.',
-            ERROR_MSG: 'Lo siento, ha habido un problema. Por favor inténtalo otra vez.'
-        }
-    },
-    fr:{
-        translation: {
-            WELCOME_MSG: 'Bienvenue sur la Skill des anniversaires! ',
-            REGISTER_MSG: 'Votre date de naissance est le {{day}} {{month}} {{year}}.',
-            REJECTED_MSG: 'D\'accord, je ne vais pas prendre en compte cette date. Dites-moi une autre date pour que je puisse l\'enregistrer.',
-            HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'"enregistre mon anniversaire"\' et je vous guiderai. Quel est votre choix ?',
-            GOODBYE_MSG: 'Au revoir!',
-            REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
-            FALLBACK_MSG: 'Désolé, je ne sais pas répondre à votre demande. Pouvez-vous reformuler?.',
-            ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler?'
-        }
-    },
-    "fr-CA": {
-        translation: {
-            WELCOME_MSG: 'Bienvenue sur la Skill des fêtes! ',
-            HELP_MSG: 'Je peux me souvenir de votre date de naissance. Dites-moi votre jour, mois et année de naissance ou bien dites-moi simplement \'sauve ma fête\' et je vous guiderai. Quel est votre choix ?',
-        }
+function getPersistenceAdapter(tableName) {
+    // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
+    function isAlexaHosted() {
+        return process.env.S3_PERSISTENCE_BUCKET;
+    }
+    if (isAlexaHosted()) {
+        const {S3PersistenceAdapter} = require('ask-sdk-s3-persistence-adapter');
+        return new S3PersistenceAdapter({
+            bucketName: process.env.S3_PERSISTENCE_BUCKET
+        });
+    } else {
+        // IMPORTANT: don't forget to give DynamoDB access to the role you're using to run this lambda (via IAM policy)
+        const {DynamoDbPersistenceAdapter} = require('ask-sdk-dynamodb-persistence-adapter');
+        return new DynamoDbPersistenceAdapter({
+            tableName: tableName || 'happy_birthday',
+            createTable: true
+        });
     }
 }
 
@@ -69,8 +34,23 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('WELCOME_MSG');
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
+        const day = sessionAttributes['day'];
+        const monthName = sessionAttributes['monthName'];
+        const year = sessionAttributes['year'];
+        const sessionCounter = sessionAttributes['sessionCounter'];
+
+        const dateAvailable = day && monthName && year;
+        if (dateAvailable){
+            // we can't use intent chaining because the target intent is not dialog based
+            return SayBirthdayIntentHandler.handle(handlerInput);
+        }
+
+        let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG') : handlerInput.t('WELCOME_BACK_MSG');
+        speechText += handlerInput.t('MISSING_MSG');
+
+        // we use intent chaining to trigger the birthday registration multi-turn
         return handlerInput.responseBuilder
             .speak(speechText)
             // we use intent chaining to trigger the birthday registration multi-turn
@@ -89,24 +69,77 @@ const RegisterBirthdayIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterBirthdayIntent';
     },
     handle(handlerInput) {
-        const {requestEnvelope, responseBuilder} = handlerInput;
+        const {attributesManager, requestEnvelope} = handlerInput;
+        // the attributes manager allows us to access session attributes
+        const sessionAttributes = attributesManager.getSessionAttributes();
         const {intent} = requestEnvelope.request;
-
-        let speechText = handlerInput.t('REJECTED_MSG');
 
         if (intent.confirmationStatus === 'CONFIRMED') {
             const day = Alexa.getSlotValue(requestEnvelope, 'day');
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
-            const month = Alexa.getSlotValue(requestEnvelope, 'month');
+            // we get the slot instead of the value directly as we also want to fetch the id
+            const monthSlot = Alexa.getSlot(requestEnvelope, 'month');
+            const monthName = monthSlot.value;
+            const month = monthSlot.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
 
-            speechText = handlerInput.t('REGISTER_MSG', {day: day, month: month, year: year}); // we'll save these values in the next module
-        } else {
-            const repromptText = handlerInput.t('HELP_MSG');
-            responseBuilder.reprompt(repromptText);
+            sessionAttributes['day'] = day;
+            sessionAttributes['month'] = month; //MM
+            sessionAttributes['monthName'] = monthName;
+            sessionAttributes['year'] = year;
+            // we can't use intent chaining because the target intent is not dialog based
+            return SayBirthdayIntentHandler.handle(handlerInput);
         }
-        
-        return responseBuilder
+
+        return handlerInput.responseBuilder
+            .speak(handlerInput.t('REJECTED_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .getResponse();
+    }
+};
+
+const SayBirthdayIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SayBirthdayIntent';
+    },
+    handle(handlerInput) {
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+        const day = sessionAttributes['day'];
+        const month = sessionAttributes['month']; //MM
+        const year = sessionAttributes['year'];
+
+        let speechText = '';
+        const dateAvailable = day && month && year;
+        if (dateAvailable){
+            const timezone = 'Europe/Rome'; // provide yours here. we'll change this later to retrieve the timezone from the device
+            const today = moment().tz(timezone).startOf('day');
+            const wasBorn = moment(`${month}/${day}/${year}`, "MM/DD/YYYY").tz(timezone).startOf('day');
+            const nextBirthday = moment(`${month}/${day}/${today.year()}`, "MM/DD/YYYY").tz(timezone).startOf('day');
+            if (today.isAfter(nextBirthday)){
+                nextBirthday.add(1, 'years');
+            }
+            const age = today.diff(wasBorn, 'years');
+            const daysUntilBirthday = nextBirthday.startOf('day').diff(today, 'days'); // same days returns 0
+            speechText = handlerInput.t('DAYS_LEFT_MSG', {count: daysUntilBirthday});
+            speechText += handlerInput.t('WILL_TURN_MSG', {count: age + 1});
+            if (daysUntilBirthday === 0) { // it's the user's birthday!
+                speechText = handlerInput.t('GREET_MSG', {count: age});
+            }
+            speechText += handlerInput.t('POST_SAY_HELP_MSG');
+        } else {
+            speechText += handlerInput.t('MISSING_MSG');
+            // we use intent chaining to trigger the birthday registration multi-turn
+            handlerInput.responseBuilder.addDelegateDirective({
+                name: 'RegisterBirthdayIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            });
+        }
+
+        return handlerInput.responseBuilder
             .speak(speechText)
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -155,7 +188,7 @@ const FallbackIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -208,7 +241,7 @@ const ErrorHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('HELP_MSG'))
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -238,7 +271,42 @@ const LocalisationRequestInterceptor = {
         });
     }
 };
+
 /* *
+ * Below we use async and await ( more info: javascript.info/async-await )
+ * It's a way to wrap promises and waait for the result of an external async operation
+ * Like getting and saving the persistent attributes
+ * */
+const LoadAttributesRequestInterceptor = {
+    async process(handlerInput) {
+        const {attributesManager, requestEnvelope} = handlerInput;
+        if (Alexa.isNewSession(requestEnvelope)){ //is this a new session? this check is not enough if using auto-delegate (more on next module)
+            const persistentAttributes = await attributesManager.getPersistentAttributes() || {};
+            console.log('Loading from persistent storage: ' + JSON.stringify(persistentAttributes));
+            //copy persistent attribute to session attributes
+            attributesManager.setSessionAttributes(persistentAttributes); // ALL persistent attributtes are now session attributes
+        }
+    }
+};
+
+// If you disable the skill and reenable it the userId might change and you loose the persistent attributes saved below as userId is the primary key
+const SaveAttributesResponseInterceptor = {
+    async process(handlerInput, response) {
+        if (!response) return; // avoid intercepting calls that have no outgoing response due to errors
+        const {attributesManager, requestEnvelope} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const shouldEndSession = (typeof response.shouldEndSession === "undefined" ? true : response.shouldEndSession); //is this a session end?
+        if (shouldEndSession || Alexa.getRequestType(requestEnvelope) === 'SessionEndedRequest') { // skill was stopped or timed out
+            // we increment a persistent session counter here
+            sessionAttributes['sessionCounter'] = sessionAttributes['sessionCounter'] ? sessionAttributes['sessionCounter'] + 1 : 1;
+            // we make ALL session attributes persistent
+            console.log('Saving to persistent storage:' + JSON.stringify(sessionAttributes));
+            attributesManager.setPersistentAttributes(sessionAttributes);
+            await attributesManager.savePersistentAttributes();
+        }
+    }
+};
+/**
  * This handler acts as the entry point for your skill, routing all request and response
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
  * defined are included below. The order matters - they're processed top to bottom 
@@ -247,6 +315,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         RegisterBirthdayIntentHandler,
+        SayBirthdayIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
@@ -256,8 +325,11 @@ exports.handler = Alexa.SkillBuilders.custom()
         ErrorHandler)
     .addRequestInterceptors(
         LocalisationRequestInterceptor,
-        LoggingRequestInterceptor)
+        LoggingRequestInterceptor,
+        LoadAttributesRequestInterceptor)
     .addResponseInterceptors(
-        LoggingResponseInterceptor)
-    .withCustomUserAgent('sample/happy-birthday/mod3')
+        LoggingResponseInterceptor,
+        SaveAttributesResponseInterceptor)
+    .withPersistenceAdapter(persistenceAdapter)
+    .withCustomUserAgent('sample/happy-birthday/mod4')
     .lambda();
