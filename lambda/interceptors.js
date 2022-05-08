@@ -2,7 +2,6 @@ const Alexa = require('ask-sdk-core');
 // i18n dependency
 const i18n = require('i18next');
 const languageStrings = require('./localisation');
-const constants = require('./constants');
 
 // This request interceptor will log all incoming requests to this lambda
 const LoggingRequestInterceptor = {
