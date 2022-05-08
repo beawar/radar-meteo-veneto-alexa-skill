@@ -8,12 +8,11 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        console.log('launch request');
-        let speechText = handlerInput.t('WELCOME_MSG', { name: '' });
+        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
 
         return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .speak(speakOutput)
+            .reprompt(speakOutput)
             .getResponse();
     }
 };
