@@ -1,4 +1,3 @@
-const moment = require('moment-timezone'); // will help us do all the dates math while considering the timezone
 const util = require('./util');
 const axios = require('axios');
 
