@@ -3,6 +3,8 @@ const Alexa = require('ask-sdk-core');
 var persistenceAdapter = getPersistenceAdapter();
 // i18n library dependency, we use it below in a localisation interceptor
 const i18n = require('i18next');
+// Moments library will help us do all the birthday math
+const moment = require('moment-timezone');
 // We import a language strings object containing all of our strings.
 // The keys for each string will then be referenced in our code, e.g. handlerInput.t('WELCOME_MSG')
 const languageStrings = require('./localisation');
