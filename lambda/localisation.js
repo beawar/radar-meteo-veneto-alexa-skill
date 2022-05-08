@@ -4,7 +4,7 @@ module.exports = {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
             GREETING_SPEECHCON: `<say-as interpret-as="interjection">bravo</say-as>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as>`,
-            WELCOME_MSG: `Welcome to Happy Birthday {{name}}. Let's have some fun with your birthday! `,
+            WELCOME_MSG: `Welcome to Arpav Radar Veneto. Say "show radar" to see radar images, or "read report" to make me read last available wheater report`,
             WELCOME_BACK_MSG: 'Welcome back {{name}}! ',
             REJECTED_MSG: 'No problem. Please say the date again so I can get it right.',
             DAYS_LEFT_MSG: `{{name}} There's {{count}} day left `,
