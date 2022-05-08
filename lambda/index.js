@@ -8,7 +8,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        console.log('launch request')
+        console.log('launch request');
         let speechText = handlerInput.t('WELCOME_MSG', { name: '' });
 
         return handlerInput.responseBuilder
@@ -85,9 +85,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        const name = sessionAttributes['name'] || '';
-        const speechText = handlerInput.t('GOODBYE_MSG', {name: name});
+        const speechText = handlerInput.t('GOODBYE_MSG', {name: ''});
 
         return handlerInput.responseBuilder
             .speak(speechText)
