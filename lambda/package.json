@@ -15,6 +15,7 @@
     "i18next": "^21.8.0",
     "ask-sdk-s3-persistence-adapter": "^2.12.1",
     "ask-sdk-dynamodb-persistence-adapter": "^2.12.1",
-    "moment-timezone": "^0.5.34"
+    "moment-timezone": "^0.5.34",
+    "axios": "^0.27.2"
   }
 }
