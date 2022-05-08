@@ -168,14 +168,10 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler)
     .addRequestInterceptors(
-        interceptors.LoadAttributesRequestInterceptor,
         interceptors.LocalisationRequestInterceptor,
-        interceptors.LoggingRequestInterceptor,
-        interceptors.LoadNameRequestInterceptor,
-        interceptors.LoadTimezoneRequestInterceptor)
+        interceptors.LoggingRequestInterceptor)
     .addResponseInterceptors(
-        interceptors.LoggingResponseInterceptor,
-        interceptors.SaveAttributesResponseInterceptor)
+        interceptors.LoggingResponseInterceptor)
     .withApiClient(new Alexa.DefaultApiClient())
     .withCustomUserAgent('sample/happy-birthday/mod7')
     .lambda();
