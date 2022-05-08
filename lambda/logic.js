@@ -4,7 +4,7 @@ const axios = require('axios');
 module.exports = {
     fetchRadar(){
         const requests = [];
-        for (let i=2; i<=6; i++) {
+        for (let i=1; i<=6; i++) {
             const url = `https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/${i}_BASE.jpg`;
              var config = {
                 timeout: 6500 // timeout api call before we reach Alexa's 8 sec timeout, or set globally via axios.defaults.timeout
