@@ -2,6 +2,19 @@ const Alexa = require('ask-sdk-core');
 const handlers = require('./handlers');
 const interceptors = require('./interceptors');
 
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
 
 /**
  * This handler acts as the entry point for your skill, routing all request and response
@@ -10,7 +23,7 @@ const interceptors = require('./interceptors');
  * */
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
-        handlers.LaunchRequestHandler,
+        LaunchRequestHandler,
         handlers.HelpIntentHandler,
         handlers.CancelAndStopIntentHandler,
         handlers.IntentReflectorHandler,
