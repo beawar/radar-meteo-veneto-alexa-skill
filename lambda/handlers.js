@@ -2,6 +2,7 @@ const Alexa = require('ask-sdk-core');
 const util = require('./util'); // utility functions
 const interceptors = require('./interceptors');
 const logic = require('./logic'); // this file encapsulates all "business" logic
+const view = require('./view');
 
 
 const LaunchRequestHandler = {
@@ -132,7 +133,7 @@ const ShowRadarIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ShowRadarIntent';
     },
-    async handle(handlerInput) {
+    handle(handlerInput) {
         try {
             // call the progressive response service
             util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
@@ -141,13 +142,18 @@ const ShowRadarIntentHandler = {
             console.log("Progressive response directive error : " + error);
         }
         // we'll now fetch radar images from an external API
-        const response = await logic.fetchRadar();
-        let speechText = handlerInput.t('API_ERROR_MSG');
-        if (response && !Array.isArray(response)) {
-            speechText = 'Fetch error: ' + response.message;
-        } else if (response) {
-            speechText = handlerInput.t('POSITIVE_SOUND');
-        }
+        // const response = await logic.fetchRadar();
+        const imagesSrc = logic.fetchRadar();
+        // let speechText = handlerInput.t('API_ERROR_MSG');
+        // if (response && !Array.isArray(response)) {
+        //     speechText = 'Fetch error: ' + response.message;
+        // } else if (response) {
+        //     speechText = handlerInput.t('POSITIVE_SOUND');
+        // }
+        
+        const speechText = handlerInput.t('POSITIVE_SOUND');
+        
+        view.showImages(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -161,7 +167,7 @@ const ReadWheaterReportIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReadWheaterReportIntent';
     },
-    async handle(handlerInput) {
+    handle(handlerInput) {
         let speechText = 'Non implementata';
         
         return handlerInput.responseBuilder
