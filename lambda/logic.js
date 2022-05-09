@@ -28,7 +28,6 @@ function fetchRadar() {
     .catch((error) => {
         console.log('Error fetching 1_BASE', JSON.stringify(error));
         return error;
-        
     });
     
 }
