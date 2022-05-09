@@ -1,6 +1,9 @@
 module.exports = {
     // APL documents
     APL: {
-        radarPlayer: require('./documents/radarPlayer.json')
+        radarPlayer: {
+            document: require('./documents/radarPlayer.json'),
+            token: 'radarPlayerToken'
+        }
     }
 }
