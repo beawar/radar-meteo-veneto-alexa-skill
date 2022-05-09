@@ -9,13 +9,13 @@ const interceptors = require('./interceptors');
  * */
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
+        handlers.ShowRadarIntentHandler,
+        handlers.ReadWheaterReportIntentHandler,
         handlers.LaunchRequestHandler,
         handlers.HelpIntentHandler,
         handlers.CancelAndStopIntentHandler,
-        handlers.IntentReflectorHandler,
         handlers.FallbackIntentHandler,
-        handlers.ShowRadarIntentHandler,
-        handlers.ReadWheaterReportIntentHandler)
+        handlers.IntentReflectorHandler)
     .addErrorHandlers(handlers.ErrorHandler)
     .addRequestInterceptors(
         interceptors.LoggingRequestInterceptor,
