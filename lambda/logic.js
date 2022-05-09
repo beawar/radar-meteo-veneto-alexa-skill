@@ -24,7 +24,7 @@ module.exports = {
         return axios.get(url, config)
         .then((result) => [result])
         .catch((error) => {
-            console.log('Error fetching 1_BASE', error);
+            console.log('Error fetching 1_BASE', JSON.stringify(error));
             return error;
             
         });
