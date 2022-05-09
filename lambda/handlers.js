@@ -183,7 +183,7 @@ const ShowRadarIntentHandler = {
         
         console.log('calling show images');
         
-        view.showImages(handlerInput, imagesSrc);
+        showImages(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
             .speak(handlerInput.t('OPEN_PLAYER_MSG', 'Sto aprendo il player'))
