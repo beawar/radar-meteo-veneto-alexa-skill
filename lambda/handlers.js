@@ -150,7 +150,7 @@ const ShowRadarIntentHandler = {
         // const speechResponse = logic.convertBirthdaysResponse(handlerInput, response, true, timezone);
         let speechText = handlerInput.t('API_ERROR_MSG');
         if (response && !Array.isArray(response)) {
-            speechText = 'Fetch error' + response.message;
+            speechText = 'Fetch error: ' + response.message;
         } else if (response) {
             speechText = 'Fetch immagini completato con successo';
         }
