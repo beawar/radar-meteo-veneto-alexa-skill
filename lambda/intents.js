@@ -3,7 +3,7 @@ const util = require('./util'); // utility functions
 const interceptors = require('./interceptors');
 const logic = require('./logic'); // this file encapsulates all "business" logic
 
-const ShowRadarIntent = {
+const ShowRadarIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ShowRadarIntent';
@@ -38,7 +38,7 @@ const ShowRadarIntent = {
     }
 };
 
-const ReadWheaterReportIntent = {
+const ReadWheaterReportIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReadWheaterReportIntent';
@@ -53,4 +53,4 @@ const ReadWheaterReportIntent = {
     }
 };
 
-module.export = { ShowRadarIntent, ReadWheaterReportIntent };
+module.export = { ShowRadarIntentHandler, ReadWheaterReportIntentHandler };
