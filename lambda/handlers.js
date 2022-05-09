@@ -3,6 +3,7 @@ const util = require('./util'); // utility functions
 const interceptors = require('./interceptors');
 const logic = require('./logic'); // this file encapsulates all "business" logic
 const view = require('./view');
+const constants = require('./constants');
 
 
 const LaunchRequestHandler = {
@@ -140,7 +141,7 @@ function showImages(handlerInput, images) {
         console.debug('images url', imagesUrl);
         handlerInput.responseBuilder.addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
-            version: '1.1',
+            version: '1.8',
             document: constants.APL.radarPlayer,
             // datasources: {
             //     launchData: {
