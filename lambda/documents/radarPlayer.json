@@ -8,35 +8,6 @@
             "version": "1.5.0"
         }
     ],
-    "layouts": {
-        "RadarPlayer": {
-            "description": "A basic player for a sequence of images",
-            "parameters": [
-                {
-                    "name": "imageSrc",
-                    "type": "string"
-                }
-            ],
-            "items": [
-                {
-                    "type": "Container",
-                    "width": "100%",
-                    "height": "100%",
-                    "justifyContent": "center",
-                    "alignItems": "center",
-                    "item": [
-                        {
-                            "type": "Image",
-                            "source": "${imageSrc}",
-                            "width": "90vw",
-                            "height": "90vh",
-                            "scale": "best-fill"
-                        }
-                    ]
-                }
-            ]
-        }
-    },
     "mainTemplate": {
         "parameters": [
             "payload"
@@ -48,44 +19,33 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.imageTemplateData.properties.backgroundImage.sources[0].url}",
+                        "backgroundImageSource": "${payload.radarImagesData.properties.backgroundImage.sources[0].url}",
                         "backgroundBlur": false,
                         "backgroundScale": "best-fill"
                     },
                     {
-                        "type": "Container",
-                        "height": "100vh",
-                        "width": "100vw",
                         "items": [
                             {
-                                "type": "AlexaHeader",
-                                "headerTitle": "${payload.imageTemplateData.properties.title}",
-                                "headerAttributionImage": "${payload.imageTemplateData.properties.logoUrl}",
-                                "headerDivider": false
-                            },
-                            {
-                                "type": "Container",
-                                "width": "100%",
-                                "height": "70%",
-                                "justifyContent": "top",
+                                "justifyContent": "center",
                                 "alignItems": "center",
-                                "paddingLeft": "@marginHorizontal",
-                                "paddingRight": "@marginHorizontal",
                                 "items": [
                                     {
                                         "type": "AlexaImage",
-                                        "imageSource": "${payload.imageTemplateData.properties.image.sources[0].url}",
+                                        "imageSource": "${payload.radarImagesData.properties.images[0].sources[0].url}",
                                         "imageRoundedCorner": true,
-                                        "imageScale": "best-fill",
                                         "imageAlignment": "center",
-                                        "imageWidth": "${@viewportProfile == @hubRoundSmall ? '70%' : '100%'}",
-                                        "imageAspectRatio": "${@viewportProfile == @hubRoundSmall ? 'square' : 'standard_landscape'}",
-                                        "imageBlurredBackground": false,
+                                        "imageWidth": "${@viewportProfile == @hubRoundSmall ? '92%' : '100%'}",
+                                        "imageAspectRatio": "square",
                                         "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
                                     }
-                                ]
+                                ],
+                                "type": "Container"
                             }
-                        ]
+                        ],
+                        "justifyContent": "center",
+                        "type": "Container",
+                        "width": "100vw",
+                        "height": "100vh"
                     }
                 ]
             }
