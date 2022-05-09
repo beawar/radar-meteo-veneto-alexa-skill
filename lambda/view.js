@@ -39,6 +39,8 @@ function showImages(handlerInput, images) {
                 }
             }
         });
+    } else {
+        handlerInput.responseBuilder.speak(handlerInput.t('UNSUPPORTED_MSG'))
     }
 }
 
