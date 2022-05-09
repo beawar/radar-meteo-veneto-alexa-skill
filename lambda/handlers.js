@@ -158,7 +158,7 @@ const ReadWheaterReportIntentHandler = {
     }
 };
 
-module.export = { 
+module.exports = { 
     LaunchRequestHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
