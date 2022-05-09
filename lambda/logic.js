@@ -1,5 +1,6 @@
-const util = require('./util');
 const axios = require('axios');
+const util = require('./util');
+
 
 function fetchRadar() {
     // const requests = [];
