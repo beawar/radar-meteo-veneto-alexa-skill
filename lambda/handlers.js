@@ -105,12 +105,10 @@ const ErrorHandler = {
 };
 
 module.export = { 
-    request: {
-        LaunchRequestHandler,
-        HelpIntentHandler,
-        CancelAndStopIntentHandler,
-        IntentReflectorHandler,
-        FallbackIntentHandler
-    },
-    error: { ErrorHandler }
+    LaunchRequestHandler,
+    HelpIntentHandler,
+    CancelAndStopIntentHandler,
+    IntentReflectorHandler,
+    FallbackIntentHandler,
+    ErrorHandler
 };
