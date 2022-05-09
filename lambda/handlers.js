@@ -153,6 +153,8 @@ const ShowRadarIntentHandler = {
         
         const speechText = handlerInput.t('POSITIVE_SOUND');
         
+        console.log('calling show images');
+        
         view.showImages(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
