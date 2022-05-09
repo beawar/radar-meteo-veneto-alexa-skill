@@ -134,13 +134,13 @@ const ShowRadarIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ShowRadarIntent';
     },
     handle(handlerInput) {
-        try {
-            // call the progressive response service
-            util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
-        } catch (error) {
-            // if it fails we can continue, but the user will wait without progressive response
-            console.log("Progressive response directive error : " + error);
-        }
+        // try {
+        //     // call the progressive response service
+        //     util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
+        // } catch (error) {
+        //     // if it fails we can continue, but the user will wait without progressive response
+        //     console.log("Progressive response directive error : " + error);
+        // }
         // we'll now fetch radar images from an external API
         // const response = await logic.fetchRadar();
         const imagesSrc = logic.fetchRadar();
