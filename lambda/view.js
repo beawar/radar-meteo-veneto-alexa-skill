@@ -11,7 +11,7 @@ function showImages(handlerInput, images) {
         }));
         handlerInput.responseBuilder.addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
-            version: '1.8',
+            version: '1.1',
             document: constants.APL.radarPlayer,
             // datasources: {
             //     launchData: {
