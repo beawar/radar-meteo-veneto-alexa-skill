@@ -43,6 +43,7 @@ const CancelAndStopIntentHandler = {
             .getResponse();
     }
 };
+
 /* *
  * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
  * It must also be defined in the language model (if the locale supports it)
@@ -82,6 +83,7 @@ const IntentReflectorHandler = {
             .getResponse();
     }
 };
+
 /**
  * Generic error handling to capture any syntax or routing errors. If you receive an error
  * stating the request handler chain is not found, you have not implemented a handler for
@@ -107,7 +109,8 @@ module.export = {
         LaunchRequestHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
-        IntentReflectorHandler
+        IntentReflectorHandler,
+        FallbackIntentHandler
     },
     error: { ErrorHandler }
 };
