@@ -142,17 +142,11 @@ const ShowRadarIntentHandler = {
         }
         // we'll now fetch radar images from an external API
         const response = await logic.fetchRadar();
-        // const response = await new Promise((resolve) => {
-            // setTimeout(resolve(['data']), 2000);
-        // })
-        console.log('handle Show Radar response', response);
-        // // below we convert the API response to text that Alexa can read
-        // const speechResponse = logic.convertBirthdaysResponse(handlerInput, response, true, timezone);
         let speechText = handlerInput.t('API_ERROR_MSG');
         if (response && !Array.isArray(response)) {
             speechText = 'Fetch error: ' + response.message;
         } else if (response) {
-            speechText = 'Fetch immagini completato con successo';
+            speechText = handlerInput.t('POSITIVE_SOUND');
         }
 
         return handlerInput.responseBuilder
