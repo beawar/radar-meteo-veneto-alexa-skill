@@ -108,6 +108,11 @@ const ErrorHandler = {
     }
 };
 
+
+/**
+ * CUSTOM HANDLERS
+ **/
+
 const ShowRadarIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -122,7 +127,7 @@ const ShowRadarIntentHandler = {
             console.log("Progressive response directive error : " + error);
         }
         // we'll now fetch radar images from an external API
-        const response = await logic.fetchRadar(handlerInput);
+        const response = await logic.fetchRadar();
         // const response = await new Promise((resolve) => {
             // setTimeout(resolve(['data']), 2000);
         // })
