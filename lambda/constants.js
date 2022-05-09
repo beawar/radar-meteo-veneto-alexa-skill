@@ -1,6 +1,6 @@
 module.exports = {
     // APL documents
     APL: {
-        launchDoc: /* require('./documents/launchScreen.json') */ ''
+        radarPlayer: require('./documents/radarPlayer.json')
     }
 }
