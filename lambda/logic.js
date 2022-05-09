@@ -1,7 +1,7 @@
 const util = require('./util');
 const axios = require('axios');
 
-function fetchRadar(){
+function fetchRadar() {
     // const requests = [];
     // for (let i=1; i<=6; i++) {
         // const url = `https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/${i}_BASE.jpg`;
