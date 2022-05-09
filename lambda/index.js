@@ -9,9 +9,17 @@ const interceptors = require('./interceptors');
  * defined are included below. The order matters - they're processed top to bottom 
  * */
 exports.handler = Alexa.SkillBuilders.custom()
-    .addRequestHandlers(...handlers.request)
-    .addErrorHandlers(...handlers.error)
-    .addRequestInterceptors(...interceptors.request)
-    .addResponseInterceptors(...interceptors.response)
+    .addRequestHandlers(
+        handlers.LaunchRequestHandler,
+        handlers.HelpIntentHandler,
+        handlers.CancelAndStopIntentHandler,
+        handlers.IntentReflectorHandler,
+        handlers.FallbackIntentHandler)
+    .addErrorHandlers(handlers.ErrorHandler)
+    .addRequestInterceptors(
+        interceptors.LoggingRequestInterceptor,
+        interceptors.LocalisationRequestInterceptor)
+    .addResponseInterceptors(
+        interceptors.LoggingResponseInterceptor)
     .withApiClient(new Alexa.DefaultApiClient())
     .lambda();
