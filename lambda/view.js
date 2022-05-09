@@ -40,7 +40,7 @@ function showImages(handlerInput, images) {
             }
         });
     } else {
-        handlerInput.responseBuilder.speak(handlerInput.t('UNSUPPORTED_MSG'))
+        handlerInput.responseBuilder.speak(handlerInput.t('UNSUPPORTED_MSG', 'Show images is not supported by this device'));
     }
 }
 
