@@ -13,8 +13,8 @@ function showImages(handlerInput, images) {
         console.debug('images url', imagesUrl);
         handlerInput.responseBuilder.addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
-            version: '1.1',
-            document: constants.APL.radarPlayer,
+            token: constants.APL.radarPlayer.token,
+            document: constants.APL.radarPlayer.document,
             // datasources: {
             //     launchData: {
             //         type: 'object',
