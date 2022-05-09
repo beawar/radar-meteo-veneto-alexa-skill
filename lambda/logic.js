@@ -2,7 +2,7 @@ const util = require('./util');
 const axios = require('axios');
 
 function fetchRadar(){
-    const requests = [];
+    // const requests = [];
     // for (let i=1; i<=6; i++) {
         // const url = `https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/${i}_BASE.jpg`;
         //  var config = {
