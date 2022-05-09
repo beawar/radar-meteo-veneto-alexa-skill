@@ -42,7 +42,11 @@ const LocalisationRequestInterceptor = {
 
 
 module.exports = {
-    LoggingRequestInterceptor,
-    LoggingResponseInterceptor,
-    LocalisationRequestInterceptor
+    request: {
+        LoggingRequestInterceptor,
+        LocalisationRequestInterceptor
+    },
+    response: {
+        LoggingResponseInterceptor,  
+    }
 }
