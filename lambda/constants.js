@@ -2,7 +2,7 @@ module.exports = {
     // APL documents
     APL: {
         radarPlayer: {
-            document: require('./documents/radarPlayer.json'),
+            document: 'doc://alexa/apl/documents/images-player',
             token: 'radarPlayerToken'
         }
     }
