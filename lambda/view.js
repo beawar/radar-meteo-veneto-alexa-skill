@@ -6,7 +6,7 @@ function showImages(handlerInput, images) {
     if (util.supportsAPL(handlerInput)) {
         const { Viewport } = handlerInput.requestEnvelope.context;
         const resolution = Viewport.pixelWidth + 'x' + Viewport.pixelHeight;
-        const sources = images.map((imageSrc) => ({
+        const imagesUrl = images.map((imageSrc) => ({
             url: imageSrc
         }));
         handlerInput.responseBuilder.addDirective({
@@ -34,11 +34,7 @@ function showImages(handlerInput, images) {
                 radarImagesData: {
                     type: 'object',
                     properties: {
-                        images: [
-                            {
-                                sources
-                            }
-                        ]
+                        images: imagesUrl
                     }
                 }
             }
