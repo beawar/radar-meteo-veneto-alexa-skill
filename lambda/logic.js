@@ -23,7 +23,11 @@ module.exports = {
         const config = { timeout: 6500 };
         return axios.get(url, config)
         .then((result) => [result])
-        .catch((error) => error);
+        .catch((error) => {
+            console.log('Error fetching 1_BASE', error);
+            return error;
+            
+        });
         
     }
 }
