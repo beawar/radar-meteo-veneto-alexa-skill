@@ -20,7 +20,7 @@ function callDirectiveService(handlerInput, msg) {
 
 
 function supportsAPL(handlerInput) {
-    const {supportedInterfaces} = handlerInput.requestEnvelope.context.System.device;
+    const { supportedInterfaces } = handlerInput.requestEnvelope.context.System.device;
     return !!supportedInterfaces['Alexa.Presentation.APL'];
 }
 
