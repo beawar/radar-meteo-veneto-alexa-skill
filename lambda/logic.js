@@ -21,7 +21,10 @@ function fetchRadar() {
     const url = `https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/1_BASE.jpg`
     const config = { timeout: 6500 };
     return axios.get(url, config)
-    .then((result) => [result])
+    .then((result) => {
+        console.log('Fetched 1_BASE', JSON.stringify(result));
+        return [result];
+    })
     .catch((error) => {
         console.log('Error fetching 1_BASE', JSON.stringify(error));
         return error;
