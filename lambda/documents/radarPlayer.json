@@ -31,7 +31,7 @@
                                 "items": [
                                     {
                                         "type": "AlexaImage",
-                                        "imageSource": "${payload.radarImagesData.properties.images[0].sources[0].url}",
+                                        "imageSource": "${payload.radarImagesData.properties.images[0].url}",
                                         "imageRoundedCorner": true,
                                         "imageAlignment": "center",
                                         "imageWidth": "${@viewportProfile == @hubRoundSmall ? '92%' : '100%'}",
