@@ -23,7 +23,7 @@ function fetchRadar() {
     const config = { timeout: 6500 };
     return axios.get(url, config)
     .then((result) => {
-        console.log('Fetched 1_BASE');
+        console.log('Fetched 1_BASE', result);
         return [result];
     })
     .catch((error) => {
