@@ -145,7 +145,7 @@ const ShowRadarIntentHandler = {
         // const response = await new Promise((resolve) => {
             // setTimeout(resolve(['data']), 2000);
         // })
-        console.log('handle Show Radar response', JSON.stringify(response));
+        console.log('handle Show Radar response', response);
         // // below we convert the API response to text that Alexa can read
         // const speechResponse = logic.convertBirthdaysResponse(handlerInput, response, true, timezone);
         let speechText = handlerInput.t('API_ERROR_MSG');
