@@ -108,6 +108,20 @@ const ErrorHandler = {
     }
 };
 
+const SessionEndedRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+    },
+    handle(handlerInput) {
+        if(null !== handlerInput.requestEnvelope.request.error && undefined !== handlerInput.requestEnvelope.request.error) {
+            console.log(JSON.stringify(handlerInput.requestEnvelope.request.error));
+        }
+
+
+        return handlerInput.responseBuilder.getResponse();
+    },
+};
+
 
 /**
  * CUSTOM HANDLERS
@@ -170,6 +184,7 @@ module.exports = {
     IntentReflectorHandler,
     FallbackIntentHandler,
     ErrorHandler,
+    SessionEndedRequestHandler,
     // custom handlers
     ShowRadarIntentHandler,
     ReadWheaterReportIntentHandler
