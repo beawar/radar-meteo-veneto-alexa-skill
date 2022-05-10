@@ -38,6 +38,7 @@
                 "navigation": "none",
                 "handlePageMove": [
                     {
+                        "when": "${event.direction == 'left' || event.direction == 'right'}",
                         "drawOrder": "higherAbove",
                         "commands": [
                             {
@@ -90,26 +91,19 @@
                         "backgroundScale": "best-fill"
                     },
                     {
-                        "items": [
-                            {
-                                "justifyContent": "center",
-                                "alignItems": "center",
-                                "height": "100%",
-                                "width": "100%",
-                                "items": [
-                                    {
-                                        "type": "ImagePager",
-                                        "id": "imagePager",
-                                        "images": "${payload.radarImagesData.properties.images}"
-                                    }
-                                ],
-                                "type": "Container"
-                            }
-                        ],
+                        
                         "justifyContent": "center",
+                        "alignItems": "center",
                         "type": "Container",
                         "width": "100vw",
-                        "height": "100vh"
+                        "height": "100vh",
+                        "items": [
+                            {
+                                "type": "ImagePager",
+                                "id": "imagePager",
+                                "images": "${payload.radarImagesData.properties.images}"
+                            }
+                        ]
                     }
                 ]
             }
