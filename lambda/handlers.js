@@ -158,7 +158,6 @@ const ShowRadarIntentHandler = {
         view.showImages(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
-            .speak(handlerInput.t('OPEN_PLAYER_MSG', 'Sto aprendo il player'))
             .speak(handlerInput.t('POSITIVE_SOUND'))
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
