@@ -8,6 +8,22 @@
             "version": "1.5.0"
         }
     ],
+    "layouts": {
+        "ImagePage": {
+            "parameters": [
+                "item"
+            ],
+            "item": {
+                "type": "AlexaImage",
+                "imageSource": "${item.url}",
+                "imageRoundedCorner": true,
+                "imageAlignment": "center",
+                "imageWidth": "${@viewportProfile == @hubRoundSmall ? '92%' : '100%'}",
+                "imageAspectRatio": "square",
+                "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
+            }
+        }
+    },
     "mainTemplate": {
         "parameters": [
             "payload"
@@ -28,15 +44,21 @@
                             {
                                 "justifyContent": "center",
                                 "alignItems": "center",
+                                "height": "100%",
+                                "width": "100%",
                                 "items": [
                                     {
-                                        "type": "AlexaImage",
-                                        "imageSource": "${payload.radarImagesData.properties.images[0].url}",
-                                        "imageRoundedCorner": true,
-                                        "imageAlignment": "center",
-                                        "imageWidth": "${@viewportProfile == @hubRoundSmall ? '92%' : '100%'}",
-                                        "imageAspectRatio": "square",
-                                        "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
+                                        "id": "imagePager",
+                                        "type": "Pager",
+                                        "height": "100%",
+                                        "width": "100%",
+                                        "items": [
+                                            {
+                                                "type": "ImagePage",
+                                                "item": "${data}"
+                                            }
+                                        ],
+                                        "data": "${payload.radarImagesData.properties.images}"
                                     }
                                 ],
                                 "type": "Container"
@@ -50,5 +72,14 @@
                 ]
             }
         ]
-    }
+    },
+    "onMount": [
+        {
+            "type": "AutoPage",
+            "componentId": "imagePager",
+            "duration": 250,
+            "delay": 250
+        }
+    ],
+    "commands": {}
 }
