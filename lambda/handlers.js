@@ -170,7 +170,7 @@ const ReadWheaterReportIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReadWheaterReportIntent';
     },
     handle(handlerInput) {
-        let speechText = 'Non implementata';
+        let speechText = handlerInput.t('FALLBACK_MSG');
         
         return handlerInput.responseBuilder
             .speak(speechText)
