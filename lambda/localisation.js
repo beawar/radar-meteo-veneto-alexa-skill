@@ -21,7 +21,7 @@ module.exports = {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/> `,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as> `,
-            WELCOME_MSG: `Benvenuto in ArpaV Radar Veneto. Chiedimi di mostrarti il radar per visualizzare le immagini radar o di leggere il boollettino meteo`,
+            WELCOME_MSG: `Benvenuto in ArpaV Radar Veneto. Chiedimi di mostrarti il radar per visualizzare le immagini radar o di leggere il bollettino meteo`,
             WELCOME_BACK_MSG: 'Ciao di nuovo, {{name}}! ',
             REPROMPT_MSG: `Se non sai cosa fare, prova a chiedermi aiuto. Se vuoi uscire dimmi pure stop. Cosa vuoi fare?`,
             GOODBYE_MSG: ['A presto, {{name}}! ', 'Ciao {{name}}! ', 'Arrivederci {{name}}! ', 'A dopo {{name}}! '],
