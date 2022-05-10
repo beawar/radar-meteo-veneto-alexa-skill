@@ -22,6 +22,52 @@
                 "imageAspectRatio": "square",
                 "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
             }
+        },
+        "ImagePager": {
+            "parameters": [
+                "images"
+            ],
+            "item": {
+                "type": "Pager",
+                "height": "100%",
+                "width": "100%",
+                "items": [
+                    {
+                        "type": "ImagePage",
+                        "item": "${data}"
+                    }
+                ],
+                "data": "${images}",
+                "navigation": "none",
+                "handlePageMove": [
+                    {
+                      "when": "${event.direction == 'left' || event.direction == 'right'}",
+                      "drawOrder": "higherAbove",
+                      "commands": [
+                        {
+                          "type": "SetValue",
+                          "componentId": "${event.currentChild.uid}",
+                          "property": "transform",
+                          "value": [
+                            {
+                              "translateX": "0"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "SetValue",
+                          "componentId": "${event.nextChild.uid}",
+                          "property": "transform",
+                          "value": [
+                            {
+                              "translateX": "1"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                ]
+            }
         }
     },
     "mainTemplate": {
@@ -48,17 +94,9 @@
                                 "width": "100%",
                                 "items": [
                                     {
+                                        "type": "ImagePager",
                                         "id": "imagePager",
-                                        "type": "Pager",
-                                        "height": "100%",
-                                        "width": "100%",
-                                        "items": [
-                                            {
-                                                "type": "ImagePage",
-                                                "item": "${data}"
-                                            }
-                                        ],
-                                        "data": "${payload.radarImagesData.properties.images}"
+                                        "images": "${payload.radarImagesData.properties.images}"
                                     }
                                 ],
                                 "type": "Container"
