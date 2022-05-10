@@ -16,7 +16,6 @@
             "item": {
                 "type": "AlexaImage",
                 "imageSource": "${item.url}",
-                "imageRoundedCorner": true,
                 "imageAlignment": "center",
                 "imageWidth": "${@viewportProfile == @hubRoundSmall ? '92%' : '100%'}",
                 "imageAspectRatio": "square",
@@ -38,30 +37,7 @@
                 "navigation": "none",
                 "handlePageMove": [
                     {
-                        "when": "${event.direction == 'left' || event.direction == 'right'}",
-                        "drawOrder": "higherAbove",
-                        "commands": [
-                            {
-                                "type": "SetValue",
-                                "componentId": "${event.currentChild.uid}",
-                                "property": "transform",
-                                "value": [
-                                    {
-                                        "translateX": "0"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "SetValue",
-                                "componentId": "${event.nextChild.uid}",
-                                "property": "transform",
-                                "value": [
-                                    {
-                                        "translateX": "1"
-                                    }
-                                ]
-                            }
-                        ]
+                        "drawOrder": "higherAbove"
                     }
                 ],
                 "type": "Pager",
