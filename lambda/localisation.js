@@ -3,7 +3,7 @@ module.exports = {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as>`,
-            WELCOME_MSG: `Welcome to Arpav Radar Veneto. Say "show radar" to see radar images, or "read report" to make me read last available weather report`,
+            WELCOME_MSG: `Welcome to Arpav Radar Veneto. Ask me to show radar to see radar images, or to read report to make me read last available weather report`,
             WELCOME_BACK_MSG: 'Welcome back {{name}}! ',
             REJECTED_MSG: 'No problem. Please say the date again so I can get it right.',
             REPROMPT_MSG: `If you're not sure what to do next try asking for help. If you want to leave just say stop. What would you like to do next? `,
@@ -22,7 +22,7 @@ module.exports = {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/> `,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as> `,
-            WELCOME_MSG: `Benvenuto a Buon Compleanno. Esploreremo un paio di funzionalità usando la tua data di nascita! `,
+            WELCOME_MSG: `Benvenuto in ArpaV Radar Veneto. Chiedimi di mostrarti il radar per visualizzare le immagini radar o di leggere il boollettino meteo`,
             WELCOME_BACK_MSG: 'Ciao di nuovo, {{name}}! ',
             REJECTED_MSG: 'Nessun problema. Per favore ridimmi la data e sistemiamo subito. ',
             REPROMPT_MSG: `Se non sai cosa fare, prova a chiedermi aiuto. Se vuoi uscire dimmi pure stop. Cosa vuoi fare?`,
