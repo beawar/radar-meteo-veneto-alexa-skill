@@ -28,9 +28,6 @@
                 "images"
             ],
             "item": {
-                "type": "Pager",
-                "height": "100%",
-                "width": "100%",
                 "items": [
                     {
                         "type": "ImagePage",
@@ -41,32 +38,39 @@
                 "navigation": "none",
                 "handlePageMove": [
                     {
-                      "when": "${event.direction == 'left' || event.direction == 'right'}",
-                      "drawOrder": "higherAbove",
-                      "commands": [
-                        {
-                          "type": "SetValue",
-                          "componentId": "${event.currentChild.uid}",
-                          "property": "transform",
-                          "value": [
+                        "drawOrder": "higherAbove",
+                        "commands": [
                             {
-                              "translateX": "0"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "SetValue",
-                          "componentId": "${event.nextChild.uid}",
-                          "property": "transform",
-                          "value": [
+                                "type": "SetValue",
+                                "componentId": "${event.currentChild.uid}",
+                                "property": "transform",
+                                "value": [
+                                    {
+                                        "translateX": "0"
+                                    }
+                                ]
+                            },
                             {
-                              "translateX": "1"
+                                "type": "SetValue",
+                                "componentId": "${event.nextChild.uid}",
+                                "property": "transform",
+                                "value": [
+                                    {
+                                        "translateX": "1"
+                                    }
+                                ]
                             }
-                          ]
-                        }
-                      ]
+                        ]
                     }
-                ]
+                ],
+                "type": "Pager",
+                "onMount": [
+                    {
+                        "type": "LoopAutoPage"
+                    }
+                ],
+                "width": "100%",
+                "height": "100%"
             }
         }
     },
@@ -111,13 +115,23 @@
             }
         ]
     },
-    "onMount": [
-        {
-            "type": "AutoPage",
-            "componentId": "imagePager",
-            "duration": 250,
-            "delay": 250
+    "commands": {
+        "LoopAutoPage": {
+            "commands": [
+                {
+                    "type": "AutoPage",
+                    "duration": 300,
+                    "delay": 1000
+                },
+                {
+                    "type": "SetPage",
+                    "position": "absolute",
+                    "value": 0
+                },
+                {
+                    "type": "LoopAutoPage"
+                }
+            ]
         }
-    ],
-    "commands": {}
+    }
 }
