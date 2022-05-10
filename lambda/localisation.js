@@ -3,7 +3,7 @@ module.exports = {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
             DOUBT_SPEECHCON: `<say-as interpret-as="interjection">hmm</say-as>`,
-            WELCOME_MSG: `Welcome to Arpav Radar Veneto. Say "show radar" to see radar images, or "read report" to make me read last available wheater report`,
+            WELCOME_MSG: `Welcome to Arpav Radar Veneto. Say "show radar" to see radar images, or "read report" to make me read last available weather report`,
             WELCOME_BACK_MSG: 'Welcome back {{name}}! ',
             REJECTED_MSG: 'No problem. Please say the date again so I can get it right.',
             REPROMPT_MSG: `If you're not sure what to do next try asking for help. If you want to leave just say stop. What would you like to do next? `,
@@ -15,6 +15,7 @@ module.exports = {
             CANCEL_MSG: `Ok. Let's cancel that. `,
             API_ERROR_MSG: `I'm sorry, I'm having trouble accessing the external A.P.I., Please try again later. `,
             CONJUNCTION_MSG: ' and ',
+            HELP_MSG: 'I can retrieve the weather information from the ArpaV website: ask me to show the radar or to read the weather report'
         }
     },
     it: {
@@ -32,7 +33,8 @@ module.exports = {
             UNSUPPORTED_DEVICE_MSG: `Questa funzionalità non è disponibile su questo dispositivo. `,
             CANCEL_MSG: `Ok, annullato. `,
             API_ERROR_MSG: `Sto avendo qualche intoppo contattando l'API esterna. Riprova più tardi. `,
-            CONJUNCTION_MSG: ' e '
+            CONJUNCTION_MSG: ' e ',
+            HELP_MSG: 'Posso recuperare le informazioni del meteo dal sito ArpaV: chiedimi di mostrarti il radar o di leggere il bollettino meteo'
         }
     }
 }
