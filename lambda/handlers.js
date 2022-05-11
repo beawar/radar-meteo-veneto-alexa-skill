@@ -163,6 +163,7 @@ const ReadWheaterReportIntentHandler = {
         //   PART 3:
         //   1) Retrieve report images from https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml (tag bollettini)
         //   2) Migliorare il tutto
+        //   modifica diversa dalla mia
         
         /*
             <bollettino bollettinoid="MV" name="Meteo Veneto" title="Bollettino del 11 maggio">
