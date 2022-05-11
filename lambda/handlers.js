@@ -152,15 +152,7 @@ const ReadWheaterReportIntentHandler = {
     },
     handle(handlerInput) {
         let speechText = `
-                Evoluzione generale
-                
-                L'Anticiclone Subtropicale Africano continuerà a portare temperature sopra la media specie nelle ore diurne, tra venerdì e sabato sarà meno esteso verso le nostre latitudini e si verificheranno delle piogge per effetto di contrasti con aria di origine atlantica, da domenica si riavvicinerà.
-                Il tempo oggi
-                
-                Cielo in prevalenza sereno o poco nuvoloso, su rilievi e zone limitrofe di pomeriggio a tratti parzialmente nuvoloso o nuvoloso con qualche piovasco sui monti.
-                Temperature in aumento leggero-moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
-                Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
-                Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto, specie di pomeriggio.
+                <b>Tempo atteso: </b>Di notte sereno o poco nuvoloso, di mattina poco o parzialmente nuvoloso, tra il pomeriggio nuvolosit&agrave; in ulteriore aumento fino a cielo anche coperto pi&ugrave; probabilmente su rilievi e zone limitrofe. <br /><b>Precipitazioni: </b>Tra il pomeriggio e la sera sui monti probabilit&agrave; medio-alta (50-75%) per piogge diffuse, sulla pedemontana probabilit&agrave; medio-bassa (25-50%) per piogge sparse e sulle zone limitrofe probabilit&agrave; bassa (5-25%) per piogge locali; si tratter&agrave; di piovaschi/rovesci/temporali. Per il resto assenti.<br /><b>Temperature: </b>Rispetto a gioved&igrave; fino al mattino saranno senza variazioni di rilievo sulla pianura e in aumento leggero/moderato sui monti, poi pi&ugrave; basse anche di molto.<br /><b>Venti: </b>Deboli/moderati, in alta montagna da ovest e altrove con direzione variabile.<br /><b>Mare: </b>Poco mosso fino al mattino e calmo dal pomeriggio.<br /><b>Attendibilit&agrave;: </b>Buona<br />
         `;
         
         return handlerInput.responseBuilder
