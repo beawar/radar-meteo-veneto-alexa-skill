@@ -1,6 +1,7 @@
 {
     "type": "APL",
     "version": "1.8",
+    "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
     "import": [
         {
             "name": "alexa-layouts",
@@ -16,7 +17,7 @@
                 "type": "AlexaImage",
                 "imageSource": "${item.url}",
                 "imageAlignment": "center",
-                "imageWidth": "${@viewportProfile == @hubRoundSmall ? '92%' : '100%'}",
+                "imageWidth": "100%",
                 "imageAspectRatio": "square",
                 "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
             }
@@ -45,8 +46,100 @@
                         "type": "LoopAutoPage"
                     }
                 ],
+                "height": "100%",
+                "width": "100%"
+            }
+        },
+        "Title": {
+            "item": {
+                "type": "Text",
+                "text": "ArpaV",
+                "style": "textStyleTitle",
+                "textAlignVertical": "center"
+            }
+        },
+        "Footer": {
+            "item": {
+                "type": "Text",
+                "style": "textStyleMetadata",
+                "text": "www.arpa.veneto.it",
+                "textAlignVertical": "center"
+            }
+        },
+        "VerticalLayout": {
+            "parameters": [
+                "contentWidth"
+            ],
+            "item": {
+                "type": "Container",
+                "justifyContent": "center",
+                "alignItems": "center",
+                "direction": "column",
                 "width": "100%",
-                "height": "100%"
+                "height": "100%",
+                "items": [
+                    {
+                        "type": "Container",
+                        "width": "${contentWidth}",
+                        "height": "70%",
+                        "justifyContent": "center",
+                        "alignItems": "center",
+                        "items": [
+                            {
+                                "type": "ImagePager",
+                                "id": "imagePager",
+                                "images": "${payload.radarImagesData.properties.images}"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Footer",
+                        "grow": 1,
+                        "paddingBottom": "3vw"
+                    }
+                ]
+            }
+        },
+        "HorizontalLayout": {
+            "item": {
+                "type": "Container",
+                "justifyContent": "spaceBetween",
+                "alignItems": "end",
+                "direction": "row",
+                "width": "100%",
+                "height": "100%",
+                "items": [
+                    {
+                        "type": "Container",
+                        "direction": "column",
+                        "justifyContent": "end",
+                        "alignItems": "center",
+                        "grow": 1,
+                        "items": [
+                            {
+                                "type": "Title"
+                            },
+                            {
+                                "type": "Footer"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Container",
+                        "width": "50%",
+                        "height": "100%",
+                        "direction": "column",
+                        "justifyContent": "end",
+                        "alignItems": "end",
+                        "items": [
+                            {
+                                "type": "ImagePager",
+                                "id": "imagePager",
+                                "images": "${payload.radarImagesData.properties.images}"
+                            }
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -57,6 +150,7 @@
         "item": [
             {
                 "type": "Container",
+                "width": "100vw",
                 "height": "100vh",
                 "items": [
                     {
@@ -66,19 +160,13 @@
                         "backgroundScale": "best-fill"
                     },
                     {
-                        
-                        "justifyContent": "center",
-                        "alignItems": "center",
-                        "type": "Container",
-                        "width": "100vw",
-                        "height": "100vh",
-                        "items": [
-                            {
-                                "type": "ImagePager",
-                                "id": "imagePager",
-                                "images": "${payload.radarImagesData.properties.images}"
-                            }
-                        ]
+                        "when": "${@viewportProfile == @hubRoundSmall || @viewportOrientation == @viewportOrientationPortrait}",
+                        "type": "VerticalLayout",
+                        "contentWidth": "${@viewportProfile == @hubRoundSmall ? '70%' : '100%'}"
+                    },
+                    {
+                        "when": "${@viewportProfile != @hubRoundSmall && @viewportOrientation != @viewportOrientationPortrait}",
+                        "type": "HorizontalLayout"
                     }
                 ]
             }
