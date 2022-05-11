@@ -151,6 +151,27 @@ const ReadWheaterReportIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReadWheaterReportIntent';
     },
     handle(handlerInput) {
+        // TODO:
+        //   PART 1: Alexa reading the summary report
+        //   1) retrieve xml from https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml (tag bollettini)
+        //   2) cleanup text to remove html tags
+        //   3) improve text to replace slashes with dash
+        //   PART 2:
+        //   1) retrieve mp3 of detailed report from https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3
+        //   2) make alexa speak mp3
+        //   3) [optional] display detailed report text on device (where supported)
+        //   PART 3:
+        //   1) Retrieve report images from https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml (tag bollettini)
+        
+        /*
+            <bollettino bollettinoid="MV" name="Meteo Veneto" title="Bollettino del 11 maggio">
+                <evoluzionegenerale>
+                    L'Anticiclone Subtropicale Africano continuer&agrave; a portare temperature sopra la media specie nelle ore diurne, tra venerd&igrave; e sabato sar&agrave; meno esteso verso le nostre latitudini e si verificheranno delle piogge per effetto di contrasti con aria di origine atlantica, da domenica si riavviciner&agrave;.
+                </evoluzionegenerale>
+                <avviso/>
+                <fenomeniparticolari/>
+            </bollettino>
+        */
         let speechText = `
                 <b>Tempo atteso: </b>Di notte sereno o poco nuvoloso, di mattina poco o parzialmente nuvoloso, tra il pomeriggio nuvolosit&agrave; in ulteriore aumento fino a cielo anche coperto pi&ugrave; probabilmente su rilievi e zone limitrofe. <br /><b>Precipitazioni: </b>Tra il pomeriggio e la sera sui monti probabilit&agrave; medio-alta (50-75%) per piogge diffuse, sulla pedemontana probabilit&agrave; medio-bassa (25-50%) per piogge sparse e sulle zone limitrofe probabilit&agrave; bassa (5-25%) per piogge locali; si tratter&agrave; di piovaschi/rovesci/temporali. Per il resto assenti.<br /><b>Temperature: </b>Rispetto a gioved&igrave; fino al mattino saranno senza variazioni di rilievo sulla pianura e in aumento leggero/moderato sui monti, poi pi&ugrave; basse anche di molto.<br /><b>Venti: </b>Deboli/moderati, in alta montagna da ovest e altrove con direzione variabile.<br /><b>Mare: </b>Poco mosso fino al mattino e calmo dal pomeriggio.<br /><b>Attendibilit&agrave;: </b>Buona<br />
         `;
