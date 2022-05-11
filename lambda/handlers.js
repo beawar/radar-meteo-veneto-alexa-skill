@@ -165,6 +165,7 @@ Temperature in aumento leggero moderato rispetto a martedì e sopra la media, an
         
         return handlerInput.responseBuilder
             .speak(speechText)
+            .listen('')
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
