@@ -141,8 +141,7 @@ const ShowRadarIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(handlerInput.t('POSITIVE_SOUND'))
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
-            .getResponse();
+            .reprompt(handlerInput.t('REPROMPT_MSG'));
     }
 };
 
