@@ -152,54 +152,15 @@ const ReadWheaterReportIntentHandler = {
     },
     handle(handlerInput) {
         let speechText = `
-<emphasis level="reduced">Evoluzione generale</emphasis>
+Evoluzione generale
 
-<p>
-    L'Anticiclone Subtropicale Africano continuerà a portare temperature sopra la media specie nelle ore diurne,
-    tra venerdì e sabato sarà meno esteso verso le nostre latitudini e si verificheranno delle piogge per effetto di contrasti con aria di origine atlantica,
-    da domenica si riavvicinerà.
-</p>
+L'Anticiclone Subtropicale Africano continuerà a portare temperature sopra la media specie nelle ore diurne, tra venerdì e sabato sarà meno esteso verso le nostre latitudini e si verificheranno delle piogge per effetto di contrasti con aria di origine atlantica, da domenica si riavvicinerà.
+Il tempo oggi
 
-<emphasis level="strong">Il tempo oggi</emphasis>
-
-<p>
-    <emphasis level="strong">mercoledì 11</emphasis>
-    Previsioni per il pomeriggio/sera di oggi. 
-    Cielo in prevalenza sereno o poco nuvoloso, su rilievi e zone limitrofe di pomeriggio a tratti parzialmente nuvoloso o nuvoloso con qualche piovasco sui monti.
-    Temperature in aumento leggero/moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
-</p>
-
-<emphasis level="strong">Tempo previsto</emphasis>
-
-<p>
-    <emphasis level="strong">giovedì 12</emphasis>.
-    Cielo in prevalenza sereno o poco nuvoloso, su rilievi e zone limitrofe a tratti parzialmente nuvoloso o nuvoloso di pomeriggio.
-    Precipitazioni: Sulla pianura assenti, sui monti probabilità bassa (5-25%) per qualche piovasco/rovescio di pomeriggio.
-    Temperature: Rispetto a mercoledì saranno in aumento leggero/moderato, eccetto stazionarietà di giorno sulla pianura; valori sopra la media anche di molto.
-    Venti Deboli/moderati; sulla costa e in prossimità dei rilievi a regime di brezza, in alta montagna di ovest, altrove con direzione variabile.
-    Mare poco mosso.
-</p>
-
-<p>
-<emphasis level="strong">venerdì 13</emphasis>. 
-    Di notte sereno o poco nuvoloso, di mattina poco o parzialmente nuvoloso, tra il pomeriggio nuvolosità in ulteriore aumento fino a cielo anche coperto più probabilmente su rilievi e zone limitrofe.
-    Precipitazioni. Tra il pomeriggio e la sera sui monti probabilità medio-alta (50-75%) per piogge diffuse, sulla pedemontana probabilità medio-bassa (25-50%) per piogge sparse e sulle zone limitrofe probabilità bassa (5-25%) per piogge locali; si tratterà di piovaschi/rovesci/temporali. Per il resto assenti.
-    Temperature: Rispetto a giovedì fino al mattino saranno senza variazioni di rilievo sulla pianura e in aumento leggero/moderato sui monti, poi più basse anche di molto.
-    Venti: Deboli/moderati, in alta montagna da ovest e altrove con direzione variabile.
-    Mare Poco mosso fino al mattino e calmo dal pomeriggio.
-</p>
-
-<emphasis level="strong">Tendenza</emphasis>
-
-<p>
-    <emphasis level="strong">sabato 14</emphasis>.
-    Alternanza di nuvole e rasserenamenti con delle piogge a tratti meno probabili su Veneziano e Rodigino e più probabili altrove. 
-    Temperature in aumento di notte e in calo di giorno.
-    
-    <emphasis level="strong">domenica 15</emphasis>.
-    Cielo in prevalenza sereno o poco nuvoloso, su rilievi e zone limitrofe di pomeriggio a tratti parzialmente nuvoloso o nuvoloso con qualche piovasco sui monti. 
-    Temperature di notte senza variazioni di rilievo sulla pianura e in calo sui monti, di giorno in aumento.
-</p>
+Cielo in prevalenza sereno o poco nuvoloso, su rilievi e zone limitrofe di pomeriggio a tratti parzialmente nuvoloso o nuvoloso con qualche piovasco sui monti.
+Temperature in aumento leggero-moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
+Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
+Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto, specie di pomeriggio. 
         `;
         
         return handlerInput.responseBuilder
