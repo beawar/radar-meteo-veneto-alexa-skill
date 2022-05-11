@@ -14,7 +14,7 @@ const LaunchRequestHandler = {
         const speakOutput = handlerInput.t('WELCOME_MSG');
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(speakOutput, constants.PlayBehavior.REPLACE_ALL)
             .reprompt(speakOutput)
             .getResponse();
     }
@@ -29,7 +29,7 @@ const HelpIntentHandler = {
         const speechText = handlerInput.t('HELP_MSG');
 
         return handlerInput.responseBuilder
-            .speak(speechText)
+            .speak(speechText, constants.PlayBehavior.REPLACE_ALL)
             .reprompt(speechText)
             .getResponse();
     }
@@ -140,7 +140,7 @@ const ShowRadarIntentHandler = {
         view.showImages(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
-            .speak(`${handlerInput.t('POSITIVE_SOUND')}<break time="8s"/>${handlerInput.t('REPROMPT_MSG')}`)
+            .speak(`${handlerInput.t('POSITIVE_SOUND')}<break time="8s"/>${handlerInput.t('REPROMPT_MSG')}`, constants.PlayBehavior.REPLACE_ALL)
             .getResponse();
     }
 };
@@ -164,7 +164,7 @@ const ReadWheaterReportIntentHandler = {
         `;
         
         return handlerInput.responseBuilder
-            .speak(speechText, 'REPLACE_ALL')
+            .speak(speechText, , constants.PlayBehavior.REPLACE_ALL)
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
