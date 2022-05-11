@@ -164,7 +164,7 @@ const ReadWheaterReportIntentHandler = {
         `;
         
         return handlerInput.responseBuilder
-            .speak(speechText, , constants.PlayBehavior.REPLACE_ALL)
+            .speak(speechText, constants.PlayBehavior.REPLACE_ALL)
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
