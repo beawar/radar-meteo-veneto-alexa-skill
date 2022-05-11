@@ -152,7 +152,7 @@ const ReadWheaterReportIntentHandler = {
     },
     handle(handlerInput) {
         let speechText = `
-<emphasis level="strong">Evoluzione generale</emphasis>
+<emphasis level="reduced">Evoluzione generale</emphasis>
 
 <p>
     L'Anticiclone Subtropicale Africano continuerà a portare temperature sopra la media specie nelle ore diurne,
