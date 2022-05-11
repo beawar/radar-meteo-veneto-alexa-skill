@@ -140,7 +140,7 @@ const ShowRadarIntentHandler = {
         view.showImages(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
-            .speak(`${handlerInput.t('SHOW_RADAR_MSG')}<break time="8s"/>${handlerInput.t('REPROMPT_MSG')}`)
+            .speak(`${handlerInput.t('POSITIVE_SOUND')}<break time="8s"/>${handlerInput.t('REPROMPT_MSG')}`)
             .getResponse();
     }
 };
