@@ -152,15 +152,17 @@ const ReadWheaterReportIntentHandler = {
     },
     handle(handlerInput) {
         let speechText = `
-Evoluzione generale
-
-L'Anticiclone Subtropicale Africano continuerà a portare temperature sopra la media specie nelle ore diurne, tra venerdì e sabato sarà meno esteso verso le nostre latitudini e si verificheranno delle piogge per effetto di contrasti con aria di origine atlantica, da domenica si riavvicinerà.
-Il tempo oggi
-
-Cielo in prevalenza sereno o poco nuvoloso, su rilievi e zone limitrofe di pomeriggio a tratti parzialmente nuvoloso o nuvoloso con qualche piovasco sui monti.
-Temperature in aumento leggero-moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
-Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
-Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto, specie di pomeriggio. 
+            <speak>
+                Evoluzione generale
+                
+                L'Anticiclone Subtropicale Africano continuerà a portare temperature sopra la media specie nelle ore diurne, tra venerdì e sabato sarà meno esteso verso le nostre latitudini e si verificheranno delle piogge per effetto di contrasti con aria di origine atlantica, da domenica si riavvicinerà.
+                Il tempo oggi
+                
+                Cielo in prevalenza sereno o poco nuvoloso, su rilievi e zone limitrofe di pomeriggio a tratti parzialmente nuvoloso o nuvoloso con qualche piovasco sui monti.
+                Temperature in aumento leggero-moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
+                Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto specie di pomeriggio.
+                Temperature in aumento leggero moderato rispetto a martedì e sopra la media, anche di molto, specie di pomeriggio.
+            </speak>
         `;
         
         return handlerInput.responseBuilder
