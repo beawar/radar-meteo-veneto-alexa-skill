@@ -46,6 +46,7 @@ const CancelAndStopIntentHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
+            .withShouldEndSession(true) // session can remain open if APL doc was rendered
             .getResponse();
     }
 };
