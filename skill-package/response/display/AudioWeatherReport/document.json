@@ -1,0 +1,17 @@
+{
+    "type": "APLA",
+    "version": "0.9",
+    "description": "This document demonstrates key components used to create audio responses.",
+    "compositions": {},
+    "resources": [],
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": {
+            "type": "Audio",
+            "description": "The Mixer component plays a set of audio clips at the same time. See docs for more information.",
+            "source": "${payload.source}"
+        }
+    }
+}
