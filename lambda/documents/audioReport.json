@@ -1,0 +1,16 @@
+{
+    "type": "APLA",
+    "version": "0.9",
+    "token": "audioReport",
+    "description": "",
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": {
+            "type": "Audio",
+            "description": "",
+            "source": "${payload.source}"
+        }
+    }
+}

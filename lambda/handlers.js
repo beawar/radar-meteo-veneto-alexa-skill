@@ -146,15 +146,33 @@ const ShowRadarIntentHandler = {
     }
 };
 
-const ReadWheaterReportIntentHandler = {
+const ReadWeatherReportIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReadWheaterReportIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReadWeatherReportIntent';
     },
     handle(handlerInput) {
         let speechText = `
                 <b>Tempo atteso: </b>Di notte sereno o poco nuvoloso, di mattina poco o parzialmente nuvoloso, tra il pomeriggio nuvolosit&agrave; in ulteriore aumento fino a cielo anche coperto pi&ugrave; probabilmente su rilievi e zone limitrofe. <br /><b>Precipitazioni: </b>Tra il pomeriggio e la sera sui monti probabilit&agrave; medio-alta (50-75%) per piogge diffuse, sulla pedemontana probabilit&agrave; medio-bassa (25-50%) per piogge sparse e sulle zone limitrofe probabilit&agrave; bassa (5-25%) per piogge locali; si tratter&agrave; di piovaschi/rovesci/temporali. Per il resto assenti.<br /><b>Temperature: </b>Rispetto a gioved&igrave; fino al mattino saranno senza variazioni di rilievo sulla pianura e in aumento leggero/moderato sui monti, poi pi&ugrave; basse anche di molto.<br /><b>Venti: </b>Deboli/moderati, in alta montagna da ovest e altrove con direzione variabile.<br /><b>Mare: </b>Poco mosso fino al mattino e calmo dal pomeriggio.<br /><b>Attendibilit&agrave;: </b>Buona<br />
         `;
+
+        speechText = util.cleanupTextToSpeech(speechText);
+        
+        return handlerInput.responseBuilder
+            .speak(speechText, constants.PlayBehavior.REPLACE_ALL)
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .getResponse();
+    }
+};
+
+const PlayWeatherReportIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PlayWeatherReportIntent';
+    },
+    handle(handlerInput) {
+        const urlMp3 = logic.fetchAudio();
+        view.playMp3Audio(handlerInput, urlMp3);
         
         return handlerInput.responseBuilder
             .speak(speechText, constants.PlayBehavior.REPLACE_ALL)
@@ -173,5 +191,6 @@ module.exports = {
     SessionEndedRequestHandler,
     // custom handlers
     ShowRadarIntentHandler,
-    ReadWheaterReportIntentHandler
+    ReadWeatherReportIntentHandler,
+    PlayWeatherReportIntentHandler
 };

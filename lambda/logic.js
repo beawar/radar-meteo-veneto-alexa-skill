@@ -12,6 +12,11 @@ function fetchRadar() {
     
 }
 
+function fetchAudio(){
+    const url = 'https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3'
+    return url;
+}
+
 module.exports = {
     fetchRadar
 }
