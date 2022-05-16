@@ -3,12 +3,18 @@ const util = require('./util');
 
 function fetchRadar() {
     const requests = [];
+    const timestamp = new Date().getTime();
     for (let i=6; i>0; i--) {
-        const url = `https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/${i}_BASE.jpg`;
+        const url = `https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/${i}_BASE.jpg?${timestamp}`;
         requests.push(url)
     }
     return requests;
     
+}
+
+function fetchAudio(){
+    const url = 'https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3'
+    return url;
 }
 
 module.exports = {

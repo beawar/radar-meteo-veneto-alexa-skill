@@ -1,0 +1,63 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "radar meteo veneto",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "ShowRadarIntent",
+          "slots": [],
+          "samples": [
+            "riproduci il radar",
+            "mostrami le immagini del radar",
+            "mostra le immagini del radar",
+            "mostrami il radar di oggi",
+            "radar oggi",
+            "fai vedere il radar",
+            "mostra il radar",
+            "mostrami il radar",
+            "radar"
+          ]
+        },
+        {
+          "name": "ReadWeatherReportIntent",
+          "slots": [],
+          "samples": [
+            "leggi il bollettino di oggi",
+            "leggi il bollettino",
+            "qual è il bollettino",
+            "bollettino"
+          ]
+        },
+        {
+          "name": "PlayWeatherReportIntent",
+          "slots": [],
+          "samples": [
+            "dimmi il bollettino di oggi",
+            "dimmi il bollettino",
+            "riproduci il bollettino dettagliato",
+            "bollettino dettagliato",
+            "dettagliato"
+          ]
+        }
+      ],
+      "types": []
+    }
+  },
+  "version": "16"
+}

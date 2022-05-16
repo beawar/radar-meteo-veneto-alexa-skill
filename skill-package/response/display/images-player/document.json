@@ -1,0 +1,106 @@
+{
+    "type": "APL",
+    "version": "1.8",
+    "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.5.0"
+        }
+    ],
+    "layouts": {
+        "ImagePage": {
+            "parameters": [
+                "item"
+            ],
+            "item": {
+                "type": "AlexaImage",
+                "imageSource": "${item.url}",
+                "imageAlignment": "center",
+                "imageWidth": "${@viewportProfile == @hubRoundSmall ? '92%' : '100%'}",
+                "imageAspectRatio": "square",
+                "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
+            }
+        },
+        "ImagePager": {
+            "parameters": [
+                "images"
+            ],
+            "item": {
+                "items": [
+                    {
+                        "type": "ImagePage",
+                        "item": "${data}"
+                    }
+                ],
+                "data": "${images}",
+                "navigation": "none",
+                "handlePageMove": [
+                    {
+                        "drawOrder": "higherAbove"
+                    }
+                ],
+                "type": "Pager",
+                "onMount": [
+                    {
+                        "type": "LoopAutoPage"
+                    }
+                ],
+                "width": "100%",
+                "height": "100%"
+            }
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": [
+            {
+                "type": "Container",
+                "height": "100vh",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.radarImagesData.properties.backgroundImage.sources[0].url}",
+                        "backgroundBlur": false,
+                        "backgroundScale": "best-fill"
+                    },
+                    {
+                        "justifyContent": "center",
+                        "alignItems": "center",
+                        "type": "Container",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "items": [
+                            {
+                                "type": "ImagePager",
+                                "id": "imagePager",
+                                "images": "${payload.radarImagesData.properties.images}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "commands": {
+        "LoopAutoPage": {
+            "commands": [
+                {
+                    "type": "AutoPage",
+                    "duration": 300,
+                    "delay": 1000
+                },
+                {
+                    "type": "SetPage",
+                    "position": "absolute",
+                    "value": 0
+                },
+                {
+                    "type": "LoopAutoPage"
+                }
+            ]
+        }
+    }
+}
