@@ -197,7 +197,7 @@ const PlayWeatherReportIntentHandler = {
         view.playMp3Audio(handlerInput, urlMp3);
         
         return handlerInput.responseBuilder
-            .speak(handlerInput.t('POSITIVE_SOUND'))
+            .speak('', constants.PlayBehavior.REPLACE_ALL)
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
