@@ -26,7 +26,7 @@ function supportsAPL(handlerInput) {
 
 function supportsAPLA(handlerInput) {
     const { supportedInterfaces } = handlerInput.requestEnvelope.context.System.device;
-    return !!supportedInterfaces['Alexa.Presentation.APL'];
+    return !!supportedInterfaces['Alexa.Presentation.APLA'];
 }
 
 function cleanupTextToSpeech(text) {
