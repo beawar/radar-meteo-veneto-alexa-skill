@@ -1,5 +1,5 @@
 {
-    "type": "APLA",
+    "type": "Alexa.Presentation.APLA.RenderDocument",
     "version": "0.9",
     "description": "",
     "mainTemplate": {
