@@ -1,3 +1,5 @@
+const he = require('he');
+
 function callDirectiveService(handlerInput, msg) {
     // Call Alexa Directive Service.
     const {requestEnvelope} = handlerInput;
@@ -31,11 +33,7 @@ function supportsAPLA(handlerInput) {
 
 function cleanupTextToSpeech(text) {
     if (text) {
-        // Regular expression to identify HTML tags in 
-        // the input string. Replacing the identified 
-        // HTML tag with a null string.
-        const HTML_TAG_REGEXP = /(<([^>]+)>)/ig;
-        return text.replace(HTML_TAG_REGEXP, '');
+        return he.decode(text);
     }
     return '';
 }
