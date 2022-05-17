@@ -18,5 +18,6 @@ function fetchAudio(){
 }
 
 module.exports = {
-    fetchRadar
+    fetchRadar,
+    fetchAudio
 }
