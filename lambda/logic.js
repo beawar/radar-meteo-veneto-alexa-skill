@@ -29,7 +29,7 @@ function parseReportToSpeech(reportXml, handlerInput) {
         if (bollettino.fenomeniparticolari[0]) {
             speechText += util.buildSentence(`${handlerInput.t('REPORT_PARTICULAR_PHENOMENA')}:`, bollettino.fenomeniparticolari[0]);
         }
-        speechText += util.buildParagraph(util.buildSentence(`${handlerInput.t('REPORT_TODAY')}:`, bollettino.giorno[0].text));
+        speechText += util.buildParagraph(util.buildSentence(`${handlerInput.t('REPORT_TODAY')}:`), util.buildSentence(bollettino.giorno[0].text));
         return speechText;
     })
     .catch((error) => {

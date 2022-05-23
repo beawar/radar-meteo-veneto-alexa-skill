@@ -49,11 +49,11 @@ function htmlToString(html) {
 }
 
 function buildSentence(...str){
-    return `<s>${htmlToString(str.join(' ').trim())}</s>`;
+    return ` <s>${htmlToString(str.join(' ').trim())}</s> `;
 }
 
 function buildParagraph(...str){
-    return `<p>${str.join(' ').trim()}</p>`;
+    return ` <p>${str.join(' ').trim()}</p> `;
 }
 
 module.exports = {

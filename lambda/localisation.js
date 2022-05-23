@@ -14,7 +14,11 @@ module.exports = {
             CANCEL_MSG: `Ok. Let's cancel that. `,
             API_ERROR_MSG: `I'm sorry, I'm having trouble accessing the external A.P.I., Please try again later. `,
             CONJUNCTION_MSG: ' and ',
-            HELP_MSG: 'I can retrieve the weather information from the ArpaV website: ask me to show the radar or to read the weather report'
+            HELP_MSG: 'I can retrieve the weather information from the ArpaV website: ask me to show the radar or to read the weather report',
+            REPORT_GENERAL: 'General evolution',
+            REPORT_ALLARM: 'Warning',
+            REPORT_PARTICULAR_PHENOMENA: 'Particular phenomena',
+            REPORT_TODAY: 'The weather today'
         }
     },
     it: {
@@ -37,7 +41,6 @@ module.exports = {
             REPORT_ALLARM: 'Avviso',
             REPORT_PARTICULAR_PHENOMENA: 'Fenomeni particolari',
             REPORT_TODAY: 'Il tempo oggi'
-
         }
     }
 }
