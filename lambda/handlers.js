@@ -205,7 +205,8 @@ const PlayWeatherReportIntentHandler = {
                 urlMp3,
                 'audioPlayerToken',
                 0
-            ).addAudioPlayerStopDirective()
+            )
+            .addAudioPlayerStopDirective()
             //.reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
