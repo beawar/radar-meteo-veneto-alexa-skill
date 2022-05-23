@@ -167,7 +167,7 @@ const ReadWeatherReportIntentHandler = {
         
         try {
             // call the progressive response service
-            await util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
+            util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
         } catch (error) {
             // if it fails we can continue, but the user will wait without progressive response
             console.log("Progressive response directive error : " + error);

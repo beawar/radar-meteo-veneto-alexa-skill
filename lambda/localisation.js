@@ -18,7 +18,8 @@ module.exports = {
             REPORT_GENERAL: 'General evolution',
             REPORT_ALLARM: 'Warning',
             REPORT_PARTICULAR_PHENOMENA: 'Particular phenomena',
-            REPORT_TODAY: 'The weather today'
+            REPORT_TODAY: 'The weather today',
+            PROGRESSIVE_MSG: 'Let me retrieve the last report'
         }
     },
     it: {
@@ -40,7 +41,8 @@ module.exports = {
             REPORT_GENERAL: 'Evoluzione generale',
             REPORT_ALLARM: 'Avviso',
             REPORT_PARTICULAR_PHENOMENA: 'Fenomeni particolari',
-            REPORT_TODAY: 'Il tempo oggi'
+            REPORT_TODAY: 'Il tempo oggi',
+            PROGRESSIVE_MSG: 'Fammi recuperare l\'ultimo bollettino'
         }
     }
 }
