@@ -16,6 +16,8 @@
     "i18next": "^21.8.0"
   },
   "devDependencies": {
-    "ask-sdk-local-debug": "^1.1.0"
+    "ask-sdk-local-debug": "^1.1.0",
+    "axios": "^0.27.2",
+    "xml2js": "^0.4.23"
   }
 }

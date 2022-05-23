@@ -32,7 +32,12 @@ module.exports = {
             CANCEL_MSG: `Ok, annullato. `,
             API_ERROR_MSG: `Sto avendo qualche intoppo contattando l'API esterna. Riprova più tardi. `,
             CONJUNCTION_MSG: ' e ',
-            HELP_MSG: 'Posso recuperare le informazioni del meteo dal sito ArpaV: chiedimi di mostrarti il radar o di leggere il bollettino meteo'
+            HELP_MSG: 'Posso recuperare le informazioni del meteo dal sito ArpaV: chiedimi di mostrarti il radar o di leggere il bollettino meteo',
+            REPORT_GENERAL: 'Evoluzione generale',
+            REPORT_ALLARM: 'Avviso',
+            REPORT_PARTICULAR_PHENOMENA: 'Fenomeni particolari',
+            REPORT_TODAY: 'Il tempo oggi'
+
         }
     }
 }

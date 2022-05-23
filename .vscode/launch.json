@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/lambda/test.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        
+        
+        {
             "name": "Debug Alexa Skill (Node.js)",
             "type": "pwa-node",
             "request": "launch",

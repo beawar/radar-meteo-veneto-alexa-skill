@@ -1,4 +1,5 @@
 const he = require('he');
+const xml2js = require('xml2js');
 
 function callDirectiveService(handlerInput, msg) {
     // Call Alexa Directive Service.
@@ -31,17 +32,36 @@ function supportsAPLA(handlerInput) {
     return !!supportedInterfaces['Alexa.Presentation.APL'];
 }
 
-function cleanupTextToSpeech(text) {
+async function parseXml(text) {
     if (text) {
         const decodedText = he.decode(text);
-        return decodedText.replace(/(<([^>]+)>)/gi, '');
+        return xml2js.parseStringPromise(decodedText)
+        .catch((error) => {
+            console.log(error);
+            return '';
+        });
     }
-    return '';
+    return Promise.resolve('');
+}
+
+function htmlToString(html) {
+    return html ? html.replace(/(<([^>]+)>)/gi, '').replace(/\s+/gim, ' ') : ''
+}
+
+function buildSentence(...str){
+    return `<s>${htmlToString(str.join(' ').trim())}</s>`;
+}
+
+function buildParagraph(...str){
+    return `<p>${str.join(' ').trim()}</p>`;
 }
 
 module.exports = {
     callDirectiveService,
     supportsAPL,
     supportsAPLA,
-    cleanupTextToSpeech
+    parseXml,
+    htmlToString,
+    buildSentence,
+    buildParagraph
 }
