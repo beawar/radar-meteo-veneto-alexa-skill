@@ -10,11 +10,5 @@ module.exports = {
         ENQUEUE: 'ENQUEUE',
         REPLACE_ALL: 'REPLACE_ALL',
         REPLACE_ENQUEUED: 'REPLACE_ENQUEUED'
-    },
-    APLA: {
-        audioReport: {
-            document: require('./documents/audioReport.json'),
-            token: 'audioToken'
-        }
     }
 }
