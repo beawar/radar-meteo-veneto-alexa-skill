@@ -203,7 +203,7 @@ const PlayWeatherReportIntentHandler = {
             .addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL,
                 urlMp3,
-                '',
+                'audioPlayerToken',
                 0
             )
             //.reprompt(handlerInput.t('REPROMPT_MSG'))
