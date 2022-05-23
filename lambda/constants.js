@@ -23,5 +23,18 @@ module.exports = {
                 "title": "Bollettino dettagliato veneto"
             }
         }
+    },
+    BasicAudioWeatherReport: {
+        "type": "AudioPlayer.Play",
+        "audioItem": {
+            "stream": {
+                "url": 'https://www.arpa.veneto.it/previsioni/audio/meteoradio.mp3',
+                "token": "radioPlayerToken",
+                "offsetInMilliseconds": 0,
+            },
+            "metadata": {
+                "title": "Bollettino radio veneto"
+            }
+        }
     }
 }
