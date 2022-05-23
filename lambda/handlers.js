@@ -4,7 +4,6 @@ const interceptors = require('./interceptors');
 const logic = require('./logic'); // this file encapsulates all "business" logic
 const view = require('./view');
 const constants = require('./constants');
-const { DetailedAudioWeatherReport } = require('./constants');
 
 
 const LaunchRequestHandler = {
@@ -197,13 +196,19 @@ const PlayWeatherReportIntentHandler = {
         
         //const urlMp3 = 'https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3';
         
+        const slotValue = Alexa.getSlotValue(handlerInput.requestEnvelope, 'dettagliato');
+        let reportType = constants.BasicAudioWeatherReport;
+        if(slotValue === 'dettagliato'){
+            reportType = constants.DetailedAudioWeatherReport;
+        }
+
         return handlerInput.responseBuilder
-            .speak('${DetailedAudioWeatherReport.metadata.title}')
+            .speak('${reportType.metadata.title}')
             .addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL, 
-                DetailedAudioWeatherReport.audioItem.stream.url, 
-                DetailedAudioWeatherReport.audioItem.stream.token, 
-                DetailedAudioWeatherReport.audioItem.stream.offsetInMilliseconds)
+                reportType.audioItem.stream.url, 
+                reportType.audioItem.stream.token, 
+                reportType.audioItem.stream.offsetInMilliseconds)
             /*.addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL,
                 urlMp3,
