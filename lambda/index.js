@@ -13,6 +13,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         handlers.ShowRadarIntentHandler,
         handlers.ReadWeatherReportIntentHandler,
         handlers.PlayWeatherReportIntentHandler,
+        handlers.PauseAudioIntentHandler,
         handlers.HelpIntentHandler,
         handlers.CancelAndStopIntentHandler,
         handlers.SessionEndedRequestHandler,
