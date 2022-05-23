@@ -4,6 +4,7 @@ const interceptors = require('./interceptors');
 const logic = require('./logic'); // this file encapsulates all "business" logic
 const view = require('./view');
 const constants = require('./constants');
+const { DetailedAudioWeatherReport } = require('./constants');
 
 
 const LaunchRequestHandler = {
@@ -194,15 +195,21 @@ const PlayWeatherReportIntentHandler = {
     },
     handle(handlerInput) {
         
-        const urlMp3 = logic.fetchAudio();
-
+        //const urlMp3 = 'https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3';
+        
         return handlerInput.responseBuilder
+            .speak('${DetailedAudioWeatherReport.metadata.title}')
             .addAudioPlayerPlayDirective(
+                constants.PlayBehavior.REPLACE_ALL, 
+                DetailedAudioWeatherReport.audioItem.stream.url, 
+                DetailedAudioWeatherReport.audioItem.stream.token, 
+                DetailedAudioWeatherReport.audioItem.stream.offsetInMilliseconds)
+            /*.addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL,
                 urlMp3,
-                'audioPlayerToken',
+                '',
                 0
-            )
+                )*/
             .getResponse();
     }
 };
