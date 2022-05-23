@@ -20,21 +20,7 @@ module.exports = {
                 "offsetInMilliseconds": 0,
             },
             "metadata": {
-                "title": "Bollettino dettagliato veneto",
-                "art": {
-                    "sources": [
-                        {
-                            "url": "https://cdn.example.com/url-of-the-album-art-image.png"
-                        }
-                    ]
-                },
-                "backgroundImage": {
-                    "sources": [
-                        {
-                            "url": "https://cdn.example.com/url-of-the-background-image.png"
-                        }
-                    ]
-                }
+                "title": "Bollettino dettagliato veneto"
             }
         }
     }
