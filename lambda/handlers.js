@@ -206,8 +206,24 @@ const PlayWeatherReportIntentHandler = {
                 'audioPlayerToken',
                 0
             )
-            //.addAudioPlayerStopDirective()
+            .addAudioPlayerStopDirective()
             //.reprompt(handlerInput.t('REPROMPT_MSG'))
+            .getResponse();
+    }
+};
+
+/**
+ * Intent handler to start playing an audio file.
+ * By default, it will play a specific audio stream.
+ * */
+const PauseAudioIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.PauseIntent';
+    },
+    async handle(handlerInput) {
+        return handlerInput.responseBuilder
+            .addAudioPlayerStopDirective()
             .getResponse();
     }
 };
@@ -223,5 +239,6 @@ module.exports = {
     // custom handlers
     ShowRadarIntentHandler,
     ReadWeatherReportIntentHandler,
-    PlayWeatherReportIntentHandler
+    PlayWeatherReportIntentHandler,
+    PauseAudioIntentHandler
 };
