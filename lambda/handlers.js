@@ -193,20 +193,16 @@ const PlayWeatherReportIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PlayWeatherReportIntent';
     },
     handle(handlerInput) {
-        //const urlMp3 = logic.fetchAudio();
-        //view.playMp3Audio(handlerInput, urlMp3);
-
-        const urlMp3 = 'https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3';
+        
+        const urlMp3 = logic.fetchAudio();
 
         return handlerInput.responseBuilder
-            .speak('Reading detailed weather report...', constants.PlayBehavior.REPLACE_ALL)
             .addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL,
                 urlMp3,
                 'audioPlayerToken',
                 0
             )
-            //.reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
