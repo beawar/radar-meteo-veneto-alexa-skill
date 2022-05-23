@@ -189,13 +189,16 @@ const PlayWeatherReportIntentHandler = {
     },
     handle(handlerInput) {
         
-        //const urlMp3 = 'https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3';
+        // assign as default weather report the basic audio. It retrieve an mp3 file audio with the info of 
+        // the today weather
+        const reportType = constants.BasicAudioWeatherReport;
         
-        const slotValue = Alexa.getSlotValue(handlerInput.requestEnvelope, 'dettagliato');
-        let reportType = constants.BasicAudioWeatherReport;
-        if(slotValue === 'dettagliato'){
+        // check if the request contains any slot about the weather report intent for detailed information
+        /*const slotValue = Alexa.getSlotValue(handlerInput.requestEnvelope, 'dettagliato');        
+        if(slotValue !== null){
+            // use AudioPlayer directive for retrieve mp3 file audio with detailed weather report
             reportType = constants.DetailedAudioWeatherReport;
-        }
+        }*/
 
         return handlerInput.responseBuilder
             .speak('${reportType.metadata.title}')
