@@ -33,7 +33,9 @@ function supportsAPLA(handlerInput) {
 
 function cleanupTextToSpeech(text) {
     if (text) {
-        return he.decode(text);
+        const decodedText = he.decode(text);
+        console.log('decoded text', decodedText);
+        return decodedText;
     }
     return '';
 }
