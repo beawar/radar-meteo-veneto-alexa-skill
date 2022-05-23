@@ -26,22 +26,6 @@ function showImages(handlerInput, images) {
     }
 }
 
-function playMp3Audio(handlerInput, urlmp3){
-    if (util.supportsAPLA(handlerInput)) {
-        handlerInput.responseBuilder.addDirective({
-            type: 'Alexa.Presentation.APLA.RenderDocument',
-            token: constants.APLA.audioReport.token,
-            document: constants.APLA.audioReport.document,
-            datasources: {
-                source: urlmp3            
-            }
-        });
-    } else {
-        handlerInput.responseBuilder.speak(handlerInput.t('UNSUPPORTED_DEVICE_MSG'));
-    }
-}
-
 module.exports = { 
-    showImages,
-    playMp3Audio
+    showImages
 };
