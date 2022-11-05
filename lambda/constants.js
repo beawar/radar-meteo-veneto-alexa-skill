@@ -4,6 +4,10 @@ module.exports = {
         radarPlayer: {
             document: require('./documents/radarPlayer.json'),
             token: 'radarPlayerToken'
+        },
+        reportViewer: {
+            document: require('./documents/reportViewer.json'),
+            token: 'reportViewerToken'
         }
     },
     PlayBehavior: {
@@ -36,5 +40,10 @@ module.exports = {
                 "title": "Bollettino radio veneto"
             }
         }
+    },
+    REPORT_ENTRY: {
+        VENETO: 'MV',
+        DOLOMITI: 'DM',
+        PIANURA: 'MP'
     }
 }

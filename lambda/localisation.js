@@ -19,7 +19,9 @@ module.exports = {
             REPORT_ALLARM: 'Warning',
             REPORT_PARTICULAR_PHENOMENA: 'Particular phenomena',
             REPORT_TODAY: 'The weather today',
-            PROGRESSIVE_MSG: 'Let me retrieve the last report'
+            PROGRESSIVE_MSG: 'Let me retrieve the last report',
+            REPORT_TITLE: 'Weather report',
+            REPORT_HINT: 'Ask me to show the radar to see the last images in real time'
         }
     },
     it: {
@@ -42,7 +44,9 @@ module.exports = {
             REPORT_ALLARM: 'Avviso',
             REPORT_PARTICULAR_PHENOMENA: 'Fenomeni particolari',
             REPORT_TODAY: 'Il tempo oggi',
-            PROGRESSIVE_MSG: 'Fammi recuperare l\'ultimo bollettino'
+            PROGRESSIVE_MSG: 'Fammi recuperare l\'ultimo bollettino',
+            REPORT_TITLE: 'Bollettino meteo',
+            REPORT_HINT: 'Chiedimi di mostrarti il radar per visualizzare le ultime immagini in tempo reale'
         }
     }
 }

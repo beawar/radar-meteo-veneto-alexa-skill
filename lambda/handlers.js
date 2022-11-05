@@ -138,7 +138,7 @@ const ShowRadarIntentHandler = {
     handle(handlerInput) {
         // get the src of radar images as an array
         const imagesSrc = logic.fetchRadar();
-        view.showImages(handlerInput, imagesSrc);
+        view.buildRadarPlayer(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
             .speak(`${handlerInput.t('POSITIVE_SOUND')}<break time="8s"/>${handlerInput.t('REPROMPT_MSG')}`, constants.PlayBehavior.REPLACE_ALL)
@@ -173,8 +173,15 @@ const ReadWeatherReportIntentHandler = {
             console.log("Progressive response directive error : " + error);
         }
 
-        const reportSpeech = await logic.fetchReport().then((report) => logic.parseReportToSpeech(report, handlerInput));
+        const reportSpeech = await logic.fetchReport()
+        .then((report) => {
+            const reportObj = logic.parseReportXmlToObj(report, handlerInput);
+            view.buildReportViewer(handlerInput, reportObj.previsioni.bollettini[0]);
+            return logic.parseReportObjToSpeech(report, handlerInput)
+        });
               
+        
+
         return handlerInput.responseBuilder
             .speak(reportSpeech, constants.PlayBehavior.REPLACE_ALL)
             .reprompt(handlerInput.t('REPROMPT_MSG'))
