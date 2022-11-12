@@ -178,7 +178,7 @@ const ReadWeatherReportIntentHandler = {
         .then((reportObj) => {
             const bollettinoVeneto = logic.findReportEntry(reportObj, constants.REPORT_ENTRY.VENETO);
             view.buildReportViewer(handlerInput, bollettinoVeneto);
-            return logic.parseReportObjToSpeech(report, bollettinoVeneto)
+            return logic.parseReportObjToSpeech(bollettinoVeneto, handlerInput);
         });
               
         
