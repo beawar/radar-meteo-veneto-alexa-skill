@@ -57,7 +57,7 @@ function buildReportViewer(handlerInput, reportEntryObj) {
                     type: 'object',
                     properties: {
                         foregroundImageLocation: "left",
-                        foregroundImageSource: `https://www.arpa.veneto.it/previsioni/it/images/map_${reportEntryObj['$'].bollettinoid}_1.png`,
+                        foregroundImageSource: `https://www.arpa.veneto.it/previsioni/it/images/map_${reportEntryObj['$'].bollettinoid}_0.png`,
                         headerTitle: reportEntryObj['$'].title,
                         headerSubtitle: reportEntryObj['$'].name,
                         hintText: handlerInput.t('REPORT_HINT'),
