@@ -59,7 +59,7 @@ function buildReportViewer(handlerInput, reportEntryObj) {
 
         handlerInput.responseBuilder.addDirective(
             buildDirective(
-                constants.APL,
+                constants.APL.audioPlayer,
                 {
                     reportReader: {
                         type: 'object',
