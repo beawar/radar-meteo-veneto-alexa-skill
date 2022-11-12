@@ -61,7 +61,7 @@ function buildReportViewer(handlerInput, reportEntryObj) {
             buildDirective(
                 constants.APL.reportReader,
                 {
-                    reportReader: {
+                    reportReaderData: {
                         type: 'object',
                         properties: {
                             foregroundImageLocation: "left",
