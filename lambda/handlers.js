@@ -207,7 +207,6 @@ const PlayWeatherReportIntentHandler = {
         view.buildReportViewer(handlerInput, reportEntryObj);
 
         return handlerInput.responseBuilder
-            .speak(reportType.metadata.title)
             .addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL, 
                 reportType.audioItem.stream.url, 
