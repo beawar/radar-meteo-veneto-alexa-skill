@@ -1,6 +1,15 @@
 const util = require('./util');
 const constants = require('./constants');
 
+function buildDirective(directive, datasource) {
+    return {
+        type: directive.type,
+        document: directive.document,
+        token: directive.token,
+        datasource
+    }
+}
+
 function buildRadarPlayer(handlerInput, images) {
     // Add APL directive to response
     if (util.supportsAPL(handlerInput)) {
@@ -9,7 +18,7 @@ function buildRadarPlayer(handlerInput, images) {
         }));
 
         handlerInput.responseBuilder.addDirective({
-            ...constants.APL.radarPlayer,
+            constants.APL.radarPlayer,
             datasources: {
                 radarImagesData: {
                     type: 'object',
