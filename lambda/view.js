@@ -73,7 +73,7 @@ function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText
             {
                 ...constants.APL.audioPlayer,
                 datasources: {
-                    audioPlayerTemplateData: {
+                    audioPlayerData: {
                         type: "object",
                         properties: {
                             audioControlType: "jump10",
