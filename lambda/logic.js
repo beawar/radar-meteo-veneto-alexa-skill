@@ -1,30 +1,28 @@
 const util = require('./util');
 const axios = require('axios');
-const { REPORT_ENTRY } = require('./constants');
 
 
 function fetchRadar() {
     const requests = [];
     const timestamp = new Date().getTime();
-    for (let i=6; i>0; i--) {
+    for (let i = 6; i > 0; i--) {
         const url = `https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/${i}_BASE.jpg?${timestamp}`;
         requests.push(url)
     }
     return requests;
-    
+
 }
 
-function fetchAudio(){
-    const url = 'https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3'
-    return url;
+function fetchAudio(src) {
+    return src + `?${new Date().getTime}`;
 }
 
 function parseReportXmlToObj(reportXml, handlerInput) {
     return util.parseXml(reportXml)
-    .catch((error) => {
-        console.error(error);
-        return handlerInput.t('API_ERROR_MSG')
-    });
+        .catch((error) => {
+            console.error(error);
+            return handlerInput.t('API_ERROR_MSG')
+        });
 }
 
 function findReportEntry(reportObj, entryId) {
@@ -32,7 +30,7 @@ function findReportEntry(reportObj, entryId) {
 }
 
 function parseReportObjToSpeech(reportEntry, handlerInput) {
-    let speechText = util.buildSentence(`${handlerInput.t('REPORT_GENERAL')}:`, reportEntry.evoluzionegenerale[0]); 
+    let speechText = util.buildSentence(`${handlerInput.t('REPORT_GENERAL')}:`, reportEntry.evoluzionegenerale[0]);
     if (reportEntry.avviso[0]) {
         speechText += util.buildSentence(`${handlerInput.t('REPORT_ALLARM')}:`, reportEntry.avviso[0]);
     }
@@ -46,13 +44,13 @@ function parseReportObjToSpeech(reportEntry, handlerInput) {
 function fetchReport() {
     const url = 'https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml';
     return axios.get(url)
-    .then((response) => {
-        return response.data;
-    })
-    .catch((error) => {
-        console.log(error);
-        return null;
-    });
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error);
+            return null;
+        });
 }
 
 async function getReportObj(handlerInput, reportEntryId) {

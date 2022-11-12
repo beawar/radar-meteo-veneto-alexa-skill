@@ -19,17 +19,17 @@ function buildRadarPlayer(handlerInput, images) {
 
         handlerInput.responseBuilder.addDirective(
             buildDirective(
-                constants.APL.radarPlayer, 
-               {
+                constants.APL.radarPlayer,
+                {
                     radarImagesData: {
                         type: 'object',
                         properties: {
                             images: imagesUrl
                         }
                     }
-               }
-                    
-        ));
+                }
+
+            ));
     } else {
         handlerInput.responseBuilder.speak(handlerInput.t('UNSUPPORTED_DEVICE_MSG'));
     }
@@ -44,7 +44,7 @@ function buildReportViewer(handlerInput, reportEntryObj) {
                 contentText: reportEntryObj.evoluzionegenerale[0]
             }
         ];
-        if (reportEntryObj.avviso[0] ) {
+        if (reportEntryObj.avviso[0]) {
             reportContent.push({
                 titleText: handlerInput.t('REPORT_ALLARM'),
                 contentText: reportEntryObj.avviso[0]
@@ -75,39 +75,52 @@ function buildReportViewer(handlerInput, reportEntryObj) {
                         }
                     }
                 }
-        ));
+            ));
     }
 }
 
 function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText, secondaryText, coverImageSource }) {
-    if (util.supportsAPL(handlerInput)) {
-        handlerInput.responseBuilder.addDirective(
-            buildDirective(
-                constants.APL.audioPlayer,
-                {
-                    audioPlayerData: {
-                        type: "object",
-                        properties: {
-                            audioControlType: "jump10",
-                            audioSources: [
-                                "http://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3"
-                            ],
-                            backgroundImage: "",
-                            coverImageSource: "",
-                            headerTitle: "Bollettino dettagliato",
-                            logoUrl: "https://www.arpa.veneto.it/logo_arpav.gif",
-                            primaryText: "Bollettino veneto",
-                            secondaryText: "12 Novembre 2022",
-                            sliderType: "determinate"
+    if (audioSources && audioSources.length > 0) {
+        if (util.supportsAPL(handlerInput)) {
+            handlerInput.responseBuilder.addDirective(
+                buildDirective(
+                    constants.APL.audioPlayer,
+                    {
+                        audioPlayerData: {
+                            type: "object",
+                            properties: {
+                                audioControlType: "jump10",
+                                audioSources,
+                                backgroundImage: "",
+                                coverImageSource,
+                                headerTitle,
+                                logoUrl: "https://www.arpa.veneto.it/logo_arpav.gif",
+                                primaryText,
+                                secondaryText,
+                                sliderType: "determinate"
+                            }
                         }
                     }
-                }
+                )
             )
-        )
+        } else {
+            handlerInput.responseBuilder
+                .addAudioPlayerPlayDirective(
+                    constants.PlayBehavior.REPLACE_ALL,
+                    audioSources[0],
+                    constants.APL.audioPlayer.token,
+                    0,
+                    undefined,
+                    {
+                        title: primaryText,
+                        subtitle: secondaryText,
+                        art: coverImageSource
+                    });
+        }
     }
 }
 
-module.exports = { 
+module.exports = {
     buildRadarPlayer,
     buildReportViewer,
     buildAudioPlayer

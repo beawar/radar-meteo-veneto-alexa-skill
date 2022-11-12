@@ -42,7 +42,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('GOODBYE_MSG', {name: ''});
+        const speechText = handlerInput.t('GOODBYE_MSG', { name: '' });
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -82,7 +82,7 @@ const IntentReflectorHandler = {
     },
     handle(handlerInput) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speechText = handlerInput.t('REFLECTOR_MSG', {intent: intentName});
+        const speechText = handlerInput.t('REFLECTOR_MSG', { intent: intentName });
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -116,7 +116,7 @@ const SessionEndedRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
     },
     handle(handlerInput) {
-        if(null !== handlerInput.requestEnvelope.request.error && undefined !== handlerInput.requestEnvelope.request.error) {
+        if (null !== handlerInput.requestEnvelope.request.error && undefined !== handlerInput.requestEnvelope.request.error) {
             console.log(JSON.stringify(handlerInput.requestEnvelope.request.error));
         }
 
@@ -164,7 +164,7 @@ const ReadWeatherReportIntentHandler = {
         //   PART 3:
         //   1) Retrieve report images from https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml (tag bollettini)
         //   2) Show images on devices with display
-        
+
         try {
             // call the progressive response service
             util.callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
@@ -173,10 +173,10 @@ const ReadWeatherReportIntentHandler = {
             console.log("Progressive response directive error : " + error);
         }
 
-        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
+        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);
         view.buildReportViewer(handlerInput, reportEntryObj);
         const reportSpeech = logic.parseReportObjToSpeech(reportEntryObj, handlerInput);
-        
+
 
         return handlerInput.responseBuilder
             .speak(reportSpeech, constants.PlayBehavior.REPLACE_ALL)
@@ -191,11 +191,11 @@ const PlayWeatherReportIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PlayWeatherReportIntent';
     },
     handle(handlerInput) {
-        
+
         // assign as default weather report the basic audio. It retrieve an mp3 file audio with the info of 
         // the today weather
         const reportType = constants.BasicAudioWeatherReport;
-        
+
         // check if the request contains any slot about the weather report intent for detailed information
         /*const slotValue = Alexa.getSlotValue(handlerInput.requestEnvelope, 'dettagliato');        
         if(slotValue !== null){
@@ -203,8 +203,8 @@ const PlayWeatherReportIntentHandler = {
             reportType = constants.DetailedAudioWeatherReport;
         }*/
 
-        const audioData = { 
-            audioSources: [reportType.src], 
+        const audioData = {
+            audioSources: [logic.fetchAudio(reportType.src)],
             headerTitle: handlerInput.t('REPORT_TITLE'),
             primaryText: reportType.title,
             secondaryText: new Date().toLocaleDateString(handlerInput.getLocale(), { day: 'numeric', month: 'long', year: 'numeric' })
@@ -213,21 +213,6 @@ const PlayWeatherReportIntentHandler = {
 
 
         return handlerInput.responseBuilder.getResponse();
-
-        // return handlerInput.responseBuilder
-        //     .speak(reportType.audioItem.metadata.title)
-        //     .addAudioPlayerPlayDirective(
-        //         constants.PlayBehavior.REPLACE_ALL, 
-        //         reportType.audioItem.stream.url, 
-        //         reportType.audioItem.stream.token, 
-        //         reportType.audioItem.stream.offsetInMilliseconds)
-        //     /*.addAudioPlayerPlayDirective(
-        //         constants.PlayBehavior.REPLACE_ALL,
-        //         urlMp3,
-        //         '',
-        //         0
-        //         )*/
-        //     .getResponse();
     }
 };
 
@@ -240,14 +225,33 @@ const PauseAudioIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.PauseIntent';
     },
-    async handle(handlerInput) {
+    handle(handlerInput) {
         return handlerInput.responseBuilder
             .addAudioPlayerStopDirective()
             .getResponse();
     }
 };
 
-module.exports = { 
+const ResumeAudioIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.ResumeIntent';
+    },
+    handle(handlerInput) {
+        const audioData = {
+            audioSources: [logic.fetchAudio(reportType.src)],
+            headerTitle: handlerInput.t('REPORT_TITLE'),
+            primaryText: reportType.title,
+            secondaryText: new Date().toLocaleDateString(handlerInput.getLocale(), { day: 'numeric', month: 'long', year: 'numeric' })
+        };
+        view.buildAudioPlayer(handlerInput, audioData);
+        
+        return handlerInput.responseBuilder
+            .getResponse();
+    }
+};
+
+module.exports = {
     LaunchRequestHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
@@ -259,5 +263,6 @@ module.exports = {
     ShowRadarIntentHandler,
     ReadWeatherReportIntentHandler,
     PlayWeatherReportIntentHandler,
-    PauseAudioIntentHandler
+    PauseAudioIntentHandler,
+    ResumeAudioIntentHandler
 };
