@@ -190,7 +190,7 @@ const PlayWeatherReportIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PlayWeatherReportIntent';
     },
-    async handle(handlerInput) {
+    handle(handlerInput) {
         
         // assign as default weather report the basic audio. It retrieve an mp3 file audio with the info of 
         // the today weather
@@ -203,10 +203,8 @@ const PlayWeatherReportIntentHandler = {
             reportType = constants.DetailedAudioWeatherReport;
         }*/
 
-        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
-        view.buildReportViewer(handlerInput, reportEntryObj);
-
         return handlerInput.responseBuilder
+            .speak(reportType.audioItem.metadata.title)
             .addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL, 
                 reportType.audioItem.stream.url, 
