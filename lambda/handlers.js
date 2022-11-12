@@ -173,14 +173,9 @@ const ReadWeatherReportIntentHandler = {
             console.log("Progressive response directive error : " + error);
         }
 
-        const reportSpeech = await logic.fetchReport()
-        .then((report) => logic.parseReportXmlToObj(report, handlerInput))
-        .then((reportObj) => {
-            const bollettinoVeneto = logic.findReportEntry(reportObj, constants.REPORT_ENTRY.VENETO);
-            view.buildReportViewer(handlerInput, bollettinoVeneto);
-            return logic.parseReportObjToSpeech(bollettinoVeneto, handlerInput);
-        });
-              
+        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
+        view.buildReportViewer(handlerInput, reportEntryObj);
+        const reportSpeech = logic.parseReportObjToSpeech(reportEntryObj, handlerInput);
         
 
         return handlerInput.responseBuilder
@@ -195,7 +190,7 @@ const PlayWeatherReportIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PlayWeatherReportIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         
         // assign as default weather report the basic audio. It retrieve an mp3 file audio with the info of 
         // the today weather
@@ -208,8 +203,11 @@ const PlayWeatherReportIntentHandler = {
             reportType = constants.DetailedAudioWeatherReport;
         }*/
 
+        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
+        view.buildReportViewer(handlerInput, reportEntryObj);
+
         return handlerInput.responseBuilder
-            .speak('${reportType.metadata.title}')
+            .speak(reportType.metadata.title)
             .addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL, 
                 reportType.audioItem.stream.url, 

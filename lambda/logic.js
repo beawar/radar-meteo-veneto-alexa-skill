@@ -55,11 +55,18 @@ function fetchReport() {
     });
 }
 
+async function getReportObj(handlerInput, reportEntryId) {
+    return logic.fetchReport()
+        .then((report) => parseReportXmlToObj(report, handlerInput))
+        .then((reportObj) => findReportEntry(reportObj, reportEntryId));
+}
+
 module.exports = {
     fetchRadar,
     fetchAudio,
     fetchReport,
     parseReportXmlToObj,
     parseReportObjToSpeech,
-    findReportEntry
+    findReportEntry,
+    getReportObj
 }
