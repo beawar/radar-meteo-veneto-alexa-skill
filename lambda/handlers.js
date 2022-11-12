@@ -203,8 +203,8 @@ const PlayWeatherReportIntentHandler = {
             reportType = constants.DetailedAudioWeatherReport;
         }*/
 
-        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
-        view.buildReportViewer(handlerInput, reportEntryObj);
+        // const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
+        // view.buildReportViewer(handlerInput, reportEntryObj);
 
         return handlerInput.responseBuilder
             .speak(reportType.metadata.title)
