@@ -138,7 +138,7 @@ const ShowRadarIntentHandler = {
     handle(handlerInput) {
         // get the src of radar images as an array
         const imagesSrc = logic.fetchRadar();
-        view.showImages(handlerInput, imagesSrc);
+        view.buildRadarPlayer(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder
             .speak(`${handlerInput.t('POSITIVE_SOUND')}<break time="8s"/>${handlerInput.t('REPROMPT_MSG')}`, constants.PlayBehavior.REPLACE_ALL)
@@ -173,8 +173,11 @@ const ReadWeatherReportIntentHandler = {
             console.log("Progressive response directive error : " + error);
         }
 
-        const reportSpeech = await logic.fetchReport().then((report) => logic.parseReportToSpeech(report, handlerInput));
-              
+        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
+        view.buildReportViewer(handlerInput, reportEntryObj);
+        const reportSpeech = logic.parseReportObjToSpeech(reportEntryObj, handlerInput);
+        
+
         return handlerInput.responseBuilder
             .speak(reportSpeech, constants.PlayBehavior.REPLACE_ALL)
             .reprompt(handlerInput.t('REPROMPT_MSG'))
@@ -187,7 +190,7 @@ const PlayWeatherReportIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PlayWeatherReportIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         
         // assign as default weather report the basic audio. It retrieve an mp3 file audio with the info of 
         // the today weather
@@ -200,8 +203,11 @@ const PlayWeatherReportIntentHandler = {
             reportType = constants.DetailedAudioWeatherReport;
         }*/
 
+        const reportEntryObj = await logic.getReportObj(handlerInput, constants.REPORT_ENTRY.VENETO);    
+        view.buildReportViewer(handlerInput, reportEntryObj);
+
         return handlerInput.responseBuilder
-            .speak('${reportType.metadata.title}')
+            .speak(reportType.metadata.title)
             .addAudioPlayerPlayDirective(
                 constants.PlayBehavior.REPLACE_ALL, 
                 reportType.audioItem.stream.url, 
