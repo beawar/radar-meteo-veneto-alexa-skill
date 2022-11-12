@@ -1,12 +1,12 @@
 const util = require('./util');
 const constants = require('./constants');
 
-function buildDirective(directive, datasource) {
+function buildDirective(directive, datasources) {
     return {
         type: directive.type,
         document: directive.document,
         token: directive.token,
-        datasource
+        datasources
     }
 }
 
@@ -17,17 +17,19 @@ function buildRadarPlayer(handlerInput, images) {
             url: imageSrc
         }));
 
-        handlerInput.responseBuilder.addDirective({
-            constants.APL.radarPlayer,
-            datasources: {
-                radarImagesData: {
-                    type: 'object',
-                    properties: {
-                        images: imagesUrl
+        handlerInput.responseBuilder.addDirective(
+            buildDirective(
+                constants.APL.radarPlayer, 
+               {
+                    radarImagesData: {
+                        type: 'object',
+                        properties: {
+                            images: imagesUrl
+                        }
                     }
-                }
-            }
-        });
+               }
+                    
+        ));
     } else {
         handlerInput.responseBuilder.speak(handlerInput.t('UNSUPPORTED_DEVICE_MSG'));
     }
@@ -55,33 +57,34 @@ function buildReportViewer(handlerInput, reportEntryObj) {
             })
         }
 
-        handlerInput.responseBuilder.addDirective({
-            ...constants.APL,
-            datasources: {
-                reportReader: {
-                    type: 'object',
-                    properties: {
-                        foregroundImageLocation: "left",
-                        foregroundImageSource: `https://www.arpa.veneto.it/previsioni/it/images/map_${reportEntryObj['$'].bollettinoid}_0.png`,
-                        headerTitle: reportEntryObj['$'].title,
-                        headerSubtitle: reportEntryObj['$'].name,
-                        hintText: handlerInput.t('REPORT_HINT'),
-                        headerAttributionImage: "https://www.arpa.veneto.it/logo_arpav.gif",
-                        textAlignment: "start",
-                        content: reportContent
+        handlerInput.responseBuilder.addDirective(
+            buildDirective(
+                constants.APL,
+                {
+                    reportReader: {
+                        type: 'object',
+                        properties: {
+                            foregroundImageLocation: "left",
+                            foregroundImageSource: `https://www.arpa.veneto.it/previsioni/it/images/map_${reportEntryObj['$'].bollettinoid}_0.png`,
+                            headerTitle: reportEntryObj['$'].title,
+                            headerSubtitle: reportEntryObj['$'].name,
+                            hintText: handlerInput.t('REPORT_HINT'),
+                            headerAttributionImage: "https://www.arpa.veneto.it/logo_arpav.gif",
+                            textAlignment: "start",
+                            content: reportContent
+                        }
                     }
                 }
-            }
-        });
+        ));
     }
 }
 
 function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText, secondaryText, coverImageSource }) {
     if (util.supportsAPL(handlerInput)) {
         handlerInput.responseBuilder.addDirective(
-            {
-                ...constants.APL.audioPlayer,
-                datasources: {
+            buildDirective(
+                constants.APL.audioPlayer,
+                {
                     audioPlayerData: {
                         type: "object",
                         properties: {
@@ -99,7 +102,7 @@ function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText
                         }
                     }
                 }
-            }
+            )
         )
     }
 }
