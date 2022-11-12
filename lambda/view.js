@@ -41,7 +41,7 @@ function buildReportViewer(handlerInput, reportEntryObj) {
                 contentText: reportEntryObj.avviso[0]
             })
         }
-        if (reportEntryObj.fenomeniparticolari) {
+        if (reportEntryObj.fenomeniparticolari[0]) {
             reportContent.push({
                 titleText: handlerInput.t('REPORT_PARTICULAR_PHENOMENA'),
                 contentText: reportEntryObj.fenomeniparticolari[0]
