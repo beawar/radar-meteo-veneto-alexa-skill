@@ -59,7 +59,6 @@
             "item": {
                 "type": "Container",
                 "width": "100%",
-                "paddingLeft": "10dp",
                 "paddingBottom": "${@simpleTextPaddingBottom}",
                 "items": [
                     {
@@ -74,6 +73,7 @@
                         "description": "Content Text",
                         "type": "Text",
                         "spacing": "@spacing2XSmall",
+                        "paddingBottom": "@spacingSmall",
                         "style": "textStyleBody",
                         "fontWeight": "@fontWeightLight",
                         "text": "${data.contentText}",
@@ -91,22 +91,6 @@
                 {
                     "name": "alignItems",
                     "type": "string"
-                },
-                {
-                    "name": "paddingTop",
-                    "type": "string"
-                },
-                {
-                    "name": "paddingBottom",
-                    "type": "string"
-                },
-                {
-                    "name": "paddingLeft",
-                    "type": "string"
-                },
-                {
-                    "name": "paddingRight",
-                    "type": "string"
                 }
             ],
             "item": {
@@ -116,11 +100,9 @@
                 "width": "100%",
                 "shrink": 1,
                 "alignItems": "${alignItems}",
-                "paddingTop": "${paddingTop}",
-                "paddingBottom": "${paddingBottom}",
-                "start": "${paddingStart}",
-                "end": "${paddingEnd}",
                 "data": "${contentData}",
+                "spacing": "@spacingMedium",
+                "justifyContent": "spaceBetween",
                 "item": {
                     "type": "ContentEntry",
                     "title": "${data.titleText}",
@@ -256,6 +238,8 @@
                                         "width": "100%",
                                         "alignItems": "${imageCenterAlign ? 'center' : 'start'}",
                                         "direction": "${imageLocation == 'left' ? 'row' : (imageLocation == 'right' ? 'rowReverse' : (imageLocation == 'bottom' ? 'columnReverse' : 'column'))}",
+                                        "justifyContent": "spaceBetween",
+                                        "spacing": "@spacingMedium",
                                         "shrink": 1,
                                         "items": [
                                             {
@@ -265,7 +249,7 @@
                                                 "id": "mainView_ForegroundImage",
                                                 "imageSource": "${foregroundImageSource}",
                                                 "imageBlurredBackground": true,
-                                                "imageAspectRatio": "${imageCenterAlign ? 'square' : 'square'}",
+                                                "imageAspectRatio": "square",
                                                 "imageScale": "best-fit"
                                             },
                                             {
@@ -273,11 +257,7 @@
                                                 "type": "Content",
                                                 "id": "mainView_ContentBlock",
                                                 "contentData": "${content}",
-                                                "alignItems": "${imageCenterAlign || textAlignment == 'center' ? 'center' : 'start'}",
-                                                "paddingTop": "${imageLocation == 'top' ? @simpleTextImageVerticalSpacing : '0dp'}",
-                                                "paddingBottom": "${imageLocation == 'bottom' ? @simpleTextImageVerticalSpacing : '0dp'}",
-                                                "paddingStart": "${imageLocation == 'left' && foregroundImageSource ? @simpleTextImageHorizontalSpacing : '0dp'}",
-                                                "paddingEnd": "${imageLocation == 'right' && foregroundImageSource ? @simpleTextImageHorizontalSpacing : '0dp'}"
+                                                "alignItems": "${imageCenterAlign || textAlignment == 'center' ? 'center' : 'start'}"
                                             }
                                         ]
                                     }
