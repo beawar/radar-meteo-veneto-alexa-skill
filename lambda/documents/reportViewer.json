@@ -276,14 +276,14 @@
         "item": [
             {
                 "type": "MainView",
-                "footerHintText": "${payload.reportViewerData.properties.hintText}",
-                "foregroundImageLocation": "${payload.reportViewerData.properties.foregroundImageLocation}",
-                "foregroundImageSource": "${payload.reportViewerData.properties.foregroundImageSource}",
-                "headerAttributionImage": "${payload.reportViewerData.properties.headerAttributionImage}",
-                "headerTitle": "${payload.reportViewerData.properties.headerTitle}",
-                "headerSubtitle": "${payload.reportViewerData.properties.headerSubtitle}",
-                "textAlignment": "${payload.reportViewerData.properties.textAlignment}",
-                "content": "${payload.reportViewerData.properties.content}"
+                "footerHintText": "${payload.reportReader.properties.hintText}",
+                "foregroundImageLocation": "${payload.reportReader.properties.foregroundImageLocation}",
+                "foregroundImageSource": "${payload.reportReader.properties.foregroundImageSource}",
+                "headerAttributionImage": "${payload.reportReader.properties.headerAttributionImage}",
+                "headerTitle": "${payload.reportReader.properties.headerTitle}",
+                "headerSubtitle": "${payload.reportReader.properties.headerSubtitle}",
+                "textAlignment": "${payload.reportReader.properties.textAlignment}",
+                "content": "${payload.reportReader.properties.content}"
             }
         ]
     }

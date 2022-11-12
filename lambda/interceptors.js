@@ -21,8 +21,9 @@ const LoggingResponseInterceptor = {
 // Additionally it will handle picking a random value if instead of a string it receives an array
 const LocalisationRequestInterceptor = {
     process(handlerInput) {
+        const getLocale = () => Alexa.getLocale(handlerInput.requestEnvelope);
         const localisationClient = i18n.init({
-            lng: Alexa.getLocale(handlerInput.requestEnvelope),
+            lng: getLocale(),
             resources: languageStrings,
             returnObjects: true
         });
@@ -37,6 +38,7 @@ const LocalisationRequestInterceptor = {
         handlerInput.t = function translate(...args) {
             return localisationClient.localise(...args);
         }
+        handlerInput.getLocale = getLocale;
     }
 };
 

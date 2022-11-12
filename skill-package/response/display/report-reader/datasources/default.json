@@ -1,5 +1,5 @@
 {
-    "reportViewerData": {
+    "reportReader": {
         "type": "object",
         "properties": {
             "backgroundImage": "",

@@ -203,20 +203,31 @@ const PlayWeatherReportIntentHandler = {
             reportType = constants.DetailedAudioWeatherReport;
         }*/
 
-        return handlerInput.responseBuilder
-            .speak(reportType.audioItem.metadata.title)
-            .addAudioPlayerPlayDirective(
-                constants.PlayBehavior.REPLACE_ALL, 
-                reportType.audioItem.stream.url, 
-                reportType.audioItem.stream.token, 
-                reportType.audioItem.stream.offsetInMilliseconds)
-            /*.addAudioPlayerPlayDirective(
-                constants.PlayBehavior.REPLACE_ALL,
-                urlMp3,
-                '',
-                0
-                )*/
-            .getResponse();
+        const audioData = { 
+            audioSources: [reportType.src], 
+            headerTitle: handlerInput.t('REPORT_TITLE'),
+            primaryText: reportType.title,
+            secondaryText: new Date().toLocaleDateString(handlerInput.getLocale(), { day: 'numeric', month: 'long', year: 'numeric' })
+        };
+        view.buildAudioPlayer(handlerInput, audioData);
+
+
+        return handlerInput.responseBuilder.getResponse();
+
+        // return handlerInput.responseBuilder
+        //     .speak(reportType.audioItem.metadata.title)
+        //     .addAudioPlayerPlayDirective(
+        //         constants.PlayBehavior.REPLACE_ALL, 
+        //         reportType.audioItem.stream.url, 
+        //         reportType.audioItem.stream.token, 
+        //         reportType.audioItem.stream.offsetInMilliseconds)
+        //     /*.addAudioPlayerPlayDirective(
+        //         constants.PlayBehavior.REPLACE_ALL,
+        //         urlMp3,
+        //         '',
+        //         0
+        //         )*/
+        //     .getResponse();
     }
 };
 

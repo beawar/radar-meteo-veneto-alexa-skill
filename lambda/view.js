@@ -9,9 +9,7 @@ function buildRadarPlayer(handlerInput, images) {
         }));
 
         handlerInput.responseBuilder.addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            token: constants.APL.radarPlayer.token,
-            document: constants.APL.radarPlayer.document,
+            ...constants.APL.radarPlayer,
             datasources: {
                 radarImagesData: {
                     type: 'object',
@@ -49,11 +47,9 @@ function buildReportViewer(handlerInput, reportEntryObj) {
         }
 
         handlerInput.responseBuilder.addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            token: constants.APL.reportViewer.token,
-            document: constants.APL.reportViewer.document,
+            ...constants.APL,
             datasources: {
-                reportViewerData: {
+                reportReader: {
                     type: 'object',
                     properties: {
                         foregroundImageLocation: "left",
@@ -71,7 +67,36 @@ function buildReportViewer(handlerInput, reportEntryObj) {
     }
 }
 
+function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText, secondaryText, coverImageSource }) {
+    if (util.supportsAPL(handlerInput)) {
+        handlerInput.responseBuilder.addDirective(
+            {
+                ...constants.APL.audioPlayer,
+                datasources: {
+                    audioPlayerTemplateData: {
+                        type: "object",
+                        properties: {
+                            audioControlType: "jump10",
+                            audioSources: [
+                                "http://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3"
+                            ],
+                            backgroundImage: "",
+                            coverImageSource: "",
+                            headerTitle: "Bollettino dettagliato",
+                            logoUrl: "https://www.arpa.veneto.it/logo_arpav.gif",
+                            primaryText: "Bollettino veneto",
+                            secondaryText: "12 Novembre 2022",
+                            sliderType: "determinate"
+                        }
+                    }
+                }
+            }
+        )
+    }
+}
+
 module.exports = { 
     buildRadarPlayer,
-    buildReportViewer
+    buildReportViewer,
+    buildAudioPlayer
 };
