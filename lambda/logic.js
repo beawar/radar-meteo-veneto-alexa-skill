@@ -31,16 +31,15 @@ function findReportEntry(reportObj, entryId) {
     return reportObj.previsioni.bollettini[0].bollettino.find((bollettino) => bollettino['$'].bollettinoid === entryId);
 }
 
-function parseReportObjToSpeech(reportObj, handlerInput) {
-    const bollettino = findReportEntry(reportObj, REPORT_ENTRY.VENETO);
-    let speechText = util.buildSentence(`${handlerInput.t('REPORT_GENERAL')}:`, bollettino.evoluzionegenerale[0]); 
-    if (bollettino.avviso[0]) {
-        speechText += util.buildSentence(`${handlerInput.t('REPORT_ALLARM')}:`, bollettino.avviso[0]);
+function parseReportObjToSpeech(reportEntry, handlerInput) {
+    let speechText = util.buildSentence(`${handlerInput.t('REPORT_GENERAL')}:`, reportEntry.evoluzionegenerale[0]); 
+    if (reportEntry.avviso[0]) {
+        speechText += util.buildSentence(`${handlerInput.t('REPORT_ALLARM')}:`, reportEntry.avviso[0]);
     }
-    if (bollettino.fenomeniparticolari[0]) {
-        speechText += util.buildSentence(`${handlerInput.t('REPORT_PARTICULAR_PHENOMENA')}:`, bollettino.fenomeniparticolari[0]);
+    if (reportEntry.fenomeniparticolari[0]) {
+        speechText += util.buildSentence(`${handlerInput.t('REPORT_PARTICULAR_PHENOMENA')}:`, reportEntry.fenomeniparticolari[0]);
     }
-    speechText += util.buildParagraph(util.buildSentence(`${handlerInput.t('REPORT_TODAY')}:`), util.buildSentence(bollettino.giorno[0].text));
+    speechText += util.buildParagraph(util.buildSentence(`${handlerInput.t('REPORT_TODAY')}:`), util.buildSentence(reportEntry.giorno[0].text));
     return speechText;
 }
 
@@ -61,5 +60,6 @@ module.exports = {
     fetchAudio,
     fetchReport,
     parseReportXmlToObj,
-    parseReportObjToSpeech
+    parseReportObjToSpeech,
+    findReportEntry
 }
