@@ -1,4 +1,4 @@
-export function fetchRadar() {
+export function buildRadarUrls() {
     const requests = [];
     const timestamp = new Date().getTime();
     for (let i = 6; i > 0; i--) {

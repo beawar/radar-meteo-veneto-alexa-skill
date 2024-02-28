@@ -1,6 +1,6 @@
 import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
 import { PLAY_BEHAVIOR } from "../constants";
-import { fetchRadar } from "../model/radar/utils";
+import { buildRadarUrls } from "../model/radar/utils";
 import { buildRadarPlayer } from "../view/radar-player";
 
 export const ShowRadarIntentHandler: RequestHandler = {
@@ -10,7 +10,7 @@ export const ShowRadarIntentHandler: RequestHandler = {
     },
     handle(handlerInput) {
         // get the src of radar images as an array
-        const imagesSrc = fetchRadar();
+        const imagesSrc = buildRadarUrls();
         buildRadarPlayer(handlerInput, imagesSrc);
 
         return handlerInput.responseBuilder

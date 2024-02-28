@@ -1,6 +1,7 @@
 import { HandlerInput } from "ask-sdk-core";
-import { buildParagraph, buildSentence, parseXml } from "../../utils";
+import fetch from 'cross-fetch';
 import { Bollettino, Report } from "./types";
+import { buildParagraph, buildSentence, parseXml } from "../../utils";
 
 export async function parseReportXmlToObj(
   reportXml: string,
