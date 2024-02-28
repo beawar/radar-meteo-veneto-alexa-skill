@@ -92,6 +92,7 @@
             "type": "ALEXA_PRESENTATION_APL"
           }
         ],
+        "locales": {},
         "regions": {
           "NA": {
             "endpoint": {

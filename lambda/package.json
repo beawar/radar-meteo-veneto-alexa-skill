@@ -1,9 +1,10 @@
 {
-  "name": "hello-world",
+  "name": "arpav-radar-veneto",
   "version": "1.2.0",
   "description": "alexa utility for quickly building skills",
   "main": "index.js",
   "scripts": {
+    "type-check": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Amazon Alexa",
@@ -13,11 +14,17 @@
     "ask-sdk-model": "^1.19.0",
     "aws-sdk": "^2.326.0",
     "he": "^1.2.0",
-    "i18next": "^21.8.0"
+    "i18next": "^21.8.0",
+    "typescript": "^5.3.3",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@tsconfig/node-lts": "^20.1.1",
+    "@tsconfig/recommended": "^1.0.3",
+    "@tsconfig/strictest": "^2.0.3",
+    "@types/he": "^1.2.3",
+    "@types/xml2js": "^0.4.14",
     "ask-sdk-local-debug": "^1.1.0",
-    "axios": "^0.27.2",
-    "xml2js": "^0.4.23"
+    "ts-node": "^10.9.2"
   }
 }

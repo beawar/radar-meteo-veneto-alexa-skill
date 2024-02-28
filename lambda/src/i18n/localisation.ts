@@ -1,4 +1,4 @@
-module.exports = {
+export const languageStrings = {
     en: {
         translation: {
             POSITIVE_SOUND: `<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_positive_response_02'/>`,
