@@ -1,6 +1,6 @@
 {
   "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/recommended/tsconfig.json"],
-  "include": ["index.ts", "src"],
+  "include": ["index.ts", "src", "@types/alexa.d.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "noEmit": true

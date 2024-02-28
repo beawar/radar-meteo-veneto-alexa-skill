@@ -18,7 +18,7 @@ export const LocalisationRequestInterceptor: RequestInterceptor = {
             }
             return value;
         };
-        handlerInput.t = localise
+        handlerInput.t = localise as i18n.TFunction;
         handlerInput.getLocale = getLocale;
     }
 };
