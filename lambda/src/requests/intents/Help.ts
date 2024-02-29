@@ -1,5 +1,5 @@
 import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
-import { PLAY_BEHAVIOR } from "../constants";
+import { PLAY_BEHAVIOR } from "../../constants";
 
 export const HelpIntentHandler: RequestHandler = {
     canHandle(handlerInput) {

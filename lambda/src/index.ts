@@ -2,18 +2,18 @@ import {
   DefaultApiClient,
   SkillBuilders,
 } from "ask-sdk-core";
-import { LaunchRequestHandler } from "./handlers/launch";
-import { ShowRadarIntentHandler } from "./handlers/show-radar";
-import { ReadWeatherReportIntentHandler } from "./handlers/read-weather";
-import { PlayWeatherReportIntentHandler } from "./handlers/play-weather";
-import { PauseAudioIntentHandler } from "./handlers/pause-audio";
-import { ResumeAudioIntentHandler } from "./handlers/resume-audio";
-import { HelpIntentHandler } from "./handlers/help";
-import { CancelAndStopIntentHandler } from "./handlers/cancel";
-import { SessionEndedRequestHandler } from "./handlers/session";
-import { FallbackIntentHandler } from "./handlers/fallback";
-import { IntentReflectorHandler } from "./handlers/reflector";
-import { ErrorHandler } from "./handlers/error";
+import { LaunchRequestHandler } from "./requests/Launch";
+import { ShowRadarIntentHandler } from "./requests/intents/ShowRadar";
+import { ReadWeatherReportIntentHandler } from "./requests/intents/ReadWeatherReport";
+import { PlayWeatherReportIntentHandler } from "./requests/intents/PlayWeatcherReport";
+import { PauseAudioIntentHandler } from "./requests/intents/PauseAudio";
+import { ResumeAudioIntentHandler } from "./requests/intents/ResumeAudio";
+import { HelpIntentHandler } from "./requests/intents/Help";
+import { CancelAndStopIntentHandler } from "./requests/intents/CancelAndStop";
+import { SessionEndedRequestHandler } from "./requests/SessionEnded";
+import { FallbackIntentHandler } from "./requests/intents/Fallback";
+import { IntentReflectorHandler } from "./requests/IntentReflector";
+import { ErrorHandler } from "./handlers/ErrorHandler";
 import { LoggingRequestInterceptor, LoggingResponseInterceptor } from "./interceptors/logging";
 import { LocalisationRequestInterceptor } from "./interceptors/localization";
 

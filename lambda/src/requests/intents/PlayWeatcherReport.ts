@@ -1,7 +1,7 @@
 import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
-import { BASIC_AUDIO_WEATHER_REPORT } from "../constants";
-import { buildAudioUrl } from "../model/audio/utils";
-import { AudioPlayerData, buildAudioPlayer } from "../view/audio-player";
+import { BASIC_AUDIO_WEATHER_REPORT } from "../../constants";
+import { buildAudioUrl } from "../../model/audio/utils";
+import { AudioPlayerData, buildAudioPlayer } from "../../view/audio-player";
 
 export const PlayWeatherReportIntentHandler: RequestHandler = {
     canHandle(handlerInput) {
