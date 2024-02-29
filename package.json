@@ -4,9 +4,8 @@
   },
   "scripts": {
     "prepare": "husky",
-    "build": "npm run build --prefix lambda"
-  },
-  "dependencies": {
-    "ask-cli": "^2.30.7"
+    "build": "npm run build --prefix lambda",
+    "predeploy": "npm run build",
+    "deploy": "ask deploy"
   }
 }
