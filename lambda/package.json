@@ -6,6 +6,7 @@
   "scripts": {
     "ask-dialog": "cd .. && ask dialog",
     "build": "npm run clean && npm run compile",
+    "build:production": "npm run build && cp package.json ./dist && npm i --production --prefix dist",
     "clean": "rm -r dist || true",
     "compile": "tsc --build tsconfig.json",
     "start": "npm run build && npm run ask-dialog",
