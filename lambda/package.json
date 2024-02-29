@@ -2,7 +2,7 @@
   "name": "arpav-radar-veneto",
   "version": "1.2.0",
   "description": "alexa utility for quickly building skills",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "ask-dialog": "cd .. && ask dialog",
     "build": "npm run clean && npm run compile",
