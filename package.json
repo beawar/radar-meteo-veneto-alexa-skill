@@ -5,6 +5,7 @@
   "scripts": {
     "prepare": "husky",
     "build": "npm run build --prefix lambda",
-    "deploy": "npm run build:production --prefix lambda && ask deploy"
+    "predeploy": "npm run build",
+    "deploy": "ask deploy"
   }
 }
