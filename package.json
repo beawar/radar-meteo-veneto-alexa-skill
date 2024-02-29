@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npm run build --prefix lambda",
     "deploy": "ask deploy",
-    "start": "npm run build && ask run",
+    "start": "npm run start --prefix lambda",
     "predeploy": "npm run build",
     "prepare": "husky"
   }
