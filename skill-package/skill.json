@@ -95,14 +95,14 @@
         ],
         "locales": {},
         "regions": {
-          "NA": {
-            "endpoint": {
-              "uri": "arn:aws:lambda:us-east-1:910093664169:function:21bb472d-1b5c-464e-8d2f-d3b30cbaeff6:Release_0"
-            }
-          },
           "EU": {
             "endpoint": {
               "uri": "arn:aws:lambda:eu-west-1:910093664169:function:21bb472d-1b5c-464e-8d2f-d3b30cbaeff6:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:910093664169:function:21bb472d-1b5c-464e-8d2f-d3b30cbaeff6:Release_0"
             }
           },
           "FE": {
