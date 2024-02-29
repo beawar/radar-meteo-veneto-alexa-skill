@@ -3,9 +3,10 @@
     "husky": "^9.0.11"
   },
   "scripts": {
-    "prepare": "husky",
     "build": "npm run build --prefix lambda",
+    "deploy": "ask deploy",
+    "start": "npm run build && ask run",
     "predeploy": "npm run build",
-    "deploy": "ask deploy"
+    "prepare": "husky"
   }
 }
