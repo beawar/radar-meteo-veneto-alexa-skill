@@ -12,12 +12,10 @@
                 "<node_internals>/**"
             ],
             "type": "node"
-        },
-        
-        
+        },    
         {
             "name": "Debug Alexa Skill (Node.js)",
-            "type": "pwa-node",
+            "type": "node",
             "request": "launch",
             "program": "${command:ask.debugAdapterPath}",
             "args": [
@@ -28,7 +26,7 @@
                 "--handlerName",
                 "handler",
                 "--skillEntryFile",
-                "${workspaceFolder}/lambda/index.js",
+                "${workspaceFolder}/lambda/dist/index.js",
                 "--region",
                 "EU"
             ],

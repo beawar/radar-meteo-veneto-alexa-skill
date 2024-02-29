@@ -3,6 +3,10 @@
     "husky": "^9.0.11"
   },
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "build": "npm run build --prefix lambda"
+  },
+  "dependencies": {
+    "ask-cli": "^2.30.7"
   }
 }

@@ -1,8 +1,9 @@
 import 'ask-sdk-core';
-import { WithT } from 'i18next';
+import { TFunction } from 'i18next';
 
 declare module 'ask-sdk-core' {
-    interface HandlerInput extends WithT {
+    interface HandlerInput {
+        t(...args: Parameters<TFunction>): string;
         getLocale(): string;
     }
 }

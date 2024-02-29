@@ -4,8 +4,12 @@
   "description": "alexa utility for quickly building skills",
   "main": "index.js",
   "scripts": {
-    "type-check": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ask-dialog": "cd .. && ask dialog",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -r dist || true",
+    "compile": "tsc --build tsconfig.json",
+    "start": "npm run build && npm run ask-dialog",
+    "type-check": "tsc"
   },
   "author": "Amazon Alexa",
   "license": "Apache License",
