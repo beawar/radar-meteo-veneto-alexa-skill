@@ -26,7 +26,7 @@
                 "--handlerName",
                 "handler",
                 "--skillEntryFile",
-                "${workspaceFolder}/lambda/dist/index.js",
+                "${workspaceFolder}/lambda/index.js",
                 "--region",
                 "EU"
             ],
