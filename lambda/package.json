@@ -4,7 +4,7 @@
   "description": "alexa utility for quickly building skills",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && npm run compile && cp -r package.json ./dist && npm i --omit=dev --prefix dist",
+    "build": "npm run clean && npm run compile",
     "clean": "rm -r dist || true",
     "compile": "tsc --build tsconfig.json",
     "deploy": "cd .. && npm run deploy",
