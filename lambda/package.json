@@ -4,12 +4,11 @@
   "description": "alexa utility for quickly building skills",
   "main": "dist/index.js",
   "scripts": {
-    "ask-dialog": "cd .. && ask dialog",
-    "build": "npm run clean && npm run compile && cp -r package.json documents ./dist && npm i --omit=dev --prefix dist",
+    "build": "npm run clean && npm run compile && cp -r package.json ./dist && npm i --omit=dev --prefix dist",
     "clean": "rm -r dist || true",
     "compile": "tsc --build tsconfig.json",
     "deploy": "cd .. && npm run deploy",
-    "start": "npm run build && npm run ask-dialog",
+    "start": "npm run build && ask run --skillEntryFile ./dist/index.js",
     "type-check": "tsc"
   },
   "author": "Amazon Alexa",
@@ -21,7 +20,7 @@
   "dependencies": {
     "ask-sdk-core": "^2.14.0",
     "ask-sdk-model": "^1.86.0",
-    "aws-sdk": "^2.1568.0",
+    "aws-sdk": "^2.1569.0",
     "cross-fetch": "^4.0.0",
     "he": "^1.2.0",
     "i18next": "^23.10.0",
