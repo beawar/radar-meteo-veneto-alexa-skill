@@ -8,16 +8,21 @@ export type AudioPlayerData = {
   headerTitle: string;
   primaryText: string;
   secondaryText: string;
-  coverImageSrc?: string;
   logoSrc?: string;
 };
 
 export function buildAudioPlayer(
   handlerInput: HandlerInput,
-  { audioSources, headerTitle, primaryText, secondaryText, coverImageSrc, logoSrc = LOGO_URL }: AudioPlayerData
+  {
+    audioSources,
+    headerTitle,
+    primaryText,
+    secondaryText,
+    logoSrc = LOGO_URL,
+  }: AudioPlayerData
 ) {
   if (audioSources) {
-    assert(audioSources[0])
+    assert(audioSources[0]);
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder.addDirective(
         buildDirective(APL.audioPlayer, {
@@ -27,7 +32,6 @@ export function buildAudioPlayer(
               audioControlType: "jump10",
               audioSources,
               backgroundImage: "",
-              coverImageSource: coverImageSrc,
               headerTitle,
               logoUrl: logoSrc,
               primaryText,
@@ -47,9 +51,6 @@ export function buildAudioPlayer(
         {
           title: primaryText,
           subtitle: secondaryText,
-          ...(coverImageSrc && { art: {
-            sources: [{ url: coverImageSrc}],
-          }} || {})
         }
       );
     }

@@ -18,8 +18,6 @@
             "dimensions": {
                 "assetHeight": "425dp",
                 "assetWidth": "425dp",
-                "coverImageShadowRadius": "40dp",
-                "coverImageShadowVerticalOffset": "20dp",
                 "mainViewHeight": "85%",
                 "mainViewTopSpacing": "15%",
                 "primaryControlSize": "120dp",
@@ -86,8 +84,6 @@
             "dimensions": {
                 "assetHeight": "240dp",
                 "assetWidth": "240dp",
-                "coverImageShadowRadius": "20dp",
-                "coverImageShadowVerticalOffset": "10dp",
                 "primaryControlSize": "60dp",
                 "secondaryControlSize": "46dp",
                 "sliderIndeterminateHeight": "40dp"
@@ -121,11 +117,6 @@
                 {
                     "name": "backgroundImageSource",
                     "description": "URL for the background image source.",
-                    "type": "string"
-                },
-                {
-                    "name": "coverImageSource",
-                    "description": "URL for the cover image source. If not provided, text content will be left aligned.",
                     "type": "string"
                 },
                 {
@@ -212,7 +203,7 @@
                             "justifyContent": "center",
                             "items": [
                                 {
-                                    "description": "Cover image and track info",
+                                    "description": "Track info",
                                     "type": "Container",
                                     "width": "100%",
                                     "paddingLeft": "@marginHorizontal",
@@ -220,32 +211,6 @@
                                     "height": "auto",
                                     "direction": "${@viewportProfile != @hubRoundSmall ? 'row' : 'column'}",
                                     "items": [
-                                        {
-                                            "description": "Cover image",
-                                            "type": "Container",
-                                            "id": "Audio_CoverImage",
-                                            "paddingEnd": "${coverImageSource != '' ? @trackInfoLeftPadding : 0}",
-                                            "justifyContent": "${@viewportProfile != @hubRoundSmall ? 'center' : 'end'}",
-                                            "items": [
-                                                {
-                                                    "when": "${@viewportProfile != @hubRoundSmall && coverImageSource != ''}",
-                                                    "type": "Container",
-                                                    "height": "@assetHeight",
-                                                    "width": "@assetWidth",
-                                                    "items": [
-                                                        {
-                                                            "type": "AlexaImage",
-                                                            "imageSource": "${coverImageSource}",
-                                                            "imageScale": "best-fill",
-                                                            "imageWidth": "@assetWidth",
-                                                            "imageHeight": "@assetHeight",
-                                                            "imageAspectRatio": "square",
-                                                            "imageShadow": true
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
                                         {
                                             "description": "Track Info",
                                             "type": "Container",
@@ -436,7 +401,6 @@
                 "audioControlType": "${payload.audioPlayerData.properties.audioControlType}",
                 "audioSources": "${payload.audioPlayerData.properties.audioSources}",
                 "backgroundImageSource": "${payload.audioPlayerData.properties.backgroundImage}",
-                "coverImageSource": "${payload.audioPlayerData.properties.coverImageSource}",
                 "headerAttributionImage": "${payload.audioPlayerData.properties.logoUrl}",
                 "headerTitle": "${payload.audioPlayerData.properties.headerTitle}",
                 "headerSubtitle": "",
