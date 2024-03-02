@@ -1,5 +1,5 @@
 import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
-import { BASIC_AUDIO_WEATHER_REPORT } from "../../constants";
+import { AUDIO_WEATHER_REPORT } from "../../constants";
 import { buildAudioUrl } from "../../model/audio/utils";
 import { AudioPlayerData, buildAudioPlayer } from "../../view/audio-player";
 
@@ -12,9 +12,8 @@ export const PlayWeatherReportIntentHandler: RequestHandler = {
   },
   handle(handlerInput) {
     // TODO:
-    //   PART 2:
-    //   1) retrieve mp3 of detailed report from https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3
-    //   2) make alexa speak mp3
+    //   1) [DONE] retrieve mp3 of detailed report from https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3
+    //   2) [DONE] make alexa speak mp3
     //   3) [optional] display detailed report text on device (where supported)
     //   PART 3:
     //   1) Retrieve report images from https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml (tag bollettini)
@@ -22,14 +21,7 @@ export const PlayWeatherReportIntentHandler: RequestHandler = {
 
     // assign as default weather report the basic audio. It retrieve an mp3 file audio with the info of
     // the today weather
-    const reportType = BASIC_AUDIO_WEATHER_REPORT;
-
-    // check if the request contains any slot about the weather report intent for detailed information
-    /*const slotValue = Alexa.getSlotValue(handlerInput.requestEnvelope, 'dettagliato');        
-        if(slotValue !== null){
-            // use AudioPlayer directive for retrieve mp3 file audio with detailed weather report
-            reportType = constants.DetailedAudioWeatherReport;
-        }*/
+    const reportType = AUDIO_WEATHER_REPORT;
 
     const audioData: AudioPlayerData = {
       audioSources: [buildAudioUrl(reportType.src)],

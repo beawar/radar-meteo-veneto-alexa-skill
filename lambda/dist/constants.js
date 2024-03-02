@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LOGO_URL = exports.REPORT_XML_URL = exports.REPORT_ENTRY = exports.BASIC_AUDIO_WEATHER_REPORT = exports.DETAILED_AUDIO_WEATHER_REPORT = exports.PLAY_BEHAVIOR = exports.APL = void 0;
+exports.LOGO_URL = exports.REPORT_XML_URL = exports.REPORT_ENTRY = exports.AUDIO_WEATHER_REPORT = exports.PLAY_BEHAVIOR = exports.APL = void 0;
 exports.APL = {
     radarPlayer: {
         type: "Alexa.Presentation.APL.RenderDocument",
@@ -32,11 +32,7 @@ exports.PLAY_BEHAVIOR = {
     replaceAll: "REPLACE_ALL",
     replaceEnqueued: "REPLACE_ENQUEUED",
 };
-exports.DETAILED_AUDIO_WEATHER_REPORT = {
-    url: "https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3",
-    title: "Bollettino dettagliato veneto",
-};
-exports.BASIC_AUDIO_WEATHER_REPORT = {
+exports.AUDIO_WEATHER_REPORT = {
     src: "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3",
     title: "Bollettino radio veneto",
 };
