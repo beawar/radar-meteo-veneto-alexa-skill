@@ -33,10 +33,7 @@ export const PLAY_BEHAVIOR = {
   replaceEnqueued: "REPLACE_ENQUEUED",
 } satisfies Record<string, ui.PlayBehavior>;
 
-export const AUDIO_WEATHER_REPORT = {
-  src: "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3",
-  title: "Bollettino radio veneto",
-};
+export const AUDIO_WEATHER_REPORT_URL = "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3";
 
 export const REPORT_ENTRY = {
   veneto: "MV",
