@@ -1,3 +1,3 @@
 export function buildAudioUrl(src: string) {
-    return src + `?${new Date().getTime}`;
+    return src + `?${new Date().getTime()}`;
   }
