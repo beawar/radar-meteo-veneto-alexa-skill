@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getReportObj = exports.fetchReport = exports.parseReportObjToSpeech = exports.findReportEntry = exports.parseReportXmlToObj = void 0;
 const cross_fetch_1 = __importDefault(require("cross-fetch"));
 const utils_1 = require("../../utils");
+const constants_1 = require("../../constants");
 function parseReportXmlToObj(reportXml, handlerInput) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -50,9 +51,8 @@ function parseReportObjToSpeech(reportEntry, handlerInput) {
 exports.parseReportObjToSpeech = parseReportObjToSpeech;
 function fetchReport() {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = "https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml";
         try {
-            const response = yield (0, cross_fetch_1.default)(url);
+            const response = yield (0, cross_fetch_1.default)(constants_1.REPORT_XML_URL);
             return yield response.text();
         }
         catch (error) {

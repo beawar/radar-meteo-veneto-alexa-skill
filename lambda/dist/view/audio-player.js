@@ -7,7 +7,7 @@ exports.buildAudioPlayer = void 0;
 const constants_1 = require("../constants");
 const utils_1 = require("./utils");
 const node_assert_1 = __importDefault(require("node:assert"));
-function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText, secondaryText, coverImageSource }) {
+function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText, secondaryText, coverImageSrc, logoSrc = constants_1.LOGO_URL }) {
     if (audioSources) {
         (0, node_assert_1.default)(audioSources[0]);
         if ((0, utils_1.supportsAPL)(handlerInput)) {
@@ -18,9 +18,9 @@ function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText
                         audioControlType: "jump10",
                         audioSources,
                         backgroundImage: "",
-                        coverImageSource,
+                        coverImageSource: coverImageSrc,
                         headerTitle,
-                        logoUrl: "https://www.arpa.veneto.it/logo_arpav.gif",
+                        logoUrl: logoSrc,
                         primaryText,
                         secondaryText,
                         sliderType: "determinate",
@@ -29,8 +29,8 @@ function buildAudioPlayer(handlerInput, { audioSources, headerTitle, primaryText
             }));
         }
         else {
-            handlerInput.responseBuilder.addAudioPlayerPlayDirective(constants_1.PLAY_BEHAVIOR.replaceAll, audioSources[0], constants_1.APL.audioPlayer.token, 0, undefined, Object.assign({ title: primaryText, subtitle: secondaryText }, (coverImageSource && { art: {
-                    sources: [{ url: coverImageSource }],
+            handlerInput.responseBuilder.addAudioPlayerPlayDirective(constants_1.PLAY_BEHAVIOR.replaceAll, audioSources[0], constants_1.APL.audioPlayer.token, 0, undefined, Object.assign({ title: primaryText, subtitle: secondaryText }, (coverImageSrc && { art: {
+                    sources: [{ url: coverImageSrc }],
                 } } || {})));
         }
     }

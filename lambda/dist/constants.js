@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.REPORT_ENTRY = exports.BASIC_AUDIO_WEATHER_REPORT = exports.DETAILED_AUDIO_WEATHER_REPORT = exports.PLAY_BEHAVIOR = exports.APL = void 0;
+exports.LOGO_URL = exports.REPORT_XML_URL = exports.REPORT_ENTRY = exports.BASIC_AUDIO_WEATHER_REPORT = exports.DETAILED_AUDIO_WEATHER_REPORT = exports.PLAY_BEHAVIOR = exports.APL = void 0;
 exports.APL = {
     radarPlayer: {
         type: "Alexa.Presentation.APL.RenderDocument",
@@ -37,7 +37,7 @@ exports.DETAILED_AUDIO_WEATHER_REPORT = {
     title: "Bollettino dettagliato veneto",
 };
 exports.BASIC_AUDIO_WEATHER_REPORT = {
-    src: "https://www.arpa.veneto.it/previsioni/audio/meteoradio.mp3",
+    src: "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3",
     title: "Bollettino radio veneto",
 };
 exports.REPORT_ENTRY = {
@@ -45,4 +45,6 @@ exports.REPORT_ENTRY = {
     dolomiti: "DM",
     pianura: "MP",
 };
+exports.REPORT_XML_URL = 'https://www.arpa.veneto.it/risorse/data-bollettini/meteo/bollettini/it/xml/bollettino_utenti.xml';
+exports.LOGO_URL = 'https://www.arpa.veneto.it/logo_arpav.png';
 //# sourceMappingURL=constants.js.map
