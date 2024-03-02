@@ -1,2 +1,3 @@
 npm run build
-git add lambda/dist
+git add -A lambda/dist
+git commit -m 'build: auto build'

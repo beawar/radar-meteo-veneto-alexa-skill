@@ -4,12 +4,12 @@
         "properties": {
             "audioControlType": "jump10",
             "audioSources": [
-                "http://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3"
+                "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3"
             ],
             "backgroundImage": "",
             "coverImageSource": "",
             "headerTitle": "Bollettino dettagliato",
-            "logoUrl": "https://www.arpa.veneto.it/logo_arpav.gif",
+            "logoUrl": "https://www.arpa.veneto.it/logo_arpav.png",
             "primaryText": "Bollettino veneto",
             "secondaryText": "12 Novembre 2022",
             "sliderType": "determinate"
