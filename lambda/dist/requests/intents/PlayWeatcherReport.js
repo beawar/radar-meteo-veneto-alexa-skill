@@ -30,3 +30,4 @@ exports.PlayWeatherReportIntentHandler = {
         return handlerInput.responseBuilder.getResponse();
     }
 };
+//# sourceMappingURL=PlayWeatcherReport.js.map

@@ -58,3 +58,4 @@ exports.ReadWeatherReportIntentHandler = {
         });
     }
 };
+//# sourceMappingURL=ReadWeatherReport.js.map

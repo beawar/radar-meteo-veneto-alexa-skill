@@ -45,3 +45,4 @@ exports.REPORT_ENTRY = {
     dolomiti: "DM",
     pianura: "MP",
 };
+//# sourceMappingURL=constants.js.map

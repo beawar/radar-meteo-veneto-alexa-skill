@@ -28,3 +28,4 @@ exports.handler = ask_sdk_core_1.SkillBuilders.custom()
     .addResponseInterceptors(logging_1.LoggingResponseInterceptor)
     .withApiClient(new ask_sdk_core_1.DefaultApiClient())
     .lambda();
+//# sourceMappingURL=index.js.map

@@ -10,3 +10,4 @@ exports.SessionEndedRequestHandler = {
         return handlerInput.responseBuilder.getResponse();
     },
 };
+//# sourceMappingURL=SessionEnded.js.map

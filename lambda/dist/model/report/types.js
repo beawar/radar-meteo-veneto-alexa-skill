@@ -20,3 +20,4 @@ var Type;
     Type["Image"] = "image";
     Type["Text"] = "text";
 })(Type || (exports.Type = Type = {}));
+//# sourceMappingURL=types.js.map

@@ -20,3 +20,4 @@ exports.IntentReflectorHandler = {
             .getResponse();
     }
 };
+//# sourceMappingURL=IntentReflector.js.map

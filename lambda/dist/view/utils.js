@@ -33,3 +33,4 @@ function supportsAPLA(handlerInput) {
     return supportsAPL(handlerInput);
 }
 exports.supportsAPLA = supportsAPLA;
+//# sourceMappingURL=utils.js.map

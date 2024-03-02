@@ -53,7 +53,7 @@ function fetchReport() {
         const url = "https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml";
         try {
             const response = yield (0, cross_fetch_1.default)(url);
-            return yield response.json();
+            return yield response.text();
         }
         catch (error) {
             console.log(error);
@@ -65,8 +65,12 @@ exports.fetchReport = fetchReport;
 function getReportObj(handlerInput, reportEntryId) {
     return __awaiter(this, void 0, void 0, function* () {
         const reportText = yield fetchReport();
-        const reportObj = yield parseReportXmlToObj(reportText, handlerInput);
-        return findReportEntry(reportObj, reportEntryId);
+        if (reportText) {
+            const reportObj = yield parseReportXmlToObj(reportText, handlerInput);
+            return findReportEntry(reportObj, reportEntryId);
+        }
+        return undefined;
     });
 }
 exports.getReportObj = getReportObj;
+//# sourceMappingURL=utils.js.map
