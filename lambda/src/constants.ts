@@ -33,13 +33,8 @@ export const PLAY_BEHAVIOR = {
   replaceEnqueued: "REPLACE_ENQUEUED",
 } satisfies Record<string, ui.PlayBehavior>;
 
-export const DETAILED_AUDIO_WEATHER_REPORT = {
-  url: "https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3",
-  title: "Bollettino dettagliato veneto",
-};
-
-export const BASIC_AUDIO_WEATHER_REPORT = {
-  src: "https://www.arpa.veneto.it/previsioni/audio/meteoradio.mp3",
+export const AUDIO_WEATHER_REPORT = {
+  src: "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3",
   title: "Bollettino radio veneto",
 };
 
@@ -48,3 +43,7 @@ export const REPORT_ENTRY = {
   dolomiti: "DM",
   pianura: "MP",
 };
+
+export const REPORT_XML_URL = 'https://www.arpa.veneto.it/risorse/data-bollettini/meteo/bollettini/it/xml/bollettino_utenti.xml';
+
+export const LOGO_URL = 'https://www.arpa.veneto.it/logo_arpav.png'

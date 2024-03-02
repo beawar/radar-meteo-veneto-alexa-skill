@@ -2,6 +2,7 @@ import { HandlerInput } from "ask-sdk-core";
 import fetch from 'cross-fetch';
 import { Bollettino, Report } from "./types";
 import { buildParagraph, buildSentence, parseXml } from "../../utils";
+import { REPORT_XML_URL } from "../../constants";
 
 export async function parseReportXmlToObj(
   reportXml: string,
@@ -54,11 +55,9 @@ export function parseReportObjToSpeech(
 }
 
 export async function fetchReport() {
-  const url =
-    "https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml";
   try {
-    const response = await fetch(url);
-    return await response.json();
+    const response = await fetch(REPORT_XML_URL);
+    return await response.text();
   } catch (error) {
     console.log(error);
     return null;
@@ -70,6 +69,9 @@ export async function getReportObj(
   reportEntryId: string
 ) {
   const reportText = await fetchReport();
-  const reportObj = await parseReportXmlToObj(reportText, handlerInput);
-  return findReportEntry(reportObj, reportEntryId);
+  if (reportText) {
+    const reportObj = await parseReportXmlToObj(reportText, handlerInput);
+    return findReportEntry(reportObj, reportEntryId);
+  }
+  return undefined;
 }

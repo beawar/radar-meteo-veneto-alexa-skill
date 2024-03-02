@@ -1,5 +1,5 @@
 import { HandlerInput } from "ask-sdk-core";
-import { APL, PLAY_BEHAVIOR } from "../constants";
+import { APL, LOGO_URL, PLAY_BEHAVIOR } from "../constants";
 import { buildDirective, supportsAPL } from "./utils";
 import assert from "node:assert";
 
@@ -8,12 +8,13 @@ export type AudioPlayerData = {
   headerTitle: string;
   primaryText: string;
   secondaryText: string;
-  coverImageSource?: string;
+  coverImageSrc?: string;
+  logoSrc?: string;
 };
 
 export function buildAudioPlayer(
   handlerInput: HandlerInput,
-  { audioSources, headerTitle, primaryText, secondaryText, coverImageSource }: AudioPlayerData
+  { audioSources, headerTitle, primaryText, secondaryText, coverImageSrc, logoSrc = LOGO_URL }: AudioPlayerData
 ) {
   if (audioSources) {
     assert(audioSources[0])
@@ -26,9 +27,9 @@ export function buildAudioPlayer(
               audioControlType: "jump10",
               audioSources,
               backgroundImage: "",
-              coverImageSource,
+              coverImageSource: coverImageSrc,
               headerTitle,
-              logoUrl: "https://www.arpa.veneto.it/logo_arpav.gif",
+              logoUrl: logoSrc,
               primaryText,
               secondaryText,
               sliderType: "determinate",
@@ -46,8 +47,8 @@ export function buildAudioPlayer(
         {
           title: primaryText,
           subtitle: secondaryText,
-          ...(coverImageSource && { art: {
-            sources: [{ url: coverImageSource}],
+          ...(coverImageSrc && { art: {
+            sources: [{ url: coverImageSrc}],
           }} || {})
         }
       );

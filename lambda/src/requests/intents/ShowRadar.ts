@@ -1,7 +1,7 @@
 import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
-import { PLAY_BEHAVIOR } from "../constants";
-import { buildRadarUrls } from "../model/radar/utils";
-import { buildRadarPlayer } from "../view/radar-player";
+import { PLAY_BEHAVIOR } from "../../constants";
+import { buildRadarUrls } from "../../model/radar/utils";
+import { buildRadarPlayer } from "../../view/radar-player";
 
 export const ShowRadarIntentHandler: RequestHandler = {
     canHandle(handlerInput) {
