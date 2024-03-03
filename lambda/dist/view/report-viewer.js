@@ -9,19 +9,19 @@ function buildReportViewer(handlerInput, reportEntryObj) {
         const reportContent = [
             {
                 titleText: handlerInput.t("REPORT_GENERAL"),
-                contentText: reportEntryObj.evoluzionegenerale[0],
+                contentText: reportEntryObj.evoluzionegenerale,
             },
         ];
-        if (reportEntryObj.avviso[0]) {
+        if (reportEntryObj.avviso) {
             reportContent.push({
                 titleText: handlerInput.t("REPORT_ALLARM"),
-                contentText: reportEntryObj.avviso[0],
+                contentText: reportEntryObj.avviso,
             });
         }
-        if (reportEntryObj.fenomeniparticolari[0]) {
+        if (reportEntryObj.fenomeniparticolari) {
             reportContent.push({
                 titleText: handlerInput.t("REPORT_PARTICULAR_PHENOMENA"),
-                contentText: reportEntryObj.fenomeniparticolari[0],
+                contentText: reportEntryObj.fenomeniparticolari,
             });
         }
         handlerInput.responseBuilder.addDirective((0, utils_1.buildDirective)(constants_1.APL.reportReader, {
