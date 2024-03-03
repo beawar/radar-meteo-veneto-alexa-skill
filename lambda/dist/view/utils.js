@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.supportsAPLA = exports.supportsAPL = exports.buildDirective = void 0;
 function assertDirective(directive) {
-    if (typeof directive !== 'object' || !directive) {
-        throw new Error('directive must be an object');
+    if (typeof directive !== "object" || !directive) {
+        throw new Error("directive must be an object");
     }
-    if (!('token' in directive)) {
-        throw new Error('directive must have a token');
+    if (!("token" in directive)) {
+        throw new Error("directive must have a token");
     }
-    if (!('document' in directive)) {
-        throw new Error('directive must have a document');
+    if (!("document" in directive)) {
+        throw new Error("directive must have a document");
     }
 }
 function buildDirective(directive, datasources) {
@@ -17,7 +17,7 @@ function buildDirective(directive, datasources) {
         type: directive.type,
         document: directive.document,
         token: directive.token,
-        datasources
+        datasources,
     };
     assertDirective(result);
     return result;

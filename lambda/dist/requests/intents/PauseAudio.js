@@ -8,13 +8,13 @@ const ask_sdk_core_1 = require("ask-sdk-core");
  * */
 exports.PauseAudioIntentHandler = {
     canHandle(handlerInput) {
-        return (0, ask_sdk_core_1.getRequestType)(handlerInput.requestEnvelope) === 'IntentRequest'
-            && (0, ask_sdk_core_1.getIntentName)(handlerInput.requestEnvelope) === 'AMAZON.PauseIntent';
+        return ((0, ask_sdk_core_1.getRequestType)(handlerInput.requestEnvelope) === "IntentRequest" &&
+            (0, ask_sdk_core_1.getIntentName)(handlerInput.requestEnvelope) === "AMAZON.PauseIntent");
     },
     handle(handlerInput) {
         return handlerInput.responseBuilder
             .addAudioPlayerStopDirective()
             .getResponse();
-    }
+    },
 };
 //# sourceMappingURL=PauseAudio.js.map

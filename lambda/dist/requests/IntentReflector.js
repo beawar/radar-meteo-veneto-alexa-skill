@@ -9,15 +9,15 @@ const ask_sdk_core_1 = require("ask-sdk-core");
  * */
 exports.IntentReflectorHandler = {
     canHandle(handlerInput) {
-        return (0, ask_sdk_core_1.getRequestType)(handlerInput.requestEnvelope) === 'IntentRequest';
+        return (0, ask_sdk_core_1.getRequestType)(handlerInput.requestEnvelope) === "IntentRequest";
     },
     handle(handlerInput) {
         const intentName = (0, ask_sdk_core_1.getIntentName)(handlerInput.requestEnvelope);
-        const speechText = handlerInput.t('REFLECTOR_MSG', { intent: intentName });
-        return handlerInput.responseBuilder
+        const speechText = handlerInput.t("REFLECTOR_MSG", { intent: intentName });
+        return (handlerInput.responseBuilder
             .speak(speechText)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
-    }
+            .getResponse());
+    },
 };
 //# sourceMappingURL=IntentReflector.js.map

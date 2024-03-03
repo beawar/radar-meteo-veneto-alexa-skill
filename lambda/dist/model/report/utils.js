@@ -16,14 +16,14 @@ exports.getReportObj = exports.fetchReport = exports.parseReportObjToSpeech = ex
 const cross_fetch_1 = __importDefault(require("cross-fetch"));
 const utils_1 = require("../../utils");
 const constants_1 = require("../../constants");
-function parseReportXmlToObj(reportXml, handlerInput) {
+function parseReportXmlToObj(reportXml) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             return yield (0, utils_1.parseXml)(reportXml);
         }
         catch (error) {
             console.error(error);
-            return handlerInput.t("API_ERROR_MSG");
+            return undefined;
         }
     });
 }
@@ -62,12 +62,12 @@ function fetchReport() {
     });
 }
 exports.fetchReport = fetchReport;
-function getReportObj(handlerInput, reportEntryId) {
+function getReportObj(reportEntryId) {
     return __awaiter(this, void 0, void 0, function* () {
         const reportText = yield fetchReport();
         if (reportText) {
-            const reportObj = yield parseReportXmlToObj(reportText, handlerInput);
-            return findReportEntry(reportObj, reportEntryId);
+            const reportObj = yield parseReportXmlToObj(reportText);
+            return reportObj && findReportEntry(reportObj, reportEntryId);
         }
         return undefined;
     });

@@ -38,7 +38,7 @@ exports.callDirectiveService = callDirectiveService;
 function parseXml(text) {
     return __awaiter(this, void 0, void 0, function* () {
         const decodedText = he_1.default.decode(text);
-        return yield xml2js_1.default.parseStringPromise(decodedText, {
+        return (yield xml2js_1.default.parseStringPromise(decodedText, {
             trim: true,
             explicitArray: false,
             mergeAttrs: true,
@@ -47,7 +47,7 @@ function parseXml(text) {
                     return `_${name}`;
                 },
             ],
-        });
+        }));
     });
 }
 exports.parseXml = parseXml;

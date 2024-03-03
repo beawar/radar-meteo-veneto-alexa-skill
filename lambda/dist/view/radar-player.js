@@ -7,19 +7,19 @@ function buildRadarPlayer(handlerInput, images) {
     // Add APL directive to response
     if ((0, utils_1.supportsAPL)(handlerInput)) {
         const imagesUrl = images.map((imageSrc) => ({
-            url: imageSrc
+            url: imageSrc,
         }));
         handlerInput.responseBuilder.addDirective((0, utils_1.buildDirective)(constants_1.APL.radarPlayer, {
             radarImagesData: {
-                type: 'object',
+                type: "object",
                 properties: {
-                    images: imagesUrl
-                }
-            }
+                    images: imagesUrl,
+                },
+            },
         }));
     }
     else {
-        handlerInput.responseBuilder.speak(handlerInput.t('UNSUPPORTED_DEVICE_MSG'));
+        handlerInput.responseBuilder.speak(handlerInput.t("UNSUPPORTED_DEVICE_MSG"));
     }
 }
 exports.buildRadarPlayer = buildRadarPlayer;

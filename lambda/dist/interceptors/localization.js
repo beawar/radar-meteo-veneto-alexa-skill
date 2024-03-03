@@ -32,21 +32,21 @@ const localisation_1 = require("../i18n/localisation");
 exports.LocalisationRequestInterceptor = {
     process(handlerInput) {
         const getLocale = () => (0, ask_sdk_core_1.getLocale)(handlerInput.requestEnvelope);
-        i18n.init({
+        void i18n.init({
             lng: getLocale(),
             resources: localisation_1.languageStrings,
-            returnObjects: true
+            returnObjects: true,
         });
         function localise(...args) {
+            var _a;
             const value = i18n.t(...args);
             if (Array.isArray(value)) {
-                return value[Math.floor(Math.random() * value.length)];
+                return (_a = value[Math.floor(Math.random() * value.length)]) !== null && _a !== void 0 ? _a : "";
             }
             return value;
         }
-        ;
         handlerInput.t = localise;
         handlerInput.getLocale = getLocale;
-    }
+    },
 };
 //# sourceMappingURL=localization.js.map

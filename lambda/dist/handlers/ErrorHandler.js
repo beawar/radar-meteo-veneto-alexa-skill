@@ -11,12 +11,12 @@ exports.ErrorHandler = {
         return true;
     },
     handle(handlerInput, error) {
-        const speechText = handlerInput.t('ERROR_MSG');
+        const speechText = handlerInput.t("ERROR_MSG");
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .reprompt(handlerInput.t("REPROMPT_MSG"))
             .getResponse();
-    }
+    },
 };
 //# sourceMappingURL=ErrorHandler.js.map
