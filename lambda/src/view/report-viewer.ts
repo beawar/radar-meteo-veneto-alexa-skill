@@ -75,7 +75,7 @@ export function parseReportObjToSpeech(
       buildSentence(`${entry.titleText}:`),
       ...entry.contentText
         .split(".")
-        .map((sentence) => buildSentence(`${sentence}.`)),
+        .map((sentence) => buildSentence(sentence)),
     );
   });
   return speechText.join();
