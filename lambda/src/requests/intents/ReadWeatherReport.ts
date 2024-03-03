@@ -7,6 +7,7 @@ import {
   buildReportViewer,
   parseReportObjToSpeech,
 } from "../../view/report-viewer";
+import { supportsAPL } from "../../view/utils";
 
 export const ReadWeatherReportIntentHandler: RequestHandler = {
   canHandle(handlerInput) {
@@ -49,8 +50,12 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
         .getResponse();
     }
 
-    buildReportViewer(handlerInput, reportEntryObj);
-    const reportSpeech = parseReportObjToSpeech(reportEntryObj, handlerInput);
+    if (supportsAPL(handlerInput)) {
+      const viewDirective = buildReportViewer(handlerInput, reportEntryObj);
+      handlerInput.responseBuilder.addDirective(viewDirective);
+    }
+
+    const reportSpeech = parseReportObjToSpeech(handlerInput, reportEntryObj);
     return handlerInput.responseBuilder
       .speak(reportSpeech, PLAY_BEHAVIOR.replaceAll)
       .reprompt(handlerInput.t("REPROMPT_MSG"))
