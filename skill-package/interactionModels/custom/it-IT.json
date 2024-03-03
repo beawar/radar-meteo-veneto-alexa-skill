@@ -47,9 +47,9 @@
           "slots": [],
           "name": "PlayWeatherReportIntent",
           "samples": [
-            "riproduci il bollettino dettagliato",
-            "bollettino dettagliato",
-            "dettagliato"
+            "bollettino audio",
+            "riproduci il bollettino audio",
+            "fammi ascoltare il bollettino"
           ]
         }
       ],
