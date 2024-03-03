@@ -62,7 +62,7 @@ function parseReportObjToSpeech(handlerInput, reportEntry) {
     const speechText = reportContent.map((entry) => {
         return (0, utils_1.buildParagraph)((0, utils_1.buildSentence)(`${entry.titleText}:`), ...entry.contentText
             .split(".")
-            .map((sentence) => (0, utils_1.buildSentence)(`${sentence}.`)));
+            .map((sentence) => (0, utils_1.buildSentence)(sentence)));
     });
     return speechText.join();
 }
