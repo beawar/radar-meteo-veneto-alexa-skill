@@ -1,1 +1,36 @@
-{"radarImagesData":{"type":"object","objectId":"radarImages","properties":{"backgroundImage":{"sources":[{"url":"https://d2o906d8ln7ui1.cloudfront.net/images/templates_v3/gridlist/GridListBackground_Dark.png","size":"large"}]},"images":[{"url":"https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/6_BASE.jpg"},{"url":"https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/5_BASE.jpg"},{"url":"https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/4_BASE.jpg"},{"url":"https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/3_BASE.jpg"},{"url":"https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/2_BASE.jpg"},{"url":"https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/1_BASE.jpg"}]}}}
+{
+  "radarImagesData": {
+    "type": "object",
+    "objectId": "radarImages",
+    "properties": {
+      "backgroundImage": {
+        "sources": [
+          {
+            "url": "https://d2o906d8ln7ui1.cloudfront.net/images/templates_v3/gridlist/GridListBackground_Dark.png",
+            "size": "large"
+          }
+        ]
+      },
+      "images": [
+        {
+          "url": "https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/6_BASE.jpg"
+        },
+        {
+          "url": "https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/5_BASE.jpg"
+        },
+        {
+          "url": "https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/4_BASE.jpg"
+        },
+        {
+          "url": "https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/3_BASE.jpg"
+        },
+        {
+          "url": "https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/2_BASE.jpg"
+        },
+        {
+          "url": "https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/1_BASE.jpg"
+        }
+      ]
+    }
+  }
+}

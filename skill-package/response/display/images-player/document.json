@@ -1,199 +1,191 @@
 {
-    "type": "APL",
-    "version": "2023.3",
-    "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
-    "import": [
-        {
-            "name": "alexa-layouts",
-            "version": "1.7.0"
-        }
-    ],
-    "layouts": {
-        "ImagePage": {
-            "parameters": [
-                "item"
-            ],
-            "item": {
-                "type": "AlexaImage",
-                "imageSource": "${item.url}",
-                "imageAlignment": "center",
-                "imageWidth": "100%",
-                "imageAspectRatio": "square",
-                "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
-            }
-        },
-        "ImagePager": {
-            "parameters": [
-                "images"
-            ],
-            "item": {
-                "items": [
-                    {
-                        "type": "ImagePage",
-                        "item": "${data}"
-                    }
-                ],
-                "data": "${images}",
-                "navigation": "none",
-                "handlePageMove": [
-                    {
-                        "drawOrder": "higherAbove"
-                    }
-                ],
-                "type": "Pager",
-                "onMount": [
-                    {
-                        "type": "LoopAutoPage"
-                    }
-                ],
-                "height": "100%",
-                "width": "100%"
-            }
-        },
-        "Title": {
-            "item": {
-                "type": "Text",
-                "text": "ArpaV",
-                "style": "textStyleTitle",
-                "textAlignVertical": "center"
-            }
-        },
-        "Footer": {
-            "item": {
-                "type": "Text",
-                "style": "textStyleMetadata",
-                "text": "www.arpa.veneto.it",
-                "textAlignVertical": "center"
-            }
-        },
-        "VerticalLayout": {
-            "parameters": [
-                "contentWidth"
-            ],
-            "item": {
-                "type": "Container",
-                "justifyContent": "center",
-                "alignItems": "center",
-                "direction": "column",
-                "width": "100%",
-                "height": "100%",
-                "items": [
-                    {
-                        "type": "Title",
-                        "grow": 1
-                    },
-                    {
-                        "type": "Container",
-                        "width": "${contentWidth}",
-                        "height": "70%",
-                        "justifyContent": "center",
-                        "alignItems": "center",
-                        "items": [
-                            {
-                                "type": "ImagePager",
-                                "id": "imagePager",
-                                "images": "${payload.radarImagesData.properties.images}"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "Footer",
-                        "grow": 1,
-                        "paddingBottom": "3vw"
-                    }
-                ]
-            }
-        },
-        "HorizontalLayout": {
-            "item": {
-                "type": "Container",
-                "justifyContent": "spaceBetween",
-                "alignItems": "end",
-                "direction": "row",
-                "width": "100%",
-                "height": "100%",
-                "items": [
-                    {
-                        "type": "Container",
-                        "direction": "column",
-                        "justifyContent": "end",
-                        "alignItems": "center",
-                        "grow": 1,
-                        "items": [
-                            {
-                                "type": "Title"
-                            },
-                            {
-                                "type": "Footer",
-                                "paddingBottom": "2vw"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "Container",
-                        "width": "50%",
-                        "height": "100%",
-                        "direction": "column",
-                        "justifyContent": "end",
-                        "alignItems": "end",
-                        "items": [
-                            {
-                                "type": "ImagePager",
-                                "id": "imagePager",
-                                "images": "${payload.radarImagesData.properties.images}"
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "mainTemplate": {
-        "parameters": [
-            "payload"
-        ],
-        "item": [
-            {
-                "type": "Container",
-                "width": "100vw",
-                "height": "100vh",
-                "items": [
-                    {
-                        "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.radarImagesData.properties.backgroundImage.sources[0].url}",
-                        "backgroundBlur": false,
-                        "backgroundScale": "best-fill"
-                    },
-                    {
-                        "when": "${@viewportProfile == @hubRoundSmall || @viewportOrientation == @viewportOrientationPortrait}",
-                        "type": "VerticalLayout",
-                        "contentWidth": "${@viewportProfile == @hubRoundSmall ? '70%' : '100%'}"
-                    },
-                    {
-                        "when": "${@viewportProfile != @hubRoundSmall && @viewportOrientation != @viewportOrientationPortrait}",
-                        "type": "HorizontalLayout"
-                    }
-                ]
-            }
-        ]
-    },
-    "commands": {
-        "LoopAutoPage": {
-            "commands": [
-                {
-                    "type": "AutoPage",
-                    "duration": 300,
-                    "delay": 1000
-                },
-                {
-                    "type": "SetPage",
-                    "position": "absolute",
-                    "value": 0
-                },
-                {
-                    "type": "LoopAutoPage"
-                }
-            ]
-        }
+  "type": "APL",
+  "version": "2023.3",
+  "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
+  "import": [
+    {
+      "name": "alexa-layouts",
+      "version": "1.7.0"
     }
+  ],
+  "layouts": {
+    "ImagePage": {
+      "parameters": ["item"],
+      "item": {
+        "type": "AlexaImage",
+        "imageSource": "${item.url}",
+        "imageAlignment": "center",
+        "imageWidth": "100%",
+        "imageAspectRatio": "square",
+        "grow": "${@viewportProfile == @hubRoundSmall ? 0 : 1}"
+      }
+    },
+    "ImagePager": {
+      "parameters": ["images"],
+      "item": {
+        "items": [
+          {
+            "type": "ImagePage",
+            "item": "${data}"
+          }
+        ],
+        "data": "${images}",
+        "navigation": "none",
+        "handlePageMove": [
+          {
+            "drawOrder": "higherAbove"
+          }
+        ],
+        "type": "Pager",
+        "onMount": [
+          {
+            "type": "LoopAutoPage"
+          }
+        ],
+        "height": "100%",
+        "width": "100%"
+      }
+    },
+    "Title": {
+      "item": {
+        "type": "Text",
+        "text": "ArpaV",
+        "style": "textStyleTitle",
+        "textAlignVertical": "center"
+      }
+    },
+    "Footer": {
+      "item": {
+        "type": "Text",
+        "style": "textStyleMetadata",
+        "text": "www.arpa.veneto.it",
+        "textAlignVertical": "center"
+      }
+    },
+    "VerticalLayout": {
+      "parameters": ["contentWidth"],
+      "item": {
+        "type": "Container",
+        "justifyContent": "center",
+        "alignItems": "center",
+        "direction": "column",
+        "width": "100%",
+        "height": "100%",
+        "items": [
+          {
+            "type": "Title",
+            "grow": 1
+          },
+          {
+            "type": "Container",
+            "width": "${contentWidth}",
+            "height": "70%",
+            "justifyContent": "center",
+            "alignItems": "center",
+            "items": [
+              {
+                "type": "ImagePager",
+                "id": "imagePager",
+                "images": "${payload.radarImagesData.properties.images}"
+              }
+            ]
+          },
+          {
+            "type": "Footer",
+            "grow": 1,
+            "paddingBottom": "3vw"
+          }
+        ]
+      }
+    },
+    "HorizontalLayout": {
+      "item": {
+        "type": "Container",
+        "justifyContent": "spaceBetween",
+        "alignItems": "end",
+        "direction": "row",
+        "width": "100%",
+        "height": "100%",
+        "items": [
+          {
+            "type": "Container",
+            "direction": "column",
+            "justifyContent": "end",
+            "alignItems": "center",
+            "grow": 1,
+            "items": [
+              {
+                "type": "Title"
+              },
+              {
+                "type": "Footer",
+                "paddingBottom": "2vw"
+              }
+            ]
+          },
+          {
+            "type": "Container",
+            "width": "50%",
+            "height": "100%",
+            "direction": "column",
+            "justifyContent": "end",
+            "alignItems": "end",
+            "items": [
+              {
+                "type": "ImagePager",
+                "id": "imagePager",
+                "images": "${payload.radarImagesData.properties.images}"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "mainTemplate": {
+    "parameters": ["payload"],
+    "item": [
+      {
+        "type": "Container",
+        "width": "100vw",
+        "height": "100vh",
+        "items": [
+          {
+            "type": "AlexaBackground",
+            "backgroundImageSource": "${payload.radarImagesData.properties.backgroundImage.sources[0].url}",
+            "backgroundBlur": false,
+            "backgroundScale": "best-fill"
+          },
+          {
+            "when": "${@viewportProfile == @hubRoundSmall || @viewportOrientation == @viewportOrientationPortrait}",
+            "type": "VerticalLayout",
+            "contentWidth": "${@viewportProfile == @hubRoundSmall ? '70%' : '100%'}"
+          },
+          {
+            "when": "${@viewportProfile != @hubRoundSmall && @viewportOrientation != @viewportOrientationPortrait}",
+            "type": "HorizontalLayout"
+          }
+        ]
+      }
+    ]
+  },
+  "commands": {
+    "LoopAutoPage": {
+      "commands": [
+        {
+          "type": "AutoPage",
+          "duration": 300,
+          "delay": 1000
+        },
+        {
+          "type": "SetPage",
+          "position": "absolute",
+          "value": 0
+        },
+        {
+          "type": "LoopAutoPage"
+        }
+      ]
+    }
+  }
 }

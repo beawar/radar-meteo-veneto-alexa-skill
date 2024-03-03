@@ -1,7 +1,4 @@
-import {
-  DefaultApiClient,
-  SkillBuilders,
-} from "ask-sdk-core";
+import { DefaultApiClient, SkillBuilders } from "ask-sdk-core";
 import { LaunchRequestHandler } from "./requests/Launch";
 import { ShowRadarIntentHandler } from "./requests/intents/ShowRadar";
 import { ReadWeatherReportIntentHandler } from "./requests/intents/ReadWeatherReport";
@@ -14,7 +11,10 @@ import { SessionEndedRequestHandler } from "./requests/SessionEnded";
 import { FallbackIntentHandler } from "./requests/intents/Fallback";
 import { IntentReflectorHandler } from "./requests/IntentReflector";
 import { ErrorHandler } from "./handlers/ErrorHandler";
-import { LoggingRequestInterceptor, LoggingResponseInterceptor } from "./interceptors/logging";
+import {
+  LoggingRequestInterceptor,
+  LoggingResponseInterceptor,
+} from "./interceptors/logging";
 import { LocalisationRequestInterceptor } from "./interceptors/localization";
 
 /**
@@ -34,12 +34,12 @@ export const handler = SkillBuilders.custom()
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
     FallbackIntentHandler,
-    IntentReflectorHandler
+    IntentReflectorHandler,
   )
   .addErrorHandlers(ErrorHandler)
   .addRequestInterceptors(
     LoggingRequestInterceptor,
-    LocalisationRequestInterceptor
+    LocalisationRequestInterceptor,
   )
   .addResponseInterceptors(LoggingResponseInterceptor)
   .withApiClient(new DefaultApiClient())

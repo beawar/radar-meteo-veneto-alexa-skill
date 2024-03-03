@@ -12,7 +12,7 @@ async function fetchReport() {
 
 async function parseXml(text: string) {
   const decodedText = he.decode(text);
-  return await xml2js.parseStringPromise(decodedText, {
+  return (await xml2js.parseStringPromise(decodedText, {
     trim: true,
     explicitArray: false,
     mergeAttrs: true,
@@ -21,7 +21,7 @@ async function parseXml(text: string) {
         return `$${name}`;
       },
     ],
-  }) as Promise<string>;
+  })) as Promise<string>;
 }
 
 async function main() {
@@ -30,11 +30,11 @@ async function main() {
     const reportObj = await parseXml(reportText);
     await fs.writeFile(
       "./generated/bollettino_utenti.json",
-      JSON.stringify(reportObj)
+      JSON.stringify(reportObj),
     );
   } catch (err) {
     console.log(err);
   }
 }
 
-main().catch(console.error)
+main().catch(console.error);

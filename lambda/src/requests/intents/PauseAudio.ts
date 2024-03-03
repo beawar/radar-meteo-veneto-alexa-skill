@@ -1,4 +1,4 @@
-import type { RequestHandler} from "ask-sdk-core";
+import type { RequestHandler } from "ask-sdk-core";
 import { getIntentName, getRequestType } from "ask-sdk-core";
 
 /**
@@ -6,13 +6,15 @@ import { getIntentName, getRequestType } from "ask-sdk-core";
  * By default, it will play a specific audio stream.
  * */
 export const PauseAudioIntentHandler: RequestHandler = {
-    canHandle(handlerInput) {
-        return getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && getIntentName(handlerInput.requestEnvelope) === 'AMAZON.PauseIntent';
-    },
-    handle(handlerInput) {
-        return handlerInput.responseBuilder
-            .addAudioPlayerStopDirective()
-            .getResponse();
-    }
+  canHandle(handlerInput) {
+    return (
+      getRequestType(handlerInput.requestEnvelope) === "IntentRequest" &&
+      getIntentName(handlerInput.requestEnvelope) === "AMAZON.PauseIntent"
+    );
+  },
+  handle(handlerInput) {
+    return handlerInput.responseBuilder
+      .addAudioPlayerStopDirective()
+      .getResponse();
+  },
 };

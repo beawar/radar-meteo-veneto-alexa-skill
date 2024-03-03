@@ -1,3 +1,3 @@
 export function buildAudioUrl(src: string) {
-    return src + `?${Date.now()}`;
-  }
+  return src + `?${Date.now()}`;
+}

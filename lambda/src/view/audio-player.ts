@@ -18,7 +18,7 @@ export function buildAudioPlayer(
     primaryText,
     secondaryText,
     logoSrc = LOGO_URL,
-  }: AudioPlayerData
+  }: AudioPlayerData,
 ) {
   if (audioSources[0]) {
     if (supportsAPL(handlerInput)) {
@@ -37,7 +37,7 @@ export function buildAudioPlayer(
               sliderType: "determinate",
             },
           },
-        })
+        }),
       );
     } else {
       handlerInput.responseBuilder.addAudioPlayerPlayDirective(
@@ -49,7 +49,7 @@ export function buildAudioPlayer(
         {
           title: primaryText,
           subtitle: secondaryText,
-        }
+        },
       );
     }
   }

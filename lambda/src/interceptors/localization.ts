@@ -15,7 +15,7 @@ export const LocalisationRequestInterceptor: RequestInterceptor = {
     function localise(...args: Parameters<i18n.TFunction>) {
       const value: string | string[] = i18n.t(...args);
       if (Array.isArray(value)) {
-        return value[Math.floor(Math.random() * value.length)] ?? '';
+        return value[Math.floor(Math.random() * value.length)] ?? "";
       }
       return value;
     }

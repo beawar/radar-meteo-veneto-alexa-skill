@@ -25,7 +25,7 @@ export function callDirectiveService(handlerInput: HandlerInput, msg: string) {
 
 export async function parseXml<TObj>(text: string) {
   const decodedText = he.decode(text);
-  return await xml2js.parseStringPromise(decodedText, {
+  return (await xml2js.parseStringPromise(decodedText, {
     trim: true,
     explicitArray: false,
     mergeAttrs: true,
@@ -34,7 +34,7 @@ export async function parseXml<TObj>(text: string) {
         return `_${name}`;
       },
     ],
-  }) as Promise<TObj>;
+  })) as Promise<TObj>;
 }
 
 function htmlToString(html: string) {

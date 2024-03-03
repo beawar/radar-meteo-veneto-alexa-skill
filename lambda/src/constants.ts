@@ -28,7 +28,10 @@ export const APL = {
     },
     token: "audioPlayerToken",
   },
-} satisfies Record<string, interfaces.alexa.presentation.apl.RenderDocumentDirective>;
+} satisfies Record<
+  string,
+  interfaces.alexa.presentation.apl.RenderDocumentDirective
+>;
 
 export const PLAY_BEHAVIOR = {
   enqueue: "ENQUEUE",
@@ -36,7 +39,8 @@ export const PLAY_BEHAVIOR = {
   replaceEnqueued: "REPLACE_ENQUEUED",
 } satisfies Record<string, ui.PlayBehavior>;
 
-export const AUDIO_WEATHER_REPORT_URL = "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3";
+export const AUDIO_WEATHER_REPORT_URL =
+  "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/mp3/meteoveneto.mp3";
 
 export const REPORT_ENTRY = {
   veneto: "MV",
@@ -44,6 +48,7 @@ export const REPORT_ENTRY = {
   pianura: "MP",
 };
 
-export const REPORT_XML_URL = 'https://www.arpa.veneto.it/risorse/data-bollettini/meteo/bollettini/it/xml/bollettino_utenti.xml';
+export const REPORT_XML_URL =
+  "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/bollettini/it/xml/bollettino_utenti.xml";
 
-export const LOGO_URL = 'https://www.arpa.veneto.it/logo_arpav.png'
+export const LOGO_URL = "https://www.arpa.veneto.it/logo_arpav.png";

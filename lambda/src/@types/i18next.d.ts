@@ -1,4 +1,4 @@
-import 'i18next';
+import "i18next";
 import type { I18N_NS_DEFAULT } from "../constants";
 import type { languageStrings } from "../i18n/localisation";
 
