@@ -2,8 +2,11 @@ import type { RequestHandler } from "ask-sdk-core";
 import { getIntentName, getRequestType } from "ask-sdk-core";
 import { callDirectiveService } from "../../utils";
 import { PLAY_BEHAVIOR, REPORT_ENTRY } from "../../constants";
-import { getReportObj, parseReportObjToSpeech } from "../../model/report/utils";
-import { buildReportViewer } from "../../view/report-viewer";
+import { getReportObj } from "../../model/report/utils";
+import {
+  buildReportViewer,
+  parseReportObjToSpeech,
+} from "../../view/report-viewer";
 
 export const ReadWeatherReportIntentHandler: RequestHandler = {
   canHandle(handlerInput) {
