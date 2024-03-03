@@ -50,7 +50,7 @@ exports.ReadWeatherReportIntentHandler = {
                     .getResponse();
             }
             (0, report_viewer_1.buildReportViewer)(handlerInput, reportEntryObj);
-            const reportSpeech = (0, utils_2.parseReportObjToSpeech)(reportEntryObj, handlerInput);
+            const reportSpeech = (0, report_viewer_1.parseReportObjToSpeech)(reportEntryObj, handlerInput);
             return handlerInput.responseBuilder
                 .speak(reportSpeech, constants_1.PLAY_BEHAVIOR.replaceAll)
                 .reprompt(handlerInput.t("REPROMPT_MSG"))
