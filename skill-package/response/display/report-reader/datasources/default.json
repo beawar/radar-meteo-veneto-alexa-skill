@@ -12,10 +12,10 @@
       "textAlignment": "start",
       "content": [
         {
-          "title": "Evoluzione generale",
-          "content": "La saccatura di origine atlantica, responsabile di una fase di tempo perturbato fino alla mattinata di venerdì, si approfondirà generando un minimo depressionario sul Tirreno, che sabato si sposterà verso sud. Al tempo stesso, già dal pomeriggio di venerdì sul Veneto si instauerà un flusso di correnti più asciutte e da domenica andrà affermandosi l'influenza di un promontorio anticiclonico che porterà tempo stabile e ben soleggiato fino ai primi giorni della prossima settimana. "
+          "titleText": "Evoluzione generale",
+          "contentText": "La saccatura di origine atlantica, responsabile di una fase di tempo perturbato fino alla mattinata di venerdì, si approfondirà generando un minimo depressionario sul Tirreno, che sabato si sposterà verso sud. Al tempo stesso, già dal pomeriggio di venerdì sul Veneto si instauerà un flusso di correnti più asciutte e da domenica andrà affermandosi l'influenza di un promontorio anticiclonico che porterà tempo stabile e ben soleggiato fino ai primi giorni della prossima settimana. "
         },
-        { "title": "Avvisi", "content": "Questo è un avviso" }
+        { "titleText": "Avvisi", "contentText": "Questo è un avviso" }
       ]
     }
   }

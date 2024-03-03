@@ -1,13 +1,20 @@
 {
   "type": "APL",
-  "version": "2022.1",
+  "version": "2023.3",
   "license": "Copyright 2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
   "theme": "dark",
-  "import": [{ "name": "alexa-layouts", "version": "1.5.0" }],
+  "import": [
+    {
+      "name": "alexa-layouts",
+      "version": "1.7.0"
+    }
+  ],
   "resources": [
     {
       "description": "Public resource definitions",
-      "colors": { "colorText": "@colorText" },
+      "colors": {
+        "colorText": "@colorText"
+      },
       "dimensions": {
         "headerHeight": "${@headerAttributionIconMaxHeight + (2 * @spacingLarge)}",
         "mainViewScrollHeightWithFooter": "${viewport.height - @headerHeight - @footerPaddingTop - @footerPaddingBottom}",
@@ -19,23 +26,35 @@
     },
     {
       "when": "${@viewportProfileCategory == @hubRound}",
-      "dimensions": { "mainViewPaddingBottom": "@spacing3XLarge" }
+      "dimensions": {
+        "mainViewPaddingBottom": "@spacing3XLarge"
+      }
     },
     {
       "when": "${@viewportProfile == @hubLandscapeSmall}",
-      "dimensions": { "mainViewScrollHeightWithFooter": "100%" }
+      "dimensions": {
+        "mainViewScrollHeightWithFooter": "100%"
+      }
     },
     {
       "when": "${viewport.theme == 'light'}",
-      "colors": { "colorText": "@colorTextReversed" }
+      "colors": {
+        "colorText": "@colorTextReversed"
+      }
     }
   ],
   "layouts": {
     "ContentEntry": {
       "description": "Title and Content text block",
       "parameters": [
-        { "name": "title", "type": "string" },
-        { "name": "description", "type": "string" }
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        }
       ],
       "item": {
         "type": "Container",
@@ -47,7 +66,7 @@
             "type": "Text",
             "width": "100%",
             "style": "textStyleDisplay6",
-            "text": "${data.title}",
+            "text": "${data.titleText}",
             "textAlign": "${@viewportProfileCategory == @hubRound ? 'center' : textAlignment}"
           },
           {
@@ -57,7 +76,7 @@
             "paddingBottom": "@spacingSmall",
             "style": "textStyleBody",
             "fontWeight": "@fontWeightLight",
-            "text": "${data.content}",
+            "text": "${data.contentText}",
             "textAlign": "${@viewportProfileCategory == @hubRound ? 'center' : textAlignment}"
           }
         ]
@@ -65,23 +84,27 @@
     },
     "Content": {
       "parameters": [
-        { "name": "contentData", "type": "array" },
-        { "name": "alignItems", "type": "string" }
+        {
+          "name": "contentData",
+          "type": "array"
+        },
+        {
+          "name": "alignItems",
+          "type": "string"
+        }
       ],
       "item": {
         "description": "Content Layout",
         "id": "ContentLayout",
         "type": "Container",
         "width": "100%",
-        "shrink": 1,
         "alignItems": "${alignItems}",
         "data": "${contentData}",
-        "spacing": "@spacingMedium",
         "justifyContent": "spaceBetween",
         "item": {
           "type": "ContentEntry",
-          "title": "${data.title}",
-          "description": "${data.content}"
+          "title": "${data.titleText}",
+          "description": "${data.contentText}"
         }
       }
     },
@@ -229,7 +252,9 @@
                         "type": "Content",
                         "id": "mainView_ContentBlock",
                         "contentData": "${content}",
-                        "alignItems": "${imageCenterAlign || textAlignment == 'center' ? 'center' : 'start'}"
+                        "alignItems": "${imageCenterAlign || textAlignment == 'center' ? 'center' : 'start'}",
+                        "spacing": "@spacingSmall",
+                        "shrink": 1
                       }
                     ]
                   }
