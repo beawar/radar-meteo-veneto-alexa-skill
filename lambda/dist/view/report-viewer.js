@@ -8,26 +8,26 @@ function extractReportContent(handlerInput, reportEntryObj) {
     const reportContent = [];
     if (reportEntryObj.evoluzionegenerale) {
         reportContent.push({
-            title: handlerInput.t("REPORT_GENERAL"),
-            content: reportEntryObj.evoluzionegenerale,
+            titleText: handlerInput.t("REPORT_GENERAL"),
+            contentText: reportEntryObj.evoluzionegenerale,
         });
     }
     if (reportEntryObj.avviso) {
         reportContent.push({
-            title: handlerInput.t("REPORT_ALLARM"),
-            content: reportEntryObj.avviso,
+            titleText: handlerInput.t("REPORT_ALLARM"),
+            contentText: reportEntryObj.avviso,
         });
     }
     if (reportEntryObj.fenomeniparticolari) {
         reportContent.push({
-            title: handlerInput.t("REPORT_PARTICULAR_PHENOMENA"),
-            content: reportEntryObj.fenomeniparticolari,
+            titleText: handlerInput.t("REPORT_PARTICULAR_PHENOMENA"),
+            contentText: reportEntryObj.fenomeniparticolari,
         });
     }
     if (reportEntryObj.giorno[0]) {
         reportContent.push({
-            title: handlerInput.t("REPORT_TODAY"),
-            content: reportEntryObj.giorno[0].text,
+            titleText: handlerInput.t("REPORT_TODAY"),
+            contentText: reportEntryObj.giorno[0].text,
         });
     }
     return reportContent;
@@ -46,8 +46,8 @@ function buildReportViewer(handlerInput, reportEntryObj) {
             properties: {
                 foregroundImageLocation: "left",
                 foregroundImageSource: todayImage,
-                headerTitle: reportEntryObj._title,
-                headerSubtitle: reportEntryObj._name,
+                headerText: reportEntryObj._title,
+                headerSubText: reportEntryObj._name,
                 hintText: handlerInput.t("REPORT_HINT"),
                 headerAttributionImage: constants_1.LOGO_URL,
                 textAlignment: "start",
@@ -60,7 +60,7 @@ exports.buildReportViewer = buildReportViewer;
 function parseReportObjToSpeech(handlerInput, reportEntry) {
     const reportContent = extractReportContent(handlerInput, reportEntry);
     const speechText = reportContent.map((entry) => {
-        return (0, utils_1.buildParagraph)((0, utils_1.buildSentence)(`${entry.title}:`), ...entry.content
+        return (0, utils_1.buildParagraph)((0, utils_1.buildSentence)(`${entry.titleText}:`), ...entry.contentText
             .split(".")
             .map((sentence) => (0, utils_1.buildSentence)(`${sentence}.`)));
     });
