@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getReportObj = exports.fetchReport = exports.parseReportObjToSpeech = exports.findReportEntry = exports.parseReportXmlToObj = void 0;
+exports.getReportObj = exports.fetchReport = exports.findReportEntry = exports.parseReportXmlToObj = void 0;
 const cross_fetch_1 = __importDefault(require("cross-fetch"));
-const utils_1 = require("../../utils");
 const constants_1 = require("../../constants");
+const utils_1 = require("../../utils");
 function parseReportXmlToObj(reportXml) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -32,23 +32,6 @@ function findReportEntry(reportObj, entryId) {
     return reportObj.previsioni.bollettini.bollettino.find((bollettino) => bollettino._bollettinoid === entryId);
 }
 exports.findReportEntry = findReportEntry;
-function parseReportObjToSpeech(reportEntry, handlerInput) {
-    let speechText = "";
-    if (reportEntry.evoluzionegenerale[0]) {
-        speechText += (0, utils_1.buildSentence)(`${handlerInput.t("REPORT_GENERAL")}:`, reportEntry.evoluzionegenerale[0]);
-    }
-    if (reportEntry.avviso[0]) {
-        speechText += (0, utils_1.buildSentence)(`${handlerInput.t("REPORT_ALLARM")}:`, reportEntry.avviso[0]);
-    }
-    if (reportEntry.fenomeniparticolari[0]) {
-        speechText += (0, utils_1.buildSentence)(`${handlerInput.t("REPORT_PARTICULAR_PHENOMENA")}:`, reportEntry.fenomeniparticolari[0]);
-    }
-    if (reportEntry.giorno[0]) {
-        speechText += (0, utils_1.buildParagraph)((0, utils_1.buildSentence)(`${handlerInput.t("REPORT_TODAY")}:`), (0, utils_1.buildSentence)(reportEntry.giorno[0].text));
-    }
-    return speechText;
-}
-exports.parseReportObjToSpeech = parseReportObjToSpeech;
 function fetchReport() {
     return __awaiter(this, void 0, void 0, function* () {
         try {

@@ -2,8 +2,12 @@ import type { RequestHandler } from "ask-sdk-core";
 import { getIntentName, getRequestType } from "ask-sdk-core";
 import { callDirectiveService } from "../../utils";
 import { PLAY_BEHAVIOR, REPORT_ENTRY } from "../../constants";
-import { getReportObj, parseReportObjToSpeech } from "../../model/report/utils";
-import { buildReportViewer } from "../../view/report-viewer";
+import { getReportObj } from "../../model/report/utils";
+import {
+  buildReportViewer,
+  parseReportObjToSpeech,
+} from "../../view/report-viewer";
+import { supportsAPL } from "../../view/utils";
 
 export const ReadWeatherReportIntentHandler: RequestHandler = {
   canHandle(handlerInput) {
@@ -46,8 +50,12 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
         .getResponse();
     }
 
-    buildReportViewer(handlerInput, reportEntryObj);
-    const reportSpeech = parseReportObjToSpeech(reportEntryObj, handlerInput);
+    if (supportsAPL(handlerInput)) {
+      const viewDirective = buildReportViewer(handlerInput, reportEntryObj);
+      handlerInput.responseBuilder.addDirective(viewDirective);
+    }
+
+    const reportSpeech = parseReportObjToSpeech(handlerInput, reportEntryObj);
     return handlerInput.responseBuilder
       .speak(reportSpeech, PLAY_BEHAVIOR.replaceAll)
       .reprompt(handlerInput.t("REPROMPT_MSG"))

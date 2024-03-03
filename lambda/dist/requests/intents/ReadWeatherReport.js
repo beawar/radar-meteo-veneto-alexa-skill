@@ -15,6 +15,7 @@ const utils_1 = require("../../utils");
 const constants_1 = require("../../constants");
 const utils_2 = require("../../model/report/utils");
 const report_viewer_1 = require("../../view/report-viewer");
+const utils_3 = require("../../view/utils");
 exports.ReadWeatherReportIntentHandler = {
     canHandle(handlerInput) {
         return ((0, ask_sdk_core_1.getRequestType)(handlerInput.requestEnvelope) === "IntentRequest" &&
@@ -49,8 +50,11 @@ exports.ReadWeatherReportIntentHandler = {
                     .reprompt(handlerInput.t("REPROMPT_MSG"))
                     .getResponse();
             }
-            (0, report_viewer_1.buildReportViewer)(handlerInput, reportEntryObj);
-            const reportSpeech = (0, utils_2.parseReportObjToSpeech)(reportEntryObj, handlerInput);
+            if ((0, utils_3.supportsAPL)(handlerInput)) {
+                const viewDirective = (0, report_viewer_1.buildReportViewer)(handlerInput, reportEntryObj);
+                handlerInput.responseBuilder.addDirective(viewDirective);
+            }
+            const reportSpeech = (0, report_viewer_1.parseReportObjToSpeech)(handlerInput, reportEntryObj);
             return handlerInput.responseBuilder
                 .speak(reportSpeech, constants_1.PLAY_BEHAVIOR.replaceAll)
                 .reprompt(handlerInput.t("REPROMPT_MSG"))

@@ -47,7 +47,7 @@
             "type": "Text",
             "width": "100%",
             "style": "textStyleDisplay6",
-            "text": "${data.titleText}",
+            "text": "${data.title}",
             "textAlign": "${@viewportProfileCategory == @hubRound ? 'center' : textAlignment}"
           },
           {
@@ -57,7 +57,7 @@
             "paddingBottom": "@spacingSmall",
             "style": "textStyleBody",
             "fontWeight": "@fontWeightLight",
-            "text": "${data.contentText}",
+            "text": "${data.content}",
             "textAlign": "${@viewportProfileCategory == @hubRound ? 'center' : textAlignment}"
           }
         ]
@@ -80,8 +80,8 @@
         "justifyContent": "spaceBetween",
         "item": {
           "type": "ContentEntry",
-          "title": "${data.titleText}",
-          "description": "${data.contentText}"
+          "title": "${data.title}",
+          "description": "${data.content}"
         }
       }
     },
