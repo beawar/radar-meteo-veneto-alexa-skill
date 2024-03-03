@@ -1,5 +1,5 @@
-import { HandlerInput } from "ask-sdk-core";
-import { Directive, interfaces } from "ask-sdk-model";
+import type { HandlerInput } from "ask-sdk-core";
+import type { Directive, interfaces } from "ask-sdk-model";
 
 function assertDirective(directive: unknown): asserts directive is Directive {
     if (typeof directive !== 'object' || !directive) {

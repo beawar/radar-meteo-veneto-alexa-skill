@@ -21,7 +21,7 @@ async function parseXml(text: string) {
         return `$${name}`;
       },
     ],
-  });
+  }) as Promise<string>;
 }
 
 async function main() {
@@ -37,4 +37,4 @@ async function main() {
   }
 }
 
-main();
+main().catch(console.error)

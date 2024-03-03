@@ -1,18 +1,15 @@
-import { HandlerInput } from "ask-sdk-core";
-import fetch from 'cross-fetch';
-import { Bollettino, Report } from "./types";
+import type { HandlerInput } from "ask-sdk-core";
+import fetch from "cross-fetch";
+import type { Bollettino, Report } from "./types";
 import { buildParagraph, buildSentence, parseXml } from "../../utils";
 import { REPORT_XML_URL } from "../../constants";
 
-export async function parseReportXmlToObj(
-  reportXml: string,
-  handlerInput: HandlerInput
-) {
+export async function parseReportXmlToObj(reportXml: string) {
   try {
-    return await parseXml(reportXml);
+    return await parseXml<Report>(reportXml);
   } catch (error) {
     console.error(error);
-    return handlerInput.t("API_ERROR_MSG");
+    return undefined;
   }
 }
 
@@ -65,13 +62,12 @@ export async function fetchReport() {
 }
 
 export async function getReportObj(
-  handlerInput: HandlerInput,
   reportEntryId: string
 ) {
   const reportText = await fetchReport();
   if (reportText) {
-    const reportObj = await parseReportXmlToObj(reportText, handlerInput);
-    return findReportEntry(reportObj, reportEntryId);
+    const reportObj = await parseReportXmlToObj(reportText);
+    return reportObj && findReportEntry(reportObj, reportEntryId);
   }
   return undefined;
 }

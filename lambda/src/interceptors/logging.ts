@@ -1,4 +1,4 @@
-import { RequestInterceptor, ResponseInterceptor } from "ask-sdk-core";
+import type { RequestInterceptor, ResponseInterceptor } from "ask-sdk-core";
 
 // This request interceptor will log all incoming requests to this lambda
 export const LoggingRequestInterceptor: RequestInterceptor = {

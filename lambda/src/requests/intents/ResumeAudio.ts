@@ -1,4 +1,5 @@
-import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
+import type { RequestHandler} from "ask-sdk-core";
+import { getIntentName, getRequestType } from "ask-sdk-core";
 
 export const ResumeAudioIntentHandler: RequestHandler = {
     canHandle(handlerInput) {

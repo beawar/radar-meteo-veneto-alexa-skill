@@ -1,7 +1,7 @@
 {
   "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/recommended/tsconfig.json"],
-  "include": ["src", "@types"],
-  "exclude": ["node_modules"],
+  "include": ["src", "src/@types"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "sourceMap": true,
     "outDir": "./dist",

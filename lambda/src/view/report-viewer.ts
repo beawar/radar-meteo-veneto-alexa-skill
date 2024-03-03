@@ -1,5 +1,5 @@
-import { HandlerInput } from "ask-sdk-core";
-import { Bollettino } from "../model/report/types";
+import type { HandlerInput } from "ask-sdk-core";
+import type { Bollettino } from "../model/report/types";
 import { APL } from "../constants";
 import { buildDirective, supportsAPL } from "./utils";
 

@@ -1,15 +1,14 @@
-import { HandlerInput } from "ask-sdk-core";
+import type { HandlerInput } from "ask-sdk-core";
 import { APL, LOGO_URL, PLAY_BEHAVIOR } from "../constants";
 import { buildDirective, supportsAPL } from "./utils";
-import assert from "node:assert";
 
-export type AudioPlayerData = {
+export interface AudioPlayerData {
   audioSources: string[];
   headerTitle: string;
   primaryText: string;
   secondaryText: string;
   logoSrc?: string;
-};
+}
 
 export function buildAudioPlayer(
   handlerInput: HandlerInput,
@@ -21,8 +20,7 @@ export function buildAudioPlayer(
     logoSrc = LOGO_URL,
   }: AudioPlayerData
 ) {
-  if (audioSources) {
-    assert(audioSources[0]);
+  if (audioSources[0]) {
     if (supportsAPL(handlerInput)) {
       handlerInput.responseBuilder.addDirective(
         buildDirective(APL.audioPlayer, {

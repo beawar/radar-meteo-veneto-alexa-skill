@@ -1,4 +1,5 @@
-import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
+import type { RequestHandler} from "ask-sdk-core";
+import { getIntentName, getRequestType } from "ask-sdk-core";
 import { callDirectiveService } from "../../utils";
 import { PLAY_BEHAVIOR, REPORT_ENTRY } from "../../constants";
 import { getReportObj, parseReportObjToSpeech } from "../../model/report/utils";
@@ -25,13 +26,13 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
 
         try {
             // call the progressive response service
-            callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
+            await callDirectiveService(handlerInput, handlerInput.t('PROGRESSIVE_MSG'));
         } catch (error) {
             // if it fails we can continue, but the user will wait without progressive response
-            console.log("Progressive response directive error : " + error);
+            console.log(`Progressive response directive error: ${String(error)}`);
         }
 
-        const reportEntryObj = await getReportObj(handlerInput, REPORT_ENTRY.veneto);
+        const reportEntryObj = await getReportObj(REPORT_ENTRY.veneto);
 
         if (reportEntryObj === undefined) {
             return handlerInput.responseBuilder

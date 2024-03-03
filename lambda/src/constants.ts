@@ -1,4 +1,7 @@
-import { interfaces, ui } from "ask-sdk-model";
+import type { interfaces, ui } from "ask-sdk-model";
+import type { DefaultNamespace } from "i18next";
+
+export const I18N_NS_DEFAULT: DefaultNamespace = "translation";
 
 export const APL = {
   radarPlayer: {

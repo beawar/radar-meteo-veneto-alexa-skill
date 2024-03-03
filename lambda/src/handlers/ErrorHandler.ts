@@ -1,4 +1,4 @@
-import { ErrorHandler as AskErrorHandler } from "ask-sdk-core";
+import type { ErrorHandler as AskErrorHandler } from "ask-sdk-core";
 
 /**
  * Generic error handling to capture any syntax or routing errors. If you receive an error

@@ -1,4 +1,5 @@
-import { RequestHandler, getRequestType } from "ask-sdk-core";
+import type { RequestHandler} from "ask-sdk-core";
+import { getRequestType } from "ask-sdk-core";
 import { PLAY_BEHAVIOR } from "../constants";
 
 export const LaunchRequestHandler: RequestHandler = {

@@ -1,4 +1,4 @@
-import { HandlerInput } from "ask-sdk-core";
+import type { HandlerInput } from "ask-sdk-core";
 import { APL } from "../constants";
 import { buildDirective, supportsAPL } from "./utils";
 

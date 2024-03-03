@@ -1,4 +1,5 @@
-import { RequestHandler, getIntentName, getRequestType } from "ask-sdk-core";
+import type { RequestHandler} from "ask-sdk-core";
+import { getIntentName, getRequestType } from "ask-sdk-core";
 
 /* *
  * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill

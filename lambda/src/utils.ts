@@ -1,5 +1,5 @@
-import { HandlerInput } from "ask-sdk-core";
-import { services } from "ask-sdk-model";
+import type { HandlerInput } from "ask-sdk-core";
+import type { services } from "ask-sdk-model";
 import he from "he";
 import xml2js from "xml2js";
 
@@ -23,18 +23,18 @@ export function callDirectiveService(handlerInput: HandlerInput, msg: string) {
   return directiveServiceClient?.enqueue(directive);
 }
 
-export async function parseXml(text: string) {
+export async function parseXml<TObj>(text: string) {
   const decodedText = he.decode(text);
   return await xml2js.parseStringPromise(decodedText, {
     trim: true,
     explicitArray: false,
     mergeAttrs: true,
     attrNameProcessors: [
-      function addPrefix(name) {
+      function addPrefix(name: string) {
         return `_${name}`;
       },
     ],
-  });
+  }) as Promise<TObj>;
 }
 
 function htmlToString(html: string) {

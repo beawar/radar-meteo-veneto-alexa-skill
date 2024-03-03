@@ -1,5 +1,5 @@
-import { RequestHandler } from "ask-sdk-core";
-import { SessionEndedRequest } from "ask-sdk-model";
+import type { RequestHandler } from "ask-sdk-core";
+import type { SessionEndedRequest } from "ask-sdk-model";
 
 export const SessionEndedRequestHandler: RequestHandler  = {
     canHandle(handlerInput) {
