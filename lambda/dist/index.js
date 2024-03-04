@@ -5,9 +5,6 @@ const ask_sdk_core_1 = require("ask-sdk-core");
 const Launch_1 = require("./requests/Launch");
 const ShowRadar_1 = require("./requests/intents/ShowRadar");
 const ReadWeatherReport_1 = require("./requests/intents/ReadWeatherReport");
-const PlayWeatherReport_1 = require("./requests/intents/PlayWeatherReport");
-const PauseAudio_1 = require("./requests/intents/PauseAudio");
-const ResumeAudio_1 = require("./requests/intents/ResumeAudio");
 const Help_1 = require("./requests/intents/Help");
 const CancelAndStop_1 = require("./requests/intents/CancelAndStop");
 const SessionEnded_1 = require("./requests/SessionEnded");
@@ -22,7 +19,7 @@ const localization_1 = require("./interceptors/localization");
  * defined are included below. The order matters - they're processed top to bottom
  * */
 exports.handler = ask_sdk_core_1.SkillBuilders.custom()
-    .addRequestHandlers(Launch_1.LaunchRequestHandler, ShowRadar_1.ShowRadarIntentHandler, ReadWeatherReport_1.ReadWeatherReportIntentHandler, PlayWeatherReport_1.PlayWeatherReportIntentHandler, PauseAudio_1.PauseAudioIntentHandler, ResumeAudio_1.ResumeAudioIntentHandler, Help_1.HelpIntentHandler, CancelAndStop_1.CancelAndStopIntentHandler, SessionEnded_1.SessionEndedRequestHandler, Fallback_1.FallbackIntentHandler, IntentReflector_1.IntentReflectorHandler)
+    .addRequestHandlers(Launch_1.LaunchRequestHandler, ShowRadar_1.ShowRadarIntentHandler, ReadWeatherReport_1.ReadWeatherReportIntentHandler, Help_1.HelpIntentHandler, CancelAndStop_1.CancelAndStopIntentHandler, SessionEnded_1.SessionEndedRequestHandler, Fallback_1.FallbackIntentHandler, IntentReflector_1.IntentReflectorHandler)
     .addErrorHandlers(ErrorHandler_1.ErrorHandler)
     .addRequestInterceptors(logging_1.LoggingRequestInterceptor, localization_1.LocalisationRequestInterceptor)
     .addResponseInterceptors(logging_1.LoggingResponseInterceptor)
