@@ -42,15 +42,6 @@
             "qual è il bollettino",
             "bollettino"
           ]
-        },
-        {
-          "slots": [],
-          "name": "PlayWeatherReportIntent",
-          "samples": [
-            "bollettino audio",
-            "riproduci il bollettino audio",
-            "fammi ascoltare il bollettino"
-          ]
         }
       ],
       "types": [],
