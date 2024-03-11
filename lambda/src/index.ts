@@ -13,6 +13,7 @@ import {
   LoggingResponseInterceptor,
 } from "./interceptors/logging";
 import { LocalisationRequestInterceptor } from "./interceptors/localization";
+import { RepeatIntentHandler } from "./requests/intents/Repeat";
 
 /**
  * This handler acts as the entry point for your skill, routing all request and response
@@ -29,6 +30,7 @@ export const handler = SkillBuilders.custom()
     SessionEndedRequestHandler,
     FallbackIntentHandler,
     IntentReflectorHandler,
+    RepeatIntentHandler,
   )
   .addErrorHandlers(ErrorHandler)
   .addRequestInterceptors(
