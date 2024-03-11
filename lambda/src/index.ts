@@ -23,6 +23,7 @@ import { RepeatIntentHandler } from "./requests/intents/Repeat";
 export const handler = SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
+    RepeatIntentHandler,
     ShowRadarIntentHandler,
     ReadWeatherReportIntentHandler,
     HelpIntentHandler,
@@ -30,7 +31,6 @@ export const handler = SkillBuilders.custom()
     SessionEndedRequestHandler,
     FallbackIntentHandler,
     IntentReflectorHandler,
-    RepeatIntentHandler,
   )
   .addErrorHandlers(ErrorHandler)
   .addRequestInterceptors(

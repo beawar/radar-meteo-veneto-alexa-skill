@@ -126,17 +126,30 @@
     },
     "publishingInformation": {
       "category": "WEATHER",
-      "distributionCountries": [],
+      "distributionCountries": ["IT"],
       "distributionMode": "PUBLIC",
-      "isAvailableWorldwide": true,
+      "isAvailableWorldwide": false,
       "locales": {
         "it-IT": {
-          "examplePhrases": [],
-          "keywords": [],
-          "name": "Arpav Radar Veneto"
+          "examplePhrases": [
+            "Alexa, apri radar meteo veneto.",
+            "Alexa, chiedi a radar meteo veneto di mostrarmi il radar.",
+            "Alexa, chiedi a radar meteo veneto di leggere il bollettino."
+          ],
+          "keywords": [
+            "meteo",
+            "veneto",
+            "radar",
+            "arpav",
+            "bollettino",
+            "previsioni"
+          ],
+          "name": "Radar Meteo Veneto",
+          "summary": "Rimani aggiornato sul meteo del Veneto con i bollettini ARPAV",
+          "description": "Con Radar Meteo Veneto visualizzi le immagini del radar ARPAV e rimani aggiornato con i bollettini meteo di ARPAV.\n\n          Utilizzando i dati forniti da ARPAV, questa skill ti permette di rimanere aggiornato sulle condizioni meteo del Veneto tramite le immagini del radar di Teolo e l'ultimo bollettino meteo emesso.\n\nInvoca la skill dicendo \"Alexa, apri radar meteo veneto\" e accedi alle funzionalità della skill.\nChiedi di mostrarti il radar per visualizzare le immagini radar, oppure di leggere il bollettino per ascoltare l'ultimo bollettino emesso.\nCaratteristiche principali:\n- Immagini radar: visualizza le ultime immagini del radar di Teolo (disponibile solo su dispositivi forniti di display)\n- Bollettino meteo: ascolta l'ultimo bollettino meteo emesso da ARPAV\n\n\nQuesta skill è stata sviluppata da terze parti ed è fornita per scopi di intrattenimento e informazione. Si prega di notare che questa skill non è affiliata né supportata ufficialmente da ARPAV e potrebbero esserci discrepanze nei dati o nei risultati rispetto alle fonti ufficiali.\nGli sviluppatori di questa skill si impegnano a fornire informazioni accurate e aggiornate, ma non possono garantire la precisione, l'affidabilità o la completezza dei dati forniti. L'uso di questa skill è a proprio rischio e viene fornita senza garanzie di alcun tipo, esplicite o implicite.\nSi consiglia agli utenti di verificare sempre le informazioni fornite da questa skill con fonti ufficiali o esperti qualificati, specialmente per decisioni critiche o importanti. Gli sviluppatori non si assumono alcuna responsabilità per eventuali danni derivanti dall'uso di questa skill.\nUtilizzando questa skill, l'utente accetta i termini e le condizioni qui esposti. Si prega di interrompere l'uso di questa skill se non si accetta uno qualsiasi di questi termini.\nPer domande, commenti o segnalazioni di problemi riguardanti questa skill, si prega di contattare gli sviluppatori"
         }
       },
-      "testingInstructions": "Sample Testing Instructions."
+      "testingInstructions": "All data used inside the skill are retrieved from ARPAV website https://www.arpa.veneto.it and follows the copyright notes described here https://www.arpa.veneto.it/note-legali\nEach view includes ARPAV name and website references."
     }
   }
 }
