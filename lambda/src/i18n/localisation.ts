@@ -20,7 +20,7 @@ export const languageStrings = {
       API_ERROR_MSG: `Sto avendo qualche intoppo contattando l'API esterna. Riprova più tardi. `,
       CONJUNCTION_MSG: " e ",
       HELP_MSG:
-        "Posso recuperare le informazioni del meteo dal sito ArpaV: chiedimi di mostrarti il radar o di leggere il bollettino meteo",
+        "Posso recuperare le informazioni del meteo dal sito ARPAV: chiedimi di mostrarti il radar o di leggere il bollettino meteo. Come posso esserti utile?",
       REPORT_GENERAL: "Evoluzione generale",
       REPORT_ALLARM: "Avviso",
       REPORT_PARTICULAR_PHENOMENA: "Fenomeni particolari",
