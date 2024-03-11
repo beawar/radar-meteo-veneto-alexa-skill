@@ -20,7 +20,7 @@ const Repeat_1 = require("./requests/intents/Repeat");
  * defined are included below. The order matters - they're processed top to bottom
  * */
 exports.handler = ask_sdk_core_1.SkillBuilders.custom()
-    .addRequestHandlers(Launch_1.LaunchRequestHandler, ShowRadar_1.ShowRadarIntentHandler, ReadWeatherReport_1.ReadWeatherReportIntentHandler, Help_1.HelpIntentHandler, CancelAndStop_1.CancelAndStopIntentHandler, SessionEnded_1.SessionEndedRequestHandler, Fallback_1.FallbackIntentHandler, IntentReflector_1.IntentReflectorHandler, Repeat_1.RepeatIntentHandler)
+    .addRequestHandlers(Launch_1.LaunchRequestHandler, Repeat_1.RepeatIntentHandler, ShowRadar_1.ShowRadarIntentHandler, ReadWeatherReport_1.ReadWeatherReportIntentHandler, Help_1.HelpIntentHandler, CancelAndStop_1.CancelAndStopIntentHandler, SessionEnded_1.SessionEndedRequestHandler, Fallback_1.FallbackIntentHandler, IntentReflector_1.IntentReflectorHandler)
     .addErrorHandlers(ErrorHandler_1.ErrorHandler)
     .addRequestInterceptors(logging_1.LoggingRequestInterceptor, localization_1.LocalisationRequestInterceptor)
     .addResponseInterceptors(logging_1.LoggingResponseInterceptor)
