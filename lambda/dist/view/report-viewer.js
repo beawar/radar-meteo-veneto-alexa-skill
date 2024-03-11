@@ -35,19 +35,14 @@ function extractReportContent(handlerInput, reportEntryObj) {
 function buildReportViewer(handlerInput, reportEntryObj) {
     var _a;
     const reportContent = extractReportContent(handlerInput, reportEntryObj);
-    const today = reportEntryObj.giorno[0];
-    const todayImage = today &&
-        (Array.isArray(today.img)
-            ? (_a = today.img[today.img.length - 1]) === null || _a === void 0 ? void 0 : _a._src
-            : today.img._src);
     return (0, utils_2.buildDirective)(constants_1.APL.reportReader, {
         reportReaderData: {
             type: "object",
             properties: {
                 imagesLocation: "left",
-                images: todayImage,
-                headerText: reportEntryObj._title,
-                headerSubText: reportEntryObj._name,
+                images: [(_a = reportEntryObj.giorno[0]) === null || _a === void 0 ? void 0 : _a.img].flat().map((img) => img === null || img === void 0 ? void 0 : img._src),
+                headerTitle: reportEntryObj._title,
+                headerSubtitle: reportEntryObj._name,
                 hint: handlerInput.t("REPORT_HINT"),
                 headerAttributionImage: constants_1.LOGO_URL,
                 textAlignment: "start",
