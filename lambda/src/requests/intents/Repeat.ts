@@ -1,5 +1,6 @@
 import type { RequestHandler } from "ask-sdk-core";
 import { getIntentName, getRequestType } from "ask-sdk-core";
+import { LAST_SPEECH_ATTRIBUTE_KEY } from "../../constants";
 
 export const RepeatIntentHandler: RequestHandler = {
   canHandle(handlerInput) {
@@ -12,8 +13,8 @@ export const RepeatIntentHandler: RequestHandler = {
     const sessionAttributes =
       handlerInput.attributesManager.getSessionAttributes();
     const lastResponse =
-      (typeof sessionAttributes["lastResponse"] === "string" &&
-        sessionAttributes["lastResponse"]) ||
+      (typeof sessionAttributes[LAST_SPEECH_ATTRIBUTE_KEY] === "string" &&
+        sessionAttributes[LAST_SPEECH_ATTRIBUTE_KEY]) ||
       handlerInput.t("NOTHING_TO_REPEAT");
 
     return handlerInput.responseBuilder

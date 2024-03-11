@@ -13,4 +13,4 @@ exports.LoggingResponseInterceptor = {
         console.log(`Outgoing response: ${JSON.stringify(response)}`);
     },
 };
-//# sourceMappingURL=logging.js.map
+//# sourceMappingURL=Logging.js.map

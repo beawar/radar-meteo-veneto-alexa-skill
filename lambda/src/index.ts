@@ -11,9 +11,10 @@ import { ErrorHandler } from "./handlers/ErrorHandler";
 import {
   LoggingRequestInterceptor,
   LoggingResponseInterceptor,
-} from "./interceptors/logging";
-import { LocalisationRequestInterceptor } from "./interceptors/localization";
+} from "./interceptors/Logging";
+import { LocalisationRequestInterceptor } from "./interceptors/Localization";
 import { RepeatIntentHandler } from "./requests/intents/Repeat";
+import { LastSpeechResponseInterceptor } from "./interceptors/LastSpeech";
 
 /**
  * This handler acts as the entry point for your skill, routing all request and response
@@ -37,6 +38,9 @@ export const handler = SkillBuilders.custom()
     LoggingRequestInterceptor,
     LocalisationRequestInterceptor,
   )
-  .addResponseInterceptors(LoggingResponseInterceptor)
+  .addResponseInterceptors(
+    LoggingResponseInterceptor,
+    LastSpeechResponseInterceptor,
+  )
   .withApiClient(new DefaultApiClient())
   .lambda();

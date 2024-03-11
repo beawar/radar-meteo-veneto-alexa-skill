@@ -49,4 +49,4 @@ exports.LocalisationRequestInterceptor = {
         handlerInput.getLocale = getLocale;
     },
 };
-//# sourceMappingURL=localization.js.map
+//# sourceMappingURL=Localization.js.map

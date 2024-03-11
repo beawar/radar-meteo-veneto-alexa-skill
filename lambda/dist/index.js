@@ -11,9 +11,10 @@ const SessionEnded_1 = require("./requests/SessionEnded");
 const Fallback_1 = require("./requests/intents/Fallback");
 const IntentReflector_1 = require("./requests/IntentReflector");
 const ErrorHandler_1 = require("./handlers/ErrorHandler");
-const logging_1 = require("./interceptors/logging");
-const localization_1 = require("./interceptors/localization");
+const Logging_1 = require("./interceptors/Logging");
+const Localization_1 = require("./interceptors/Localization");
 const Repeat_1 = require("./requests/intents/Repeat");
+const LastSpeech_1 = require("./interceptors/LastSpeech");
 /**
  * This handler acts as the entry point for your skill, routing all request and response
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -22,8 +23,8 @@ const Repeat_1 = require("./requests/intents/Repeat");
 exports.handler = ask_sdk_core_1.SkillBuilders.custom()
     .addRequestHandlers(Launch_1.LaunchRequestHandler, Repeat_1.RepeatIntentHandler, ShowRadar_1.ShowRadarIntentHandler, ReadWeatherReport_1.ReadWeatherReportIntentHandler, Help_1.HelpIntentHandler, CancelAndStop_1.CancelAndStopIntentHandler, SessionEnded_1.SessionEndedRequestHandler, Fallback_1.FallbackIntentHandler, IntentReflector_1.IntentReflectorHandler)
     .addErrorHandlers(ErrorHandler_1.ErrorHandler)
-    .addRequestInterceptors(logging_1.LoggingRequestInterceptor, localization_1.LocalisationRequestInterceptor)
-    .addResponseInterceptors(logging_1.LoggingResponseInterceptor)
+    .addRequestInterceptors(Logging_1.LoggingRequestInterceptor, Localization_1.LocalisationRequestInterceptor)
+    .addResponseInterceptors(Logging_1.LoggingResponseInterceptor, LastSpeech_1.LastSpeechResponseInterceptor)
     .withApiClient(new ask_sdk_core_1.DefaultApiClient())
     .lambda();
 //# sourceMappingURL=index.js.map

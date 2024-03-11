@@ -57,3 +57,5 @@ export const ATTRIBUTION = {
   name: "ARPAV",
   website: "www.arpa.veneto.it",
 };
+
+export const LAST_SPEECH_ATTRIBUTE_KEY = "lastSpeech";
