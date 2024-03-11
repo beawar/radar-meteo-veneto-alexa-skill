@@ -6,7 +6,7 @@ function getSpeechText(outputSpeech) {
     if (outputSpeech === undefined) {
         return undefined;
     }
-    if (outputSpeech.type === 'SSML') {
+    if (outputSpeech.type === "SSML") {
         return outputSpeech.ssml;
     }
     return outputSpeech.text;
