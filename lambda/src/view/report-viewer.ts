@@ -41,21 +41,15 @@ export function buildReportViewer(
   reportEntryObj: Bollettino,
 ) {
   const reportContent = extractReportContent(handlerInput, reportEntryObj);
-  const today = reportEntryObj.giorno[0];
-  const todayImage =
-    today &&
-    (Array.isArray(today.img)
-      ? today.img[today.img.length - 1]?._src
-      : today.img._src);
 
   return buildDirective(APL.reportReader, {
     reportReaderData: {
       type: "object",
       properties: {
         imagesLocation: "left",
-        images: todayImage,
-        headerText: reportEntryObj._title,
-        headerSubText: reportEntryObj._name,
+        images: [reportEntryObj.giorno[0]?.img].flat().map((img) => img?._src),
+        headerTitle: reportEntryObj._title,
+        headerSubtitle: reportEntryObj._name,
         hint: handlerInput.t("REPORT_HINT"),
         headerAttributionImage: LOGO_URL,
         textAlignment: "start",
