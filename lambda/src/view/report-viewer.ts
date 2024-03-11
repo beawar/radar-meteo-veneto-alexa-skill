@@ -1,5 +1,5 @@
 import type { HandlerInput } from "ask-sdk-core";
-import { APL, LOGO_URL } from "../constants";
+import { APL, ATTRIBUTION, LOGO_URL } from "../constants";
 import type { Bollettino } from "../model/report/types";
 import { buildParagraph, buildSentence } from "../utils";
 import { buildDirective } from "./utils";
@@ -52,15 +52,24 @@ export function buildReportViewer(
     reportReaderData: {
       type: "object",
       properties: {
-        foregroundImageLocation: "left",
-        foregroundImageSource: todayImage,
+        imagesLocation: "left",
+        images: todayImage,
         headerText: reportEntryObj._title,
         headerSubText: reportEntryObj._name,
-        hintText: handlerInput.t("REPORT_HINT"),
+        hint: handlerInput.t("REPORT_HINT"),
         headerAttributionImage: LOGO_URL,
         textAlignment: "start",
         content: reportContent,
+        attributionName: ATTRIBUTION.name,
+        attributionWebsite: ATTRIBUTION.website,
       },
+      transformers: [
+        {
+          inputPath: "hint",
+          transformer: "textToHint",
+          outputName: "hintText",
+        },
+      ],
     },
   });
 }

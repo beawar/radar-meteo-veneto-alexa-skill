@@ -1,5 +1,5 @@
 import type { HandlerInput } from "ask-sdk-core";
-import { APL } from "../constants";
+import { APL, ATTRIBUTION } from "../constants";
 import { buildDirective, supportsAPL } from "./utils";
 
 export function buildRadarPlayer(handlerInput: HandlerInput, images: string[]) {
@@ -15,6 +15,8 @@ export function buildRadarPlayer(handlerInput: HandlerInput, images: string[]) {
           type: "object",
           properties: {
             images: imagesUrl,
+            attributionName: ATTRIBUTION.name,
+            attributionWebsite: ATTRIBUTION.website,
           },
         },
       }),

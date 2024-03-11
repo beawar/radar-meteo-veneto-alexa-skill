@@ -30,7 +30,9 @@
         {
           "url": "https://www.arpa.veneto.it/bollettini/meteo/radar/imgs/teolo/1_BASE.jpg"
         }
-      ]
+      ],
+      "attributionName": "ARPAV",
+      "attributionWebsite": "www.arpa.veneto.it"
     }
   }
 }

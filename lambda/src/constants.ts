@@ -52,3 +52,8 @@ export const REPORT_XML_URL =
   "https://www.arpa.veneto.it/risorse/data-bollettini/meteo/bollettini/it/xml/bollettino_utenti.xml";
 
 export const LOGO_URL = "https://www.arpa.veneto.it/logo_arpav.png";
+
+export const ATTRIBUTION = {
+  name: "ARPAV",
+  website: "www.arpa.veneto.it",
+};

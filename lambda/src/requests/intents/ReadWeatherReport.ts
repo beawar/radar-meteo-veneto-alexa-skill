@@ -17,19 +17,6 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
     );
   },
   async handle(handlerInput) {
-    // TODO:
-    //   PART 1: Alexa reading the summary report
-    //   1) retrieve xml from https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml (tag bollettini)
-    //   2) cleanup text to remove html tags
-    //   3) improve text to replace slashes with dash
-    //   PART 2:
-    //   1) retrieve mp3 of detailed report from https://www.arpa.veneto.it/previsioni/audio/meteoveneto.mp3
-    //   2) make alexa speak mp3
-    //   3) [optional] display detailed report text on device (where supported)
-    //   PART 3:
-    //   1) Retrieve report images from https://www.arpa.veneto.it/previsioni/it/xml/bollettino_utenti.xml (tag bollettini)
-    //   2) Show images on devices with display
-
     try {
       // call the progressive response service
       await callDirectiveService(

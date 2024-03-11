@@ -44,6 +44,34 @@
     }
   ],
   "layouts": {
+    "ImagesContainer": {
+      "description": "Vertical container for images",
+      "parameters": [
+        {
+          "name": "images",
+          "type": "array"
+        }
+      ],
+      "item": {
+        "description": "Content Layout",
+        "id": "ImagesContainer_ContentLayout",
+        "type": "Container",
+        "width": "auto",
+        "data": "${images}",
+        "justifyContent": "start",
+        "item": {
+          "description": "Image block",
+          "when": "${data}",
+          "type": "AlexaImage",
+          "id": "ImagesContainer_ContentLayout_ForegroundImage",
+          "imageSource": "${data}",
+          "imageBlurredBackground": true,
+          "imageAspectRatio": "square",
+          "imageScale": "best-fit",
+          "spacing": "@spacingSmall"
+        }
+      }
+    },
     "ContentEntry": {
       "description": "Title and Content text block",
       "parameters": [
@@ -116,15 +144,15 @@
           "type": "string"
         },
         {
-          "name": "foregroundImageLocation",
+          "name": "imagesLocation",
           "description": "Location of the forground image. Options are top, bottom, left, and right. Default is top.",
           "type": "string",
           "default": "top"
         },
         {
-          "name": "foregroundImageSource",
-          "description": "URL for the foreground image source. If blank, the template will be full text layout.",
-          "type": "string"
+          "name": "images",
+          "description": "URLs for the image source. If blank, the template will be full text layout.",
+          "type": "array"
         },
         {
           "name": "headerAttributionImage",
@@ -151,6 +179,16 @@
           "description": "Alignment of text content. Options are start, and center. Default is start.",
           "type": "string",
           "default": "start"
+        },
+        {
+          "name": "attributionName",
+          "description": "Attribution for the thirdparties content",
+          "type": "string"
+        },
+        {
+          "name": "attributionWebsite",
+          "description": "Attribution for the thirdparties content",
+          "type": "string"
         }
       ],
       "item": {
@@ -161,12 +199,12 @@
           {
             "name": "imageCenterAlign",
             "type": "boolean",
-            "value": "${@viewportProfileCategory == @hubRound || foregroundImageLocation == 'top' || foregroundImageLocation == 'bottom'}"
+            "value": "${@viewportProfileCategory == @hubRound || imagesLocation == 'top' || imagesLocation == 'bottom'}"
           },
           {
             "name": "imageLocation",
             "type": "string",
-            "value": "${@viewportProfileCategory == @hubRound && foregroundImageLocation != 'bottom' ? 'top' : foregroundImageLocation}"
+            "value": "${@viewportProfileCategory == @hubRound && imagesLocation != 'bottom' ? 'top' : imagesLocation}"
           },
           {
             "name": "hasFooter",
@@ -182,14 +220,13 @@
             "backgroundImageSource": "${backgroundImageSource}"
           },
           {
-            "when": "${@viewportProfileCategory != @hubRound}",
             "type": "AlexaHeader",
             "id": "AlexaHeader",
             "layoutDirection": "${environment.layoutDirection}",
             "headerAttributionImage": "${headerAttributionImage}",
-            "headerTitle": "${headerTitle}",
-            "headerSubtitle": "${headerSubtitle}",
-            "headerAttributionPrimacy": true,
+            "headerTitle": "${headerTitle} ${headerSubtitle}",
+            "headerSubtitle": "${attributionName} ${attributionWebsite}",
+            "headerAttributionPrimacy": false,
             "width": "100%"
           },
           {
@@ -219,15 +256,6 @@
                 "alignItems": "center",
                 "items": [
                   {
-                    "when": "${@viewportProfileCategory == @hubRound}",
-                    "type": "AlexaHeader",
-                    "id": "AlexaHeader",
-                    "layoutDirection": "${environment.layoutDirection}",
-                    "headerAttributionImage": "${headerAttributionImage}",
-                    "headerAttributionPrimacy": true,
-                    "width": "100%"
-                  },
-                  {
                     "description": "Image and text content block",
                     "type": "Container",
                     "width": "100%",
@@ -238,14 +266,12 @@
                     "shrink": 1,
                     "items": [
                       {
-                        "description": "Image block",
-                        "when": "${foregroundImageSource}",
-                        "type": "AlexaImage",
-                        "id": "mainView_ForegroundImage",
-                        "imageSource": "${foregroundImageSource}",
-                        "imageBlurredBackground": true,
-                        "imageAspectRatio": "square",
-                        "imageScale": "best-fit"
+                        "type": "ImagesContainer",
+                        "description": "Container for weather images",
+                        "id": "mainView_ImagesContainer",
+                        "images": "${images}",
+                        "alignItems": "${imageCenterAlign ? 'center' : 'start'}",
+                        "spacing": "@spacingSmall"
                       },
                       {
                         "description": "Content block",
@@ -272,13 +298,15 @@
       {
         "type": "MainView",
         "footerHintText": "${payload.reportReaderData.properties.hintText}",
-        "foregroundImageLocation": "${payload.reportReaderData.properties.foregroundImageLocation}",
-        "foregroundImageSource": "${payload.reportReaderData.properties.foregroundImageSource}",
+        "imagesLocation": "${payload.reportReaderData.properties.imagesLocation}",
+        "images": "${payload.reportReaderData.properties.images}",
         "headerAttributionImage": "${payload.reportReaderData.properties.headerAttributionImage}",
         "headerTitle": "${payload.reportReaderData.properties.headerTitle}",
         "headerSubtitle": "${payload.reportReaderData.properties.headerSubtitle}",
         "textAlignment": "${payload.reportReaderData.properties.textAlignment}",
-        "content": "${payload.reportReaderData.properties.content}"
+        "content": "${payload.reportReaderData.properties.content}",
+        "attributionName": "${payload.reportReaderData.properties.attributionName}",
+        "attributionWebsite": "${payload.reportReaderData.properties.attributionWebsite}"
       }
     ]
   }

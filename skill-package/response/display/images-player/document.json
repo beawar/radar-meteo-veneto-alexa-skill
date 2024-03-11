@@ -10,7 +10,12 @@
   ],
   "layouts": {
     "ImagePage": {
-      "parameters": ["item"],
+      "parameters": [
+        {
+          "name": "item",
+          "type": "object"
+        }
+      ],
       "item": {
         "type": "AlexaImage",
         "imageSource": "${item.url}",
@@ -21,7 +26,12 @@
       }
     },
     "ImagePager": {
-      "parameters": ["images"],
+      "parameters": [
+        {
+          "name": "images",
+          "type": "array"
+        }
+      ],
       "item": {
         "items": [
           {
@@ -47,18 +57,30 @@
       }
     },
     "Title": {
+      "parameters": [
+        {
+          "name": "content",
+          "type": "string"
+        }
+      ],
       "item": {
         "type": "Text",
-        "text": "ArpaV",
+        "text": "${content}",
         "style": "textStyleTitle",
         "textAlignVertical": "center"
       }
     },
     "Footer": {
+      "parameters": [
+        {
+          "name": "content",
+          "type": "string"
+        }
+      ],
       "item": {
         "type": "Text",
         "style": "textStyleMetadata",
-        "text": "www.arpa.veneto.it",
+        "text": "${content}",
         "textAlignVertical": "center"
       }
     },
@@ -74,7 +96,8 @@
         "items": [
           {
             "type": "Title",
-            "grow": 1
+            "grow": 1,
+            "content": "${payload.radarImagesData.properties.attributionName}"
           },
           {
             "type": "Container",
@@ -93,7 +116,8 @@
           {
             "type": "Footer",
             "grow": 1,
-            "paddingBottom": "3vw"
+            "paddingBottom": "3vw",
+            "content": "${payload.radarImagesData.properties.attributionWebsite}"
           }
         ]
       }
@@ -102,7 +126,7 @@
       "item": {
         "type": "Container",
         "justifyContent": "spaceBetween",
-        "alignItems": "end",
+        "alignItems": "start",
         "direction": "row",
         "width": "100%",
         "height": "100%",
@@ -112,24 +136,30 @@
             "direction": "column",
             "justifyContent": "end",
             "alignItems": "center",
+            "width": "auto",
+            "shrink": 0,
+            "padding": "@spacingSmall",
             "grow": 1,
             "items": [
               {
-                "type": "Title"
+                "type": "Title",
+                "content": "${payload.radarImagesData.properties.attributionName}"
               },
               {
                 "type": "Footer",
-                "paddingBottom": "2vw"
+                "paddingBottom": "2vw",
+                "content": "${payload.radarImagesData.properties.attributionWebsite}"
               }
             ]
           },
           {
             "type": "Container",
-            "width": "50%",
-            "height": "100%",
+            "width": "100%",
+            "height": "${@viewportProfile == @tvLandscapeXLarge ? '70%' : '100%'}",
             "direction": "column",
             "justifyContent": "end",
             "alignItems": "end",
+            "alignSelf": "center",
             "items": [
               {
                 "type": "ImagePager",

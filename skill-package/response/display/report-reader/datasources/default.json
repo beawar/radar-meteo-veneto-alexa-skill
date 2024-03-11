@@ -3,12 +3,15 @@
     "type": "object",
     "properties": {
       "backgroundImage": "",
-      "foregroundImageLocation": "left",
-      "foregroundImageSource": "https://www.arpa.veneto.it/previsioni/it/images/map_MV_1.png",
+      "imagesLocation": "left",
+      "images": [
+        "https://www.arpa.veneto.it/previsioni/it/images/map_MV_1.png",
+        "https://www.arpa.veneto.it/previsioni/it/images/map_MV_2.png"
+      ],
       "headerTitle": "Bollettino",
       "headerSubtitle": "5 novembre 2022",
-      "hintText": "Try, \"Alexa, next question\"",
-      "headerAttributionImage": "https://www.arpa.veneto.it/logo_arpav.gif",
+      "hintText": "next question",
+      "headerAttributionImage": "https://www.arpa.veneto.it/logo_arpav.png",
       "textAlignment": "start",
       "content": [
         {
@@ -16,7 +19,16 @@
           "contentText": "La saccatura di origine atlantica, responsabile di una fase di tempo perturbato fino alla mattinata di venerdì, si approfondirà generando un minimo depressionario sul Tirreno, che sabato si sposterà verso sud. Al tempo stesso, già dal pomeriggio di venerdì sul Veneto si instauerà un flusso di correnti più asciutte e da domenica andrà affermandosi l'influenza di un promontorio anticiclonico che porterà tempo stabile e ben soleggiato fino ai primi giorni della prossima settimana. "
         },
         { "titleText": "Avvisi", "contentText": "Questo è un avviso" }
-      ]
-    }
+      ],
+      "attributionName": "ARPAV",
+      "attributionWebsite": "www.arpa.veneto.it"
+    },
+    "transformers": [
+      {
+        "inputPath": "hintTextToTransform",
+        "transformer": "textToHint",
+        "outputName": "transformedHintText"
+      }
+    ]
   }
 }
