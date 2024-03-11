@@ -14,6 +14,8 @@ function buildRadarPlayer(handlerInput, images) {
                 type: "object",
                 properties: {
                     images: imagesUrl,
+                    attributionName: constants_1.ATTRIBUTION.name,
+                    attributionWebsite: constants_1.ATTRIBUTION.website,
                 },
             },
         }));

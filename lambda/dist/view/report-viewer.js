@@ -44,15 +44,24 @@ function buildReportViewer(handlerInput, reportEntryObj) {
         reportReaderData: {
             type: "object",
             properties: {
-                foregroundImageLocation: "left",
-                foregroundImageSource: todayImage,
+                imagesLocation: "left",
+                images: todayImage,
                 headerText: reportEntryObj._title,
                 headerSubText: reportEntryObj._name,
-                hintText: handlerInput.t("REPORT_HINT"),
+                hint: handlerInput.t("REPORT_HINT"),
                 headerAttributionImage: constants_1.LOGO_URL,
                 textAlignment: "start",
                 content: reportContent,
+                attributionName: constants_1.ATTRIBUTION.name,
+                attributionWebsite: constants_1.ATTRIBUTION.website,
             },
+            transformers: [
+                {
+                    inputPath: "hint",
+                    transformer: "textToHint",
+                    outputName: "hintText",
+                },
+            ],
         },
     });
 }
