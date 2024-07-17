@@ -1,6 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
+      "invocationName": "radar meteo veneto",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -23,8 +24,8 @@
           "samples": []
         },
         {
-          "slots": [],
           "name": "ShowRadarIntent",
+          "slots": [],
           "samples": [
             "riproduci il radar",
             "mostrami le immagini del radar",
@@ -38,18 +39,29 @@
           ]
         },
         {
-          "slots": [],
           "name": "ReadWeatherReportIntent",
+          "slots": [
+            {
+              "name": "report_date",
+              "type": "AMAZON.DATE"
+            }
+          ],
           "samples": [
-            "leggi il bollettino di oggi",
+            "dimmi il meteo",
+            "dimmi il meteo di {report_date}",
+            "qual è il meteo {report_date}",
+            "qual è il meteo",
+            "che tempo fa",
+            "che tempo fa {report_date}",
+            "bollettino di {report_date}",
+            "leggi il bollettino di {report_date}",
             "leggi il bollettino",
             "qual è il bollettino",
             "bollettino"
           ]
         }
       ],
-      "types": [],
-      "invocationName": "radar meteo veneto"
+      "types": []
     }
   }
 }

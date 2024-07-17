@@ -16,6 +16,9 @@ const constants_1 = require("../../constants");
 const utils_2 = require("../../model/report/utils");
 const report_viewer_1 = require("../../view/report-viewer");
 const utils_3 = require("../../view/utils");
+const SLOTS = {
+    report_date: 'report_date'
+};
 exports.ReadWeatherReportIntentHandler = {
     canHandle(handlerInput) {
         return ((0, ask_sdk_core_1.getRequestType)(handlerInput.requestEnvelope) === "IntentRequest" &&
@@ -38,6 +41,12 @@ exports.ReadWeatherReportIntentHandler = {
                     .reprompt(handlerInput.t("REPROMPT_MSG"))
                     .getResponse();
             }
+            const reportDateSlot = (0, ask_sdk_core_1.getSlotValue)(handlerInput.requestEnvelope, SLOTS.report_date);
+            const reportDateSlot2 = (0, ask_sdk_core_1.getSlotValueV2)(handlerInput.requestEnvelope, SLOTS.report_date);
+            const slotValue = reportDateSlot2.type === 'Simple' && reportDateSlot2.value || undefined;
+            if (reportDateSlot || slotValue) {
+                findReportForDate(reportEntryObj, (reportDateSlot || slotValue));
+            }
             if ((0, utils_3.supportsAPL)(handlerInput)) {
                 const viewDirective = (0, report_viewer_1.buildReportViewer)(handlerInput, reportEntryObj);
                 handlerInput.responseBuilder.addDirective(viewDirective);
@@ -50,4 +59,8 @@ exports.ReadWeatherReportIntentHandler = {
         });
     },
 };
+function findReportForDate(reportEntryObj, date) {
+    console.log(date);
+    return reportEntryObj;
+}
 //# sourceMappingURL=ReadWeatherReport.js.map

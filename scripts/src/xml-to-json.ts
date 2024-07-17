@@ -24,17 +24,32 @@ async function parseXml(text: string) {
   })) as Promise<string>;
 }
 
-async function main() {
+async function createDirectory(directoryPath: string) {
   try {
-    const reportText = await fetchReport();
-    const reportObj = await parseXml(reportText);
-    await fs.writeFile(
-      "./generated/bollettino_utenti.json",
-      JSON.stringify(reportObj),
-    );
-  } catch (err) {
-    console.log(err);
+    await fs.access(directoryPath, fs.constants.W_OK);
+  } catch (accessError) {
+    try {
+      await fs.mkdir(directoryPath).catch(console.warn);
+    } catch (mkdirError) {
+      throw new Error(
+        `Cannot access directory ${directoryPath}
+        ${JSON.stringify(accessError)}
+        ${JSON.stringify(mkdirError)}
+        `,
+      );
+    }
   }
+}
+
+async function main() {
+  const directoryPath = "./generated";
+  const reportText = await fetchReport();
+  const reportObj = await parseXml(reportText);
+  await createDirectory(directoryPath);
+  await fs.writeFile(
+    `${directoryPath}/bollettino_utenti.json`,
+    JSON.stringify(reportObj),
+  );
 }
 
 main().catch(console.error);

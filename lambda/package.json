@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run clean && npm run compile",
-    "clean": "rm -r dist || true",
+    "clean": "rm -rf dist",
     "compile": "tsc --build tsconfig.json",
     "deploy": "cd .. && npm run deploy",
     "start": "npm run build && cd .. && ask run",

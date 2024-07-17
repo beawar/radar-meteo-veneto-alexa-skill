@@ -1,5 +1,5 @@
 import type { RequestHandler } from "ask-sdk-core";
-import { getIntentName, getRequestType } from "ask-sdk-core";
+import { getIntentName, getRequestType, getSlotValue } from "ask-sdk-core";
 import { callDirectiveService } from "../../utils";
 import { PLAY_BEHAVIOR, REPORT_ENTRY } from "../../constants";
 import { getReportObj } from "../../model/report/utils";
@@ -8,6 +8,11 @@ import {
   parseReportObjToSpeech,
 } from "../../view/report-viewer";
 import { supportsAPL } from "../../view/utils";
+import type { Bollettino } from "../../model/report/types";
+
+const SLOTS = {
+  report_date: "report_date",
+};
 
 export const ReadWeatherReportIntentHandler: RequestHandler = {
   canHandle(handlerInput) {
@@ -37,6 +42,15 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
         .getResponse();
     }
 
+    const reportDateSlot = getSlotValue(
+      handlerInput.requestEnvelope,
+      SLOTS.report_date,
+    );
+
+    if (reportDateSlot) {
+      findReportForDate(reportEntryObj, reportDateSlot);
+    }
+
     if (supportsAPL(handlerInput)) {
       const viewDirective = buildReportViewer(handlerInput, reportEntryObj);
       handlerInput.responseBuilder.addDirective(viewDirective);
@@ -49,3 +63,8 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
       .getResponse();
   },
 };
+
+function findReportForDate(reportEntryObj: Bollettino, date: string) {
+  console.log(date);
+  return reportEntryObj;
+}
