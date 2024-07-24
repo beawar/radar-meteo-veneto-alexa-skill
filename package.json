@@ -17,8 +17,5 @@
     "start": "npm run start --prefix lambda",
     "predeploy": "npm run build",
     "prepare": "husky"
-  },
-  "dependencies": {
-    "date-fns": "^3.6.0"
   }
 }
