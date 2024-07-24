@@ -5,8 +5,14 @@
       "backgroundImage": "",
       "imagesLocation": "left",
       "images": [
-        "https://www.arpa.veneto.it/previsioni/it/images/map_MV_1.png",
-        "https://www.arpa.veneto.it/previsioni/it/images/map_MV_2.png"
+        {
+          "src": "https://www.arpa.veneto.it/previsioni/it/images/map_MV_1.png",
+          "caption": ""
+        },
+        {
+          "src": "https://www.arpa.veneto.it/previsioni/it/images/map_MV_2.png",
+          "caption": ""
+        }
       ],
       "headerTitle": "Bollettino",
       "headerSubtitle": "5 novembre 2022",
