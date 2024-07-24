@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.buildAudioUrl = void 0;
 function buildAudioUrl(src) {
-    return src + `?${Date.now()}`;
+    return src + `?${Date.now().toString()}`;
 }
 exports.buildAudioUrl = buildAudioUrl;
 //# sourceMappingURL=utils.js.map
