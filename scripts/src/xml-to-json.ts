@@ -29,7 +29,9 @@ async function createDirectory(directoryPath: string) {
     await fs.access(directoryPath, fs.constants.W_OK);
   } catch (accessError) {
     try {
-      await fs.mkdir(directoryPath).catch(console.warn);
+      await fs.mkdir(directoryPath).catch((error: unknown) => {
+        console.warn(error);
+      });
     } catch (mkdirError) {
       throw new Error(
         `Cannot access directory ${directoryPath}
@@ -52,4 +54,6 @@ async function main() {
   );
 }
 
-main().catch(console.error);
+main().catch((error: unknown) => {
+  console.error(error);
+});
