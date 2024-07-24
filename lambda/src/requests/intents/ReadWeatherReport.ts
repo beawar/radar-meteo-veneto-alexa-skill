@@ -8,7 +8,7 @@ import {
   parseReportObjToSpeech,
 } from "../../view/report-viewer";
 import { supportsAPL } from "../../view/utils";
-import type { Bollettino } from "../../model/report/types";
+import type { Bollettino, Giorno } from "../../model/report/types";
 
 const SLOTS = {
   report_date: "report_date",
@@ -47,16 +47,19 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
       SLOTS.report_date,
     );
 
-    if (reportDateSlot) {
-      findReportForDate(reportEntryObj, reportDateSlot);
-    }
+    const reportToRead: Pick<Bollettino, "_title" | "_name"> &
+      (Bollettino | Giorno) = {
+      _title: reportEntryObj._title,
+      _name: reportEntryObj._name,
+      ...(findReportForDate(reportEntryObj, reportDateSlot) ?? reportEntryObj),
+    };
 
     if (supportsAPL(handlerInput)) {
-      const viewDirective = buildReportViewer(handlerInput, reportEntryObj);
+      const viewDirective = buildReportViewer(handlerInput, reportToRead);
       handlerInput.responseBuilder.addDirective(viewDirective);
     }
 
-    const reportSpeech = parseReportObjToSpeech(handlerInput, reportEntryObj);
+    const reportSpeech = parseReportObjToSpeech(handlerInput, reportToRead);
     return handlerInput.responseBuilder
       .speak(reportSpeech, PLAY_BEHAVIOR.replaceAll)
       .reprompt(handlerInput.t("REPROMPT_MSG"))
@@ -65,6 +68,12 @@ export const ReadWeatherReportIntentHandler: RequestHandler = {
 };
 
 function findReportForDate(reportEntryObj: Bollettino, date: string) {
-  console.log(date);
-  return reportEntryObj;
+  if (date.trim().length === 0) {
+    return undefined;
+  }
+  const requestedDate = Intl.DateTimeFormat("it", {
+    day: "2-digit",
+    month: "long",
+  }).format(new Date(date));
+  return reportEntryObj.giorno.find((report) => report._data === requestedDate);
 }

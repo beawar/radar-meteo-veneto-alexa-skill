@@ -25,6 +25,7 @@ exports.ReadWeatherReportIntentHandler = {
             (0, ask_sdk_core_1.getIntentName)(handlerInput.requestEnvelope) === "ReadWeatherReportIntent");
     },
     handle(handlerInput) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 // call the progressive response service
@@ -42,14 +43,12 @@ exports.ReadWeatherReportIntentHandler = {
                     .getResponse();
             }
             const reportDateSlot = (0, ask_sdk_core_1.getSlotValue)(handlerInput.requestEnvelope, SLOTS.report_date);
-            if (reportDateSlot) {
-                findReportForDate(reportEntryObj, reportDateSlot);
-            }
+            const reportToRead = Object.assign({ _title: reportEntryObj._title, _name: reportEntryObj._name }, ((_a = findReportForDate(reportEntryObj, reportDateSlot)) !== null && _a !== void 0 ? _a : reportEntryObj));
             if ((0, utils_3.supportsAPL)(handlerInput)) {
-                const viewDirective = (0, report_viewer_1.buildReportViewer)(handlerInput, reportEntryObj);
+                const viewDirective = (0, report_viewer_1.buildReportViewer)(handlerInput, reportToRead);
                 handlerInput.responseBuilder.addDirective(viewDirective);
             }
-            const reportSpeech = (0, report_viewer_1.parseReportObjToSpeech)(handlerInput, reportEntryObj);
+            const reportSpeech = (0, report_viewer_1.parseReportObjToSpeech)(handlerInput, reportToRead);
             return handlerInput.responseBuilder
                 .speak(reportSpeech, constants_1.PLAY_BEHAVIOR.replaceAll)
                 .reprompt(handlerInput.t("REPROMPT_MSG"))
@@ -58,7 +57,13 @@ exports.ReadWeatherReportIntentHandler = {
     },
 };
 function findReportForDate(reportEntryObj, date) {
-    console.log(date);
-    return reportEntryObj;
+    if (date.trim().length === 0) {
+        return undefined;
+    }
+    const requestedDate = Intl.DateTimeFormat("it", {
+        day: "2-digit",
+        month: "long",
+    }).format(new Date(date));
+    return reportEntryObj.giorno.find((report) => report._data === requestedDate);
 }
 //# sourceMappingURL=ReadWeatherReport.js.map

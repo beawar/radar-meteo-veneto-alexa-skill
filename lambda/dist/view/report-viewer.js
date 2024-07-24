@@ -4,43 +4,55 @@ exports.parseReportObjToSpeech = exports.buildReportViewer = void 0;
 const constants_1 = require("../constants");
 const utils_1 = require("../utils");
 const utils_2 = require("./utils");
+function isGeneralReport(report) {
+    return "evoluzioneGenerale" in report;
+}
+function isDailyReport(report) {
+    return "_data" in report;
+}
 function extractReportContent(handlerInput, reportEntryObj) {
     const reportContent = [];
-    if (reportEntryObj.evoluzionegenerale) {
-        reportContent.push({
-            titleText: handlerInput.t("REPORT_GENERAL"),
-            contentText: reportEntryObj.evoluzionegenerale,
-        });
+    if (isGeneralReport(reportEntryObj)) {
+        if (reportEntryObj.evoluzionegenerale) {
+            reportContent.push({
+                titleText: handlerInput.t("REPORT_GENERAL"),
+                contentText: reportEntryObj.evoluzionegenerale,
+            });
+        }
+        if (reportEntryObj.avviso) {
+            reportContent.push({
+                titleText: handlerInput.t("REPORT_ALLARM"),
+                contentText: reportEntryObj.avviso,
+            });
+        }
+        if (reportEntryObj.fenomeniparticolari) {
+            reportContent.push({
+                titleText: handlerInput.t("REPORT_PARTICULAR_PHENOMENA"),
+                contentText: reportEntryObj.fenomeniparticolari,
+            });
+        }
     }
-    if (reportEntryObj.avviso) {
+    else {
         reportContent.push({
-            titleText: handlerInput.t("REPORT_ALLARM"),
-            contentText: reportEntryObj.avviso,
-        });
-    }
-    if (reportEntryObj.fenomeniparticolari) {
-        reportContent.push({
-            titleText: handlerInput.t("REPORT_PARTICULAR_PHENOMENA"),
-            contentText: reportEntryObj.fenomeniparticolari,
-        });
-    }
-    if (reportEntryObj.giorno[0]) {
-        reportContent.push({
-            titleText: handlerInput.t("REPORT_TODAY"),
-            contentText: reportEntryObj.giorno[0].text,
+            titleText: reportEntryObj._data,
+            contentText: reportEntryObj.text,
         });
     }
     return reportContent;
 }
 function buildReportViewer(handlerInput, reportEntryObj) {
-    var _a;
     const reportContent = extractReportContent(handlerInput, reportEntryObj);
+    const images = isDailyReport(reportEntryObj)
+        ? [reportEntryObj.img]
+            .flat()
+            .map(({ _src, _caption }) => ({ src: _src, caption: _caption }))
+        : [];
     return (0, utils_2.buildDirective)(constants_1.APL.reportReader, {
         reportReaderData: {
             type: "object",
             properties: {
                 imagesLocation: "left",
-                images: [(_a = reportEntryObj.giorno[0]) === null || _a === void 0 ? void 0 : _a.img].flat().map((img) => img === null || img === void 0 ? void 0 : img._src),
+                images,
                 headerTitle: reportEntryObj._title,
                 headerSubtitle: reportEntryObj._name,
                 hint: handlerInput.t("REPORT_HINT"),

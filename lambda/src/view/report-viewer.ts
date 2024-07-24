@@ -1,36 +1,45 @@
 import type { HandlerInput } from "ask-sdk-core";
 import { APL, ATTRIBUTION, LOGO_URL } from "../constants";
-import type { Bollettino } from "../model/report/types";
+import type { Bollettino, Giorno } from "../model/report/types";
 import { buildParagraph, buildSentence } from "../utils";
 import { buildDirective } from "./utils";
 
+function isGeneralReport(report: Bollettino | Giorno): report is Bollettino {
+  return "evoluzioneGenerale" in report;
+}
+
+function isDailyReport(report: Bollettino | Giorno): report is Giorno {
+  return "_data" in report;
+}
+
 function extractReportContent(
   handlerInput: HandlerInput,
-  reportEntryObj: Bollettino,
+  reportEntryObj: Bollettino | Giorno,
 ) {
   const reportContent: { titleText: string; contentText: string }[] = [];
-  if (reportEntryObj.evoluzionegenerale) {
+  if (isGeneralReport(reportEntryObj)) {
+    if (reportEntryObj.evoluzionegenerale) {
+      reportContent.push({
+        titleText: handlerInput.t("REPORT_GENERAL"),
+        contentText: reportEntryObj.evoluzionegenerale,
+      });
+    }
+    if (reportEntryObj.avviso) {
+      reportContent.push({
+        titleText: handlerInput.t("REPORT_ALLARM"),
+        contentText: reportEntryObj.avviso,
+      });
+    }
+    if (reportEntryObj.fenomeniparticolari) {
+      reportContent.push({
+        titleText: handlerInput.t("REPORT_PARTICULAR_PHENOMENA"),
+        contentText: reportEntryObj.fenomeniparticolari,
+      });
+    }
+  } else {
     reportContent.push({
-      titleText: handlerInput.t("REPORT_GENERAL"),
-      contentText: reportEntryObj.evoluzionegenerale,
-    });
-  }
-  if (reportEntryObj.avviso) {
-    reportContent.push({
-      titleText: handlerInput.t("REPORT_ALLARM"),
-      contentText: reportEntryObj.avviso,
-    });
-  }
-  if (reportEntryObj.fenomeniparticolari) {
-    reportContent.push({
-      titleText: handlerInput.t("REPORT_PARTICULAR_PHENOMENA"),
-      contentText: reportEntryObj.fenomeniparticolari,
-    });
-  }
-  if (reportEntryObj.giorno[0]) {
-    reportContent.push({
-      titleText: handlerInput.t("REPORT_TODAY"),
-      contentText: reportEntryObj.giorno[0].text,
+      titleText: reportEntryObj._data,
+      contentText: reportEntryObj.text,
     });
   }
   return reportContent;
@@ -38,16 +47,21 @@ function extractReportContent(
 
 export function buildReportViewer(
   handlerInput: HandlerInput,
-  reportEntryObj: Bollettino,
+  reportEntryObj: Pick<Bollettino, "_title" | "_name"> & (Bollettino | Giorno),
 ) {
   const reportContent = extractReportContent(handlerInput, reportEntryObj);
+  const images = isDailyReport(reportEntryObj)
+    ? [reportEntryObj.img]
+        .flat()
+        .map(({ _src, _caption }) => ({ src: _src, caption: _caption }))
+    : [];
 
   return buildDirective(APL.reportReader, {
     reportReaderData: {
       type: "object",
       properties: {
         imagesLocation: "left",
-        images: [reportEntryObj.giorno[0]?.img].flat().map((img) => img?._src),
+        images,
         headerTitle: reportEntryObj._title,
         headerSubtitle: reportEntryObj._name,
         hint: handlerInput.t("REPORT_HINT"),
@@ -70,7 +84,7 @@ export function buildReportViewer(
 
 export function parseReportObjToSpeech(
   handlerInput: HandlerInput,
-  reportEntry: Bollettino,
+  reportEntry: Bollettino | Giorno,
 ) {
   const reportContent = extractReportContent(handlerInput, reportEntry);
   const speechText = reportContent.map((entry) => {

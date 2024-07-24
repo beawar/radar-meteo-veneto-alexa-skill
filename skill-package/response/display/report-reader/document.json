@@ -64,7 +64,7 @@
           "when": "${data}",
           "type": "AlexaImage",
           "id": "ImagesContainer_ContentLayout_ForegroundImage",
-          "imageSource": "${data}",
+          "imageSource": "${data.src}",
           "imageBlurredBackground": true,
           "imageAspectRatio": "square",
           "imageScale": "best-fit",
@@ -151,7 +151,7 @@
         },
         {
           "name": "images",
-          "description": "URLs for the image source. If blank, the template will be full text layout.",
+          "description": "URLs and captions for the image source. If blank, the template will be full text layout.",
           "type": "array"
         },
         {
