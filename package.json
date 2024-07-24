@@ -3,11 +3,11 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5",
-    "typescript": "^5.3.3",
-    "typescript-eslint": "^7.1.0"
+    "husky": "^9.1.1",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.17.0"
   },
   "scripts": {
     "build": "npm run build --prefix lambda",
@@ -17,8 +17,5 @@
     "start": "npm run start --prefix lambda",
     "predeploy": "npm run build",
     "prepare": "husky"
-  },
-  "dependencies": {
-    "date-fns": "^3.6.0"
   }
 }
